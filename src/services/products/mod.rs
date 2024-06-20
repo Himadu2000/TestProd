@@ -1,7 +1,7 @@
 mod models;
 
 use models::Product;
-use swd::Object;
+use swd::{async_graphql::Context, Object};
 
 #[derive(Default)]
 pub struct ProductsQuery;
@@ -11,7 +11,7 @@ pub struct ProductsMutation;
 
 #[Object]
 impl ProductsQuery {
-    async fn status(&self) -> &str {
+    async fn status<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
         "Server Is Running OK...!"
     }
 }
