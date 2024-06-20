@@ -3,7 +3,9 @@ use surrealdb::sql::{Bytes, Thing};
 
 #[derive(Debug, Serialize)]
 pub struct Image {
-    first: String,
+    alt: Option<String>,
+    position: u8,
+    file: Bytes,
 }
 
 #[derive(Debug, Serialize)]
