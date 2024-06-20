@@ -16,7 +16,8 @@ pub struct ProductsMutation;
 #[Object]
 impl ProductsQuery {
     async fn get_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<Product, &str> {
-        let db = ctx.data::<Surreal<Db>>();
+        let db = ctx.data::<Surreal<Db>>().unwrap();
+
         Err("Server Is Running OK...!")
     }
 
@@ -34,6 +35,8 @@ impl ProductsQuery {
             first,
             last,
             |after, before, first, last| async move {
+                let db = ctx.data::<Surreal<Db>>().unwrap();
+
                 let mut start = after.map(|after| after + 1).unwrap_or(0);
                 let mut end = before.unwrap_or(10000);
                 if let Some(first) = first {
@@ -78,12 +81,14 @@ impl ProductsMutation {
         id: String,
         data: Product,
     ) -> Result<Product, &str> {
-        let db = ctx.data::<Surreal<Db>>();
+        let db = ctx.data::<Surreal<Db>>().unwrap();
+
         Err("Server Is Running OK...!")
     }
 
     async fn delete_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<bool, &str> {
-        let db = ctx.data::<Surreal<Db>>();
+        let db = ctx.data::<Surreal<Db>>().unwrap();
+
         Err("Server Is Running OK...!")
     }
 }
