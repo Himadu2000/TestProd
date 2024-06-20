@@ -22,7 +22,7 @@ impl ProductsQuery {
     ) -> Result<Option<ProductRecord>, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
-        let product: Option<ProductRecord> = db.select(("person", id)).await.unwrap();
+        let product: Option<ProductRecord> = db.select(("product", id)).await.unwrap();
 
         Ok(product)
     }
