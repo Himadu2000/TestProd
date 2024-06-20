@@ -1,3 +1,6 @@
+mod models;
+
+use models::Products;
 use swd::Object;
 
 #[derive(Default)]
