@@ -18,7 +18,7 @@ pub struct ProductsMutation;
 impl ProductsQuery {
     async fn getProduct<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<Product, &str> {
         let db = ctx.data::<Surreal<Db>>();
-        "Server Is Running OK...!"
+        Err("Server Is Running OK...!")
     }
 
     async fn getProducts<'ctx>(
@@ -60,16 +60,16 @@ impl ProductsQuery {
 impl ProductsMutation {
     async fn createProduct<'ctx>(&self, ctx: &Context<'ctx>) -> Result<String, &str> {
         let db = ctx.data::<Surreal<Db>>();
-        "Server Is Running OK...!"
+        Err("Server Is Running OK...!")
     }
 
     async fn updateProduct<'ctx>(&self, ctx: &Context<'ctx>) -> Result<Product, &str> {
         let db = ctx.data::<Surreal<Db>>();
-        "Server Is Running OK...!"
+        Err("Server Is Running OK...!")
     }
 
     async fn deleteProduct<'ctx>(&self, ctx: &Context<'ctx>) -> Result<bool, &str> {
         let db = ctx.data::<Surreal<Db>>();
-        "Server Is Running OK...!"
+        Err("Server Is Running OK...!")
     }
 }
