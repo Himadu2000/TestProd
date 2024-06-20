@@ -9,3 +9,4 @@ async-graphql = "7.0.6"
 swd = { path = "../../Rust/standard/src/swd" }
 rocket = "0.5.1"
 surrealdb = "1.5.3"
+serde = "1.0.203"
