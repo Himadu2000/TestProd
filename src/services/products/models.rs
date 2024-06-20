@@ -43,10 +43,10 @@ pub struct ProductOption {
     pub values: Vec<Value>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
 pub struct VariantOption {
-    pub option_id: Thing,
-    pub value_id: Thing,
+    pub option_id: String,
+    pub value_id: String,
 }
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
@@ -55,7 +55,6 @@ pub struct Variant {
     pub price: f32,
     pub stock_quantity: u16,
     pub weight: Option<f32>,
-    #[graphql(skip)]
     pub options: Vec<VariantOption>,
 }
 
@@ -80,8 +79,7 @@ pub struct Product {
     pub sku: Option<String>,
     pub code: Option<String>,
     pub tax_class: Option<String>,
-    #[graphql(skip)]
-    pub related_products: Vec<Thing>,
+    pub related_products: Vec<String>,
     #[graphql(default)]
     pub prices: Vec<f32>,
     pub cost_price: Option<f32>,
@@ -109,8 +107,7 @@ pub struct Product {
     pub stock_preorder: bool,
     #[graphql(default)]
     pub stock_backorder: bool,
-    #[graphql(skip)]
-    pub category_ids: Vec<Thing>,
+    pub category_ids: Vec<String>,
     #[graphql(default)]
     pub options: Vec<ProductOption>,
     #[graphql(default)]
@@ -120,8 +117,7 @@ pub struct Product {
 #[derive(Debug, Deserialize, SimpleObject)]
 pub struct ProductRecord {
     #[allow(dead_code)]
-    #[graphql(skip)]
-    pub id: Thing,
+    pub id: String,
     #[serde(flatten)]
     #[graphql(flatten)]
     pub product: Product,
