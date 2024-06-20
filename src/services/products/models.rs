@@ -2,37 +2,37 @@ use serde::{Deserialize, Serialize};
 use surrealdb::sql::{Bytes, Thing};
 
 #[derive(Debug, Serialize)]
-pub struct Product {
+pub struct Image {
     first: String,
 }
 
 #[derive(Debug, Serialize)]
-pub struct Product {
+pub struct Dimensions {
     first: String,
 }
 
 #[derive(Debug, Serialize)]
-pub struct Product {
+pub struct Attribute {
     first: String,
 }
 
 #[derive(Debug, Serialize)]
-pub struct Product {
+pub struct Value {
     first: String,
 }
 
 #[derive(Debug, Serialize)]
-pub struct Product {
+pub struct Option {
     first: String,
 }
 
 #[derive(Debug, Serialize)]
-pub struct Product {
+pub struct VariantOption {
     first: String,
 }
 
 #[derive(Debug, Serialize)]
-pub struct Product {
+pub struct Variant {
     first: String,
 }
 
