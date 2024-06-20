@@ -24,7 +24,7 @@ pub struct Value {
 }
 
 #[derive(Debug, Serialize)]
-pub struct Option {
+pub struct ProductOption {
     first: String,
 }
 
