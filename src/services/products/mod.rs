@@ -58,17 +58,17 @@ impl ProductsQuery {
 
 #[Object]
 impl ProductsMutation {
-    async fn status<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
+    async fn createProduct<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
         let db = ctx.data::<Surreal<Db>>();
         "Server Is Running OK...!"
     }
 
-    async fn status<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
+    async fn updateProduct<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
         let db = ctx.data::<Surreal<Db>>();
         "Server Is Running OK...!"
     }
 
-    async fn status<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
+    async fn deleteProduct<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
         let db = ctx.data::<Surreal<Db>>();
         "Server Is Running OK...!"
     }
