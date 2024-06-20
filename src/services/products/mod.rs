@@ -1,7 +1,6 @@
 mod models;
 
 use models::Product;
-use serde::{Deserialize, Serialize};
 use surrealdb::{engine::local::Db, Surreal};
 use swd::{
     async_graphql::{types::connection::*, Context, Error},
