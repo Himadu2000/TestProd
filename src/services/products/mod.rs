@@ -22,7 +22,7 @@ impl ProductsQuery {
     ) -> Result<Vec<ProductRecord>, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
-        let product: Vec<ProductRecord> = db.select("product").await.unwrap();
+        let product: Vec<ProductRecord> = db.select(("person", id)).await.unwrap();
 
         Ok(product)
     }
