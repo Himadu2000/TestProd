@@ -17,13 +17,13 @@ pub struct Dimensions {
 
 #[derive(Debug, Serialize)]
 pub struct Attribute {
-    name: Option<String>,
-    value: Option<String>,
+    name: String,
+    value: String,
 }
 
 #[derive(Debug, Serialize)]
 pub struct Value {
-    name: Option<String>,
+    name: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -33,7 +33,7 @@ pub enum ProductOptionControl {
 
 #[derive(Debug, Serialize)]
 pub struct ProductOption {
-    name: Option<String>,
+    name: String,
     control: ProductOptionControl,
     required: bool,
     position: u8,
@@ -71,9 +71,9 @@ pub struct Product {
     sku: Option<String>,
     code: Option<String>,
     tax_class: Option<String>,
-    related_product_ids: Vec<Thing>,
+    related_products: Vec<Thing>,
     prices: Vec<f32>,
-    cost_price: f32,
+    cost_price: Option<f32>,
     regular_price: f32,
     sale_price: Option<f32>,
     quantity_inc: u16,
