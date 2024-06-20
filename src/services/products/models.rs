@@ -118,8 +118,10 @@ pub struct Product {
     pub variants: Vec<Variant>,
 }
 
-#[derive(Debug, Deserialize)]
-pub struct Record {
+#[derive(Debug, Deserialize, SimpleObject)]
+pub struct ProductRecord {
     #[allow(dead_code)]
     pub id: Thing,
+    #[graphql(flatten)]
+    pub product: Product,
 }
