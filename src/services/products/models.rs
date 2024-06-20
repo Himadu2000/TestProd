@@ -3,6 +3,7 @@ use surrealdb::sql::{Bytes, Datetime, Thing};
 use swd::async_graphql::{InputObject, SimpleObject};
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(complex)]
 pub struct Image {
     pub alt: Option<String>,
     pub position: u8,
@@ -34,10 +35,9 @@ pub enum ProductOptionControl {
     SELECT,
 }
 
-#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[derive(Debug, Enum, Serialize, Deserialize, SimpleObject, InputObject)]
 pub struct ProductOption {
     pub name: String,
-    #[graphql(skip)]
     pub control: ProductOptionControl,
     pub required: bool,
     pub position: u8,
