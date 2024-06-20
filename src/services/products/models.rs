@@ -56,7 +56,6 @@ pub struct ProductOption {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-#[graphql(input_name = "VariantOptionInput")]
 pub struct VariantOption {
     pub option_id: Thing,
     pub value_id: Thing,
