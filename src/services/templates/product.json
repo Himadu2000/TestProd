@@ -1,0 +1,109 @@
+{
+  "date_created": "2024-03-26T05:21:29.370Z",
+  "date_updated": "2024-03-26T05:23:28.446Z",
+  "images": [
+    {
+      "id": "66025bd7325a6d31541dc6d7",
+      "alt": "",
+      "position": 99,
+      "filename": "9fc2fb5f006211deb0f15a600.png"
+    },
+    {
+      "id": "66025bd7325a6d31541dc6d8",
+      "alt": "",
+      "position": 99,
+      "filename": "9fc2fb5f006211deb0f15a601.png"
+    }
+  ],
+  "dimensions": {
+    "length": 0,
+    "width": 0,
+    "height": 0
+  },
+  "name": "ABSDF",
+  "description": "<p>vsavsas</p>",
+  "meta_description": "asfasf",
+  "meta_title": "safas",
+  "tags": [],
+  "attributes": [
+    {
+      "name": "fsfas",
+      "value": "bgdgs"
+    },
+    {
+      "name": "vss",
+      "value": "2142"
+    }
+  ],
+  "enabled": true,
+  "discontinued": false,
+  "slug": "asdsaf",
+  "sku": "afsasg",
+  "code": "",
+  "tax_class": "",
+  "related_product_ids": ["66023ff876eb6a24146450aa"],
+  "prices": [],
+  "cost_price": 0,
+  "regular_price": 1232.3,
+  "sale_price": 214.5,
+  "quantity_inc": 1,
+  "quantity_min": 1,
+  "weight": 2324,
+  "stock_quantity": 122,
+  "position": 2,
+  "date_stock_expected": "2024-03-21T07:00:00.000Z",
+  "date_sale_from": "2024-03-14T07:00:00.000Z",
+  "date_sale_to": "2024-03-29T07:00:00.000Z",
+  "stock_tracking": true,
+  "stock_preorder": true,
+  "stock_backorder": true,
+  "category_id": "66023ff776eb6a24146450a6",
+  "category_ids": ["66023ff776eb6a24146450a4"],
+  "options": [
+    {
+      "id": "66025b8f325a6d31541dc6d2",
+      "name": "New optionsss",
+      "control": "select",
+      "required": true,
+      "position": 0,
+      "values": [
+        {
+          "id": "66025b99325a6d31541dc6d3",
+          "name": "aaaa"
+        },
+        {
+          "id": "66025b9b325a6d31541dc6d4",
+          "name": "bbbb"
+        }
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "66025ba2325a6d31541dc6d5",
+      "sku": "asfsags",
+      "price": 1232.3,
+      "stock_quantity": 122,
+      "weight": 2324,
+      "options": [
+        {
+          "option_id": "66025b8f325a6d31541dc6d2",
+          "value_id": "66025b99325a6d31541dc6d3"
+        }
+      ]
+    },
+    {
+      "id": "66025ba7325a6d31541dc6d6",
+      "sku": "csvsv",
+      "price": 1232.3,
+      "stock_quantity": 122,
+      "weight": 2324,
+      "options": [
+        {
+          "option_id": "66025b8f325a6d31541dc6d2",
+          "value_id": "66025b9b325a6d31541dc6d4"
+        }
+      ]
+    }
+  ]
+}
