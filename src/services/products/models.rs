@@ -51,7 +51,7 @@ pub struct Variant {
     sku: Option<String>,
     price: f32,
     stock_quantity: u16,
-    weight: f32,
+    weight: Option<f32>,
     options: Vec<VariantOption>,
 }
 
