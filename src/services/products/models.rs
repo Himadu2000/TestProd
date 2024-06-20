@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use surrealdb::sql::{Bytes, Datetime, Thing};
+use surrealdb::sql::{Bytes, Datetime};
 use swd::async_graphql::{Enum, InputObject, SimpleObject};
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
