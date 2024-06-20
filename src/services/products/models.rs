@@ -23,7 +23,7 @@ pub struct Attribute {
 
 #[derive(Debug, Serialize)]
 pub struct Value {
-    first: String,
+    name: Option<String>,
 }
 
 #[derive(Debug, Serialize)]
