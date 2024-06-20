@@ -1,6 +1,6 @@
 mod models;
 
-use models::Products;
+use models::Product;
 use swd::Object;
 
 #[derive(Default)]
