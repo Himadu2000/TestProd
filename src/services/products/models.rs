@@ -48,7 +48,11 @@ pub struct VariantOption {
 
 #[derive(Debug, Serialize)]
 pub struct Variant {
-    first: String,
+    sku: Option<String>,
+    price: f32,
+    stock_quantity: u16,
+    weight: f32,
+    options: Vec<VariantOption>,
 }
 
 #[derive(Debug, Serialize)]
