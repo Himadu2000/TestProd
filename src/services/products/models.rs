@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use surrealdb::sql::Thing;
+use surrealdb::sql::{Bytes, Thing};
 
 #[derive(Debug, Serialize)]
 pub struct Product<'a> {
