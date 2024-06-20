@@ -43,6 +43,8 @@ impl ProductsQuery {
             |after, before, first, last| async move {
                 let db = ctx.data::<Surreal<Db>>().unwrap();
 
+                let product: Vec<ProductRecord> = db.select("product").await.unwrap();
+
                 let mut start = after.map(|after| after + 1).unwrap_or(0);
                 let mut end = before.unwrap_or(10000);
                 if let Some(first) = first {
