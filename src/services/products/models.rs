@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use surrealdb::sql::Thing;
 
 #[derive(Debug, Serialize)]
-pub struct Products<'a> {
+pub struct Product<'a> {
     first: &'a str,
     last: &'a str,
 }
