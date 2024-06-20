@@ -16,12 +16,12 @@ pub struct ProductsMutation;
 
 #[Object]
 impl ProductsQuery {
-    async fn status<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> &str {
+    async fn getProduct<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> &str {
         let db = ctx.data::<Surreal<Db>>();
         "Server Is Running OK...!"
     }
 
-    async fn numbers<'ctx>(
+    async fn getProducts<'ctx>(
         &self,
         ctx: &Context<'ctx>,
         after: Option<String>,
