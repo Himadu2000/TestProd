@@ -28,8 +28,9 @@ pub struct Value {
     pub name: String,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Default, Serialize)]
 pub enum ProductOptionControl {
+    #[default]
     SELECT,
 }
 
