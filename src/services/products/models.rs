@@ -28,7 +28,7 @@ pub struct Value {
     pub name: String,
 }
 
-#[derive(Clone, Copy, Debug, Default, Enum, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Default, Enum, Eq, PartialEq, Serialize, Deserialize)]
 pub enum ProductOptionControl {
     #[default]
     SELECT,
