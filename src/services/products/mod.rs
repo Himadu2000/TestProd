@@ -18,7 +18,7 @@ impl ProductsQuery {
     async fn get_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<String, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
-        let product: Vec<Record> = db.select("product").await.unwrap();
+        let product: Vec<ProductRecord> = db.select("product").await.unwrap();
 
         let product = product.first().unwrap();
         let product = &product.id.tb;
@@ -72,7 +72,7 @@ impl ProductsMutation {
     ) -> Result<String, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
-        let product: Vec<Record> = db.create("product").content(data).await.unwrap();
+        let product: Vec<ProductRecord> = db.create("product").content(data).await.unwrap();
 
         let product = product.first().unwrap();
         let product = &product.id.tb;
@@ -88,7 +88,7 @@ impl ProductsMutation {
     ) -> Result<String, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
-        let product: Option<Record> = db.update(("product", id)).merge(data).await.unwrap();
+        let product: Option<ProductRecord> = db.update(("product", id)).merge(data).await.unwrap();
 
         let product = product.unwrap();
         let product = &product.id.tb;
