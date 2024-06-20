@@ -43,13 +43,10 @@ pub struct ProductOption {
     pub values: Vec<Value>,
 }
 
-#[derive(Debug, Serialize, SimpleObject)]
+#[derive(Debug, Serialize)]
 pub struct VariantOption {
-    #[graphql(skip)]
     pub option_id: Thing,
-    #[graphql(skip)]
     pub value_id: Thing,
-    pub temp: String,
 }
 
 #[derive(Debug, Serialize, SimpleObject)]
@@ -58,6 +55,7 @@ pub struct Variant {
     pub price: f32,
     pub stock_quantity: u16,
     pub weight: Option<f32>,
+    #[graphql(skip)]
     pub options: Vec<VariantOption>,
 }
 
