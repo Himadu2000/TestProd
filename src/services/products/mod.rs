@@ -85,7 +85,10 @@ impl ProductsMutation {
 
         let product: Option<Record> = db.update(("product", id)).merge(data).await.unwrap();
 
-        Err("Server Is Running OK...!")
+        let product = product.unwrap();
+        let product = &product.id.tb;
+
+        Ok(product.to_owned())
     }
 
     async fn delete_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<bool, &str> {
