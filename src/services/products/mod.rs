@@ -1,7 +1,10 @@
 use swd::{async_graphql::MergedObject, Object};
 
 #[derive(Default)]
-struct QueryRoot;
+pub struct ProductsQuery;
+
+#[derive(Default)]
+pub struct ProductsMutation;
 
 #[Object]
 impl ProductsQuery {
