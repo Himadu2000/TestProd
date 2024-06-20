@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use surrealdb::sql::{Bytes, Datetime, Thing};
-use swd::async_graphql::{InputObject, SimpleObject};
+use swd::async_graphql::{ComplexObject, Enum, InputObject, SimpleObject};
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(complex)]
@@ -29,7 +29,7 @@ pub struct Value {
     pub name: String,
 }
 
-#[derive(Debug, Default, Enum, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Default, Enum, Serialize, Deserialize)]
 pub enum ProductOptionControl {
     #[default]
     SELECT,
