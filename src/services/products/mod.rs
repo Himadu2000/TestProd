@@ -15,12 +15,15 @@ pub struct ProductsMutation;
 
 #[Object]
 impl ProductsQuery {
-    async fn get_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<Product, &str> {
+    async fn get_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<String, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
         let product: Vec<Record> = db.select("product").await.unwrap();
 
-        Err("Server Is Running OK...!")
+        let product = product.unwrap();
+        let product = &product.id.tb;
+
+        Ok(product.to_owned())
     }
 
     async fn get_products<'ctx>(
