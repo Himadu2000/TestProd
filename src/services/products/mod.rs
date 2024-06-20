@@ -4,14 +4,15 @@ use swd::{async_graphql::MergedObject, Object};
 struct QueryRoot;
 
 #[Object]
-impl QueryRoot {
+impl ProductsQuery {
     async fn status(&self) -> &str {
         "Server Is Running OK...!"
     }
 }
 
-#[derive(MergedObject, Default)]
-pub struct Query(QueryRoot);
-
-#[derive(MergedObject, Default)]
-pub struct Mutation(QueryRoot);
+#[Object]
+impl ProductsQuery {
+    async fn status(&self) -> &str {
+        "Server Is Running OK...!"
+    }
+}
