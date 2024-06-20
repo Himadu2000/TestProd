@@ -6,6 +6,7 @@ use swd::async_graphql::SimpleObject;
 pub struct Image {
     pub alt: Option<String>,
     pub position: u8,
+    #[graphql(skip)]
     pub file: Bytes,
 }
 
@@ -27,7 +28,7 @@ pub struct Value {
     pub name: String,
 }
 
-#[derive(Debug, Serialize, SimpleObject)]
+#[derive(Debug, Serialize)]
 pub enum ProductOptionControl {
     SELECT,
 }
@@ -35,6 +36,7 @@ pub enum ProductOptionControl {
 #[derive(Debug, Serialize, SimpleObject)]
 pub struct ProductOption {
     pub name: String,
+    #[graphql(skip)]
     pub control: ProductOptionControl,
     pub required: bool,
     pub position: u8,
@@ -43,8 +45,11 @@ pub struct ProductOption {
 
 #[derive(Debug, Serialize, SimpleObject)]
 pub struct VariantOption {
+    #[graphql(skip)]
     pub option_id: Thing,
+    #[graphql(skip)]
     pub value_id: Thing,
+    pub temp: String,
 }
 
 #[derive(Debug, Serialize, SimpleObject)]
@@ -72,6 +77,7 @@ pub struct Product {
     pub sku: Option<String>,
     pub code: Option<String>,
     pub tax_class: Option<String>,
+    #[graphql(skip)]
     pub related_products: Vec<Thing>,
     pub prices: Vec<f32>,
     pub cost_price: Option<f32>,
@@ -82,12 +88,16 @@ pub struct Product {
     pub weight: Option<f32>,
     pub stock_quantity: u16,
     pub position: u8,
+    #[graphql(skip)]
     pub date_stock_expected: Datetime,
+    #[graphql(skip)]
     pub date_sale_from: Datetime,
+    #[graphql(skip)]
     pub date_sale_to: Datetime,
     pub stock_tracking: bool,
     pub stock_preorder: bool,
     pub stock_backorder: bool,
+    #[graphql(skip)]
     pub category_ids: Vec<Thing>,
     pub options: Vec<ProductOption>,
     pub variants: Vec<Variant>,
