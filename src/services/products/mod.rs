@@ -67,9 +67,9 @@ impl ProductsMutation {
         let product: Vec<Record> = db.create("product").content(data).await.unwrap();
 
         let product = product.first().unwrap();
-        let product = product.first().unwrap();
+        let product = &product.id.tb;
 
-        Ok(product)
+        Ok(product.to_owned())
     }
 
     async fn update_product<'ctx>(
