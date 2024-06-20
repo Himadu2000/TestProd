@@ -17,11 +17,27 @@ impl ProductsQuery {
         let db = ctx.data::<Surreal<Db>>();
         "Server Is Running OK...!"
     }
+
+    async fn status<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
+        let db = ctx.data::<Surreal<Db>>();
+        "Server Is Running OK...!"
+    }
 }
 
 #[Object]
 impl ProductsMutation {
-    async fn status(&self) -> &str {
+    async fn status<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
+        let db = ctx.data::<Surreal<Db>>();
+        "Server Is Running OK...!"
+    }
+
+    async fn status<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
+        let db = ctx.data::<Surreal<Db>>();
+        "Server Is Running OK...!"
+    }
+
+    async fn status<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
+        let db = ctx.data::<Surreal<Db>>();
         "Server Is Running OK...!"
     }
 }
