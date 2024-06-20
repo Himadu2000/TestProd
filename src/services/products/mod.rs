@@ -66,7 +66,10 @@ impl ProductsMutation {
 
         let product: Vec<Record> = db.create("product").content(data).await.unwrap();
 
-        Err("Server Is Running OK...!")
+        let product = product.first().unwrap();
+        let product = product.first().unwrap();
+
+        Ok(product)
     }
 
     async fn update_product<'ctx>(
