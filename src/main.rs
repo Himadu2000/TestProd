@@ -5,7 +5,6 @@ use crate::{
     services::{Mutation, Query},
     util::graphql::graphql,
 };
-use serde::{Deserialize, Serialize};
 use surrealdb::engine::local::Mem;
 use surrealdb::sql::Thing;
 use surrealdb::Surreal;
@@ -24,7 +23,9 @@ fn rocket() -> _ {
     // Select a specific namespace / database
     db.use_ns("test").use_db("test").await?;
 
-    let schema = Schema::build(Query::default(), Mutation::default(), EmptySubscription).finish();
+    let schema = Schema::build(Query::default(), Mutation::default(), EmptySubscription)
+        .data(db)
+        .finish();
 
     build()
         .attach(Cors)
