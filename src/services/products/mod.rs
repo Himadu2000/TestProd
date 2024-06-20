@@ -20,7 +20,7 @@ impl ProductsQuery {
 
         let product: Vec<Record> = db.select("product").await.unwrap();
 
-        let product = product.unwrap();
+        let product = product.first().unwrap();
         let product = &product.id.tb;
 
         Ok(product.to_owned())
