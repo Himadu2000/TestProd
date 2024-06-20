@@ -18,6 +18,8 @@ impl ProductsQuery {
     async fn get_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<Product, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
+        let product: Vec<Record> = db.select("product").await.unwrap();
+
         Err("Server Is Running OK...!")
     }
 
