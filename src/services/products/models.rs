@@ -60,7 +60,7 @@ pub struct Variant {
     pub options: Vec<VariantOption>,
 }
 
-#[derive(Debug, Default, Serialize, SimpleObject)]
+#[derive(Debug, Default, Serialize, SimpleObject, InputObject)]
 pub struct Product {
     pub images: Vec<Image>,
     pub dimensions: Option<Dimensions>,
