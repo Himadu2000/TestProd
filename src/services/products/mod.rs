@@ -70,13 +70,14 @@ impl ProductsMutation {
     async fn updateProduct<'ctx>(
         &self,
         ctx: &Context<'ctx>,
+        id: String,
         data: Product,
     ) -> Result<Product, &str> {
         let db = ctx.data::<Surreal<Db>>();
         Err("Server Is Running OK...!")
     }
 
-    async fn deleteProduct<'ctx>(&self, ctx: &Context<'ctx>) -> Result<bool, &str> {
+    async fn deleteProduct<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<bool, &str> {
         let db = ctx.data::<Surreal<Db>>();
         Err("Server Is Running OK...!")
     }
