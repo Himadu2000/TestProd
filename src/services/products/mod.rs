@@ -88,7 +88,9 @@ impl ProductsMutation {
         let product = product.unwrap();
         let product = &product.id.tb;
 
-        Ok(product.to_owned())
+        // Ok(product.to_owned())
+
+        Err("Server Is Running OK...!")
     }
 
     async fn delete_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<bool, &str> {
