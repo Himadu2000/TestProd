@@ -4,7 +4,7 @@ use models::Product;
 use serde::{Deserialize, Serialize};
 use surrealdb::{engine::local::Db, Surreal};
 use swd::{
-    async_graphql::{types::connection::*, Context},
+    async_graphql::{types::connection::*, Context, Error},
     Object,
 };
 
@@ -28,7 +28,7 @@ impl ProductsQuery {
         before: Option<String>,
         first: Option<i32>,
         last: Option<i32>,
-    ) -> Result<Connection<usize, i32, EmptyFields, EmptyFields>, String> {
+    ) -> Result<Connection<usize, i32, EmptyFields, EmptyFields>, Error> {
         query(
             after,
             before,
