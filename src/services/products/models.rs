@@ -1,13 +1,21 @@
 use serde::{Deserialize, Serialize};
 use surrealdb::sql::{Bytes, Datetime};
-use swd::async_graphql::{Enum, InputObject, SimpleObject};
+use swd::async_graphql::{ComplexObject, Enum, InputObject, SimpleObject};
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(complex)]
 pub struct Image {
     pub alt: Option<String>,
     pub position: u8,
     #[graphql(skip)]
     pub file: Bytes,
+}
+
+#[ComplexObject]
+impl Image {
+    async fn file(&self) -> String {
+        String::new()
+    }
 }
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
@@ -59,6 +67,7 @@ pub struct Variant {
 }
 
 #[derive(Debug, Default, Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(complex)]
 pub struct Product {
     #[graphql(default)]
     pub images: Vec<Image>,
@@ -112,6 +121,21 @@ pub struct Product {
     pub options: Vec<ProductOption>,
     #[graphql(default)]
     pub variants: Vec<Variant>,
+}
+
+#[ComplexObject]
+impl Product {
+    async fn date_stock_expected(&self) -> String {
+        String::new()
+    }
+
+    async fn date_sale_from(&self) -> String {
+        String::new()
+    }
+
+    async fn date_sale_to(&self) -> String {
+        String::new()
+    }
 }
 
 #[derive(Debug, Deserialize, SimpleObject)]
