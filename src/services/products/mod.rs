@@ -24,10 +24,7 @@ impl ProductsQuery {
 
         let product: Vec<ProductRecord> = db.select("product").await.unwrap();
 
-        let product = product.first().unwrap();
-        let product = &product.id.tb;
-
-        Ok(product.to_owned())
+        Ok(product)
     }
 
     async fn get_products<'ctx>(
@@ -78,10 +75,7 @@ impl ProductsMutation {
 
         let product: Vec<ProductRecord> = db.create("product").content(data).await.unwrap();
 
-        let product = product.first().unwrap();
-        let product = &product.id.tb;
-
-        Ok(product.to_owned())
+        Ok(product)
     }
 
     async fn update_product<'ctx>(
@@ -94,10 +88,7 @@ impl ProductsMutation {
 
         let product: Option<ProductRecord> = db.update(("product", id)).merge(data).await.unwrap();
 
-        let product = product.unwrap();
-        let product = &product.id.tb;
-
-        Ok(product.to_owned())
+        Ok(product)
     }
 
     async fn delete_product<'ctx>(
@@ -109,6 +100,6 @@ impl ProductsMutation {
 
         let product: Option<ProductRecord> = db.delete(("product", id)).await.unwrap();
 
-        Ok(true)
+        Ok(product)
     }
 }
