@@ -1,10 +1,6 @@
 use serde::{Deserialize, Serialize};
 use surrealdb::sql::{Bytes, Datetime, Thing};
-use swd::async_graphql::{OutputType, SimpleObject};
-
-struct OutputBytes(Bytes);
-
-impl OutputType for OutputBytes {}
+use swd::async_graphql::SimpleObject;
 
 #[derive(Debug, Serialize, SimpleObject)]
 pub struct Image {
