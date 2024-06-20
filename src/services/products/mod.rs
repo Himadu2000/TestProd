@@ -83,7 +83,7 @@ impl ProductsMutation {
         ctx: &Context<'ctx>,
         id: String,
         data: Product,
-    ) -> Result<Vec<ProductRecord>, &str> {
+    ) -> Result<Option<ProductRecord>, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
         let product: Option<ProductRecord> = db.update(("product", id)).merge(data).await.unwrap();
@@ -95,7 +95,7 @@ impl ProductsMutation {
         &self,
         ctx: &Context<'ctx>,
         id: String,
-    ) -> Result<Vec<ProductRecord>, &str> {
+    ) -> Result<Option<ProductRecord>, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
         let product: Option<ProductRecord> = db.delete(("product", id)).await.unwrap();
