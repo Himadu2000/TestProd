@@ -1,0 +1,10 @@
+{
+  "name": "Cash On Delivery",
+  "enabled": true,
+  "conditions": {
+    "countries": [],
+    "shipping_method_ids": [],
+    "subtotal_min": 0,
+    "subtotal_max": 0
+  }
+}

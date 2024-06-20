@@ -1,0 +1,5 @@
+{
+  "key": "google-analytics",
+  "place": "head_start",
+  "value": "<!-- Global site tag (gtag.js) - Google Analytics -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AA\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'AA');\n</script>"
+}

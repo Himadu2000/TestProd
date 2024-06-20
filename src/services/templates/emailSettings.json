@@ -1,0 +1,8 @@
+{
+  "host": "smtp.gmail.com",
+  "port": 465,
+  "user": "ACS",
+  "pass": "123",
+  "from_name": "ABV",
+  "from_address": "cat@dog.com"
+}

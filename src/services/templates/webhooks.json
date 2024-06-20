@@ -1,0 +1,18 @@
+{
+  "date_created": "2024-03-26T06:10:17.168Z",
+  "description": "asds",
+  "url": "as.com",
+  "secret": "cssasa",
+  "enabled": true,
+  "events": [
+    "customer.created",
+    "customer.deleted",
+    "customer.updated",
+    "order.created",
+    "order.deleted",
+    "order.updated",
+    "transaction.created",
+    "transaction.deleted",
+    "transaction.updated"
+  ]
+}

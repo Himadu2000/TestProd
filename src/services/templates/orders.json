@@ -1,0 +1,119 @@
+{
+  "date_created": "2024-03-26T05:03:02.379Z",
+  "date_placed": null,
+  "date_updated": "2024-03-26T05:14:00.516Z",
+  "date_closed": null,
+  "date_paid": null,
+  "date_cancelled": null,
+  "number": 1000,
+  "shipping_status": "",
+  "items": [
+    {
+      "product_image": [
+        {
+          "id": "66025a606a9c772210bc15eb",
+          "alt": "",
+          "position": 99,
+          "filename": "e6ccfed1e776bc494c4a5d500.png",
+          "url": "/images/products/66023ff876eb6a24146450aa/e6ccfed1e776bc494c4a5d500.png"
+        },
+        {
+          "id": "66025a646a9c772210bc15ec",
+          "alt": "",
+          "position": 99,
+          "filename": "e6ccfed1e776bc494c4a5d501.png",
+          "url": "/images/products/66023ff876eb6a24146450aa/e6ccfed1e776bc494c4a5d501.png"
+        }
+      ],
+      "id": "66025aeb6a9c772210bc15f0",
+      "product_id": "66023ff876eb6a24146450aa",
+      "variant_id": "66025a706a9c772210bc15ed",
+      "quantity": 7,
+      "discount_total": 0,
+      "name": "Product A",
+      "price": 950,
+      "price_total": 6650,
+      "sku": "sfasfs",
+      "tax_class": null,
+      "tax_total": 0,
+      "variant_name": "New option: aaa",
+      "weight": 1212
+    },
+    {
+      "product_image": [],
+      "id": "66025af06a9c772210bc15f1",
+      "product_id": "66023ff876eb6a24146450ab",
+      "variant_id": "66025a706a9c772210bc15ed",
+      "quantity": 4
+    }
+  ],
+  "transactions": [],
+  "discounts": [],
+  "billing_address": {
+    "full_name": "",
+    "address1": "",
+    "address2": "",
+    "city": "",
+    "country": "",
+    "postal_code": "",
+    "state": "",
+    "phone": "",
+    "company": "",
+    "tax_number": "",
+    "coordinates": {
+      "latitude": "",
+      "longitude": ""
+    },
+    "details": null
+  },
+  "shipping_address": {
+    "full_name": " ",
+    "address1": "",
+    "address2": "",
+    "city": "",
+    "country": "",
+    "postal_code": "",
+    "state": "",
+    "phone": "",
+    "company": "",
+    "tax_number": "",
+    "coordinates": {
+      "latitude": "",
+      "longitude": ""
+    },
+    "details": null
+  },
+  "tax_rate": 0,
+  "shipping_tax": 0,
+  "shipping_discount": 0,
+  "shipping_price": 0,
+  "item_tax_included": false,
+  "shipping_tax_included": true,
+  "closed": false,
+  "cancelled": false,
+  "delivered": false,
+  "paid": false,
+  "hold": false,
+  "draft": true,
+  "first_name": "",
+  "last_name": "",
+  "password": "",
+  "email": "",
+  "mobile": "",
+  "referrer_url": "",
+  "landing_url": "http://localhost/",
+  "channel": "",
+  "note": "",
+  "comments": "",
+  "coupon": "",
+  "tracking_number": "",
+  "customer_id": null,
+  "status_id": null,
+  "payment_method_id": null,
+  "shipping_method_id": "66023ff976eb6a24146450b3",
+  "tags": [],
+  "browser": {
+    "ip": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+  }
+}
