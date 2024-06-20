@@ -27,12 +27,14 @@ pub struct Dimensions {
 }
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(complex, input_name = "AttributeInput")]
 pub struct Attribute {
     pub name: String,
     pub value: String,
 }
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(complex, input_name = "ValueInput")]
 pub struct Value {
     pub name: String,
 }
@@ -44,6 +46,7 @@ pub enum ProductOptionControl {
 }
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(complex, input_name = "ProductOptionInput")]
 pub struct ProductOption {
     pub name: String,
     pub control: ProductOptionControl,
@@ -53,6 +56,7 @@ pub struct ProductOption {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[graphql(complex, input_name = "VariantOptionInput")]
 pub struct VariantOption {
     pub option_id: Thing,
     pub value_id: Thing,
