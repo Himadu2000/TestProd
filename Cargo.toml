@@ -8,5 +8,5 @@ license = "AGPL-3.0-or-later"
 async-graphql = "7.0.6"
 swd = { path = "../../Rust/standard/src/swd" }
 rocket = "0.5.1"
-surrealdb = "1.5.3"
+surrealdb = { version = "1.5.3", features = ["kv-mem"] }
 serde = "1.0.203"
