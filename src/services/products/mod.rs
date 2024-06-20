@@ -15,7 +15,11 @@ pub struct ProductsMutation;
 
 #[Object]
 impl ProductsQuery {
-    async fn get_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<String, &str> {
+    async fn get_product<'ctx>(
+        &self,
+        ctx: &Context<'ctx>,
+        id: String,
+    ) -> Result<Vec<ProductRecord>, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
         let product: Vec<ProductRecord> = db.select("product").await.unwrap();
@@ -69,7 +73,7 @@ impl ProductsMutation {
         &self,
         ctx: &Context<'ctx>,
         data: Product,
-    ) -> Result<String, &str> {
+    ) -> Result<Vec<ProductRecord>, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
         let product: Vec<ProductRecord> = db.create("product").content(data).await.unwrap();
@@ -85,7 +89,7 @@ impl ProductsMutation {
         ctx: &Context<'ctx>,
         id: String,
         data: Product,
-    ) -> Result<String, &str> {
+    ) -> Result<Vec<ProductRecord>, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
         let product: Option<ProductRecord> = db.update(("product", id)).merge(data).await.unwrap();
@@ -96,7 +100,11 @@ impl ProductsMutation {
         Ok(product.to_owned())
     }
 
-    async fn delete_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<bool, &str> {
+    async fn delete_product<'ctx>(
+        &self,
+        ctx: &Context<'ctx>,
+        id: String,
+    ) -> Result<Vec<ProductRecord>, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
         let product: Option<ProductRecord> = db.delete(("product", id)).await.unwrap();
