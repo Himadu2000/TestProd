@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use surrealdb::sql::{Bytes, Datetime};
+use surrealdb::sql::{Bytes, Datetime, Thing};
 use swd::async_graphql::{ComplexObject, Enum, InputObject, SimpleObject};
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
@@ -51,19 +51,28 @@ pub struct ProductOption {
     pub values: Vec<Value>,
 }
 
-#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct VariantOption {
-    pub option_id: String,
-    pub value_id: String,
+    pub option_id: Thing,
+    pub value_id: Thing,
 }
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(complex)]
 pub struct Variant {
     pub sku: Option<String>,
     pub price: f32,
     pub stock_quantity: u16,
     pub weight: Option<f32>,
+    #[graphql(skip)]
     pub options: Vec<VariantOption>,
+}
+
+#[ComplexObject]
+impl Variant {
+    async fn options(&self) -> String {
+        String::new()
+    }
 }
 
 #[derive(Debug, Default, Serialize, Deserialize, SimpleObject, InputObject)]
@@ -88,7 +97,8 @@ pub struct Product {
     pub sku: Option<String>,
     pub code: Option<String>,
     pub tax_class: Option<String>,
-    pub related_products: Vec<String>,
+    #[graphql(skip)]
+    pub related_products: Vec<Thing>,
     #[graphql(default)]
     pub prices: Vec<f32>,
     pub cost_price: Option<f32>,
@@ -116,7 +126,8 @@ pub struct Product {
     pub stock_preorder: bool,
     #[graphql(default)]
     pub stock_backorder: bool,
-    pub category_ids: Vec<String>,
+    #[graphql(skip)]
+    pub category_ids: Vec<Thing>,
     #[graphql(default)]
     pub options: Vec<ProductOption>,
     #[graphql(default)]
@@ -139,10 +150,19 @@ impl Product {
 }
 
 #[derive(Debug, Deserialize, SimpleObject)]
+#[graphql(complex)]
 pub struct ProductRecord {
     #[allow(dead_code)]
-    pub id: String,
+    #[graphql(skip)]
+    pub id: Thing,
     #[serde(flatten)]
     #[graphql(flatten)]
     pub product: Product,
+}
+
+#[ComplexObject]
+impl ProductRecord {
+    async fn id(&self) -> String {
+        String::new()
+    }
 }
