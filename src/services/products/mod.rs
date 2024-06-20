@@ -14,7 +14,7 @@ impl ProductsQuery {
 }
 
 #[Object]
-impl ProductsQuery {
+impl ProductsMutation {
     async fn status(&self) -> &str {
         "Server Is Running OK...!"
     }
