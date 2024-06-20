@@ -3,27 +3,27 @@ use surrealdb::sql::{Bytes, Datetime, Thing};
 
 #[derive(Debug, Serialize)]
 pub struct Image {
-    alt: Option<String>,
-    position: u8,
-    file: Bytes,
+    pub alt: Option<String>,
+    pub position: u8,
+    pub file: Bytes,
 }
 
 #[derive(Debug, Serialize)]
 pub struct Dimensions {
-    length: f32,
-    width: f32,
-    height: f32,
+    pub length: f32,
+    pub width: f32,
+    pub height: f32,
 }
 
 #[derive(Debug, Serialize)]
 pub struct Attribute {
-    name: String,
-    value: String,
+    pub name: String,
+    pub value: String,
 }
 
 #[derive(Debug, Serialize)]
 pub struct Value {
-    name: String,
+    pub name: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -33,26 +33,26 @@ pub enum ProductOptionControl {
 
 #[derive(Debug, Serialize)]
 pub struct ProductOption {
-    name: String,
-    control: ProductOptionControl,
-    required: bool,
-    position: u8,
-    values: Vec<Value>,
+    pub name: String,
+    pub control: ProductOptionControl,
+    pub required: bool,
+    pub position: u8,
+    pub values: Vec<Value>,
 }
 
 #[derive(Debug, Serialize)]
 pub struct VariantOption {
-    option_id: Thing,
-    value_id: Thing,
+    pub option_id: Thing,
+    pub value_id: Thing,
 }
 
 #[derive(Debug, Serialize)]
 pub struct Variant {
-    sku: Option<String>,
-    price: f32,
-    stock_quantity: u16,
-    weight: Option<f32>,
-    options: Vec<VariantOption>,
+    pub sku: Option<String>,
+    pub price: f32,
+    pub stock_quantity: u16,
+    pub weight: Option<f32>,
+    pub options: Vec<VariantOption>,
 }
 
 #[derive(Debug, Default, Serialize)]
