@@ -42,7 +42,8 @@ pub struct ProductOption {
 
 #[derive(Debug, Serialize)]
 pub struct VariantOption {
-    first: String,
+    option_id: Thing,
+    value_id: Thing,
 }
 
 #[derive(Debug, Serialize)]
