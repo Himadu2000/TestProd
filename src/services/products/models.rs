@@ -96,6 +96,7 @@ pub struct Product {
     pub weight: Option<f32>,
     #[graphql(default)]
     pub stock_quantity: u16,
+    #[graphql(default)]
     pub position: u8,
     #[graphql(skip)]
     pub date_stock_expected: Datetime,
