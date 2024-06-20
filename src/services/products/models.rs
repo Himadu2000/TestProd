@@ -167,6 +167,6 @@ pub struct ProductRecord {
 #[ComplexObject]
 impl ProductRecord {
     async fn id(&self) -> String {
-        String::new()
+        format!("{}:{}", &self.id.tb, &self.id.id)
     }
 }
