@@ -121,6 +121,7 @@ pub struct Product {
 #[derive(Debug, Deserialize, SimpleObject)]
 pub struct ProductRecord {
     #[allow(dead_code)]
+    #[graphql(skip)]
     pub id: Thing,
     #[serde(flatten)]
     #[graphql(flatten)]
