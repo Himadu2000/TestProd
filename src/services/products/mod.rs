@@ -19,10 +19,10 @@ impl ProductsQuery {
         &self,
         ctx: &Context<'ctx>,
         id: String,
-    ) -> Result<Vec<ProductRecord>, &str> {
+    ) -> Result<Option<ProductRecord>, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
-        let product: Vec<ProductRecord> = db.select(("person", id)).await.unwrap();
+        let product: Option<ProductRecord> = db.select(("person", id)).await.unwrap();
 
         Ok(product)
     }
