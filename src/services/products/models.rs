@@ -29,13 +29,13 @@ pub struct Value {
     pub name: String,
 }
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Enum, Serialize, Deserialize)]
 pub enum ProductOptionControl {
     #[default]
     SELECT,
 }
 
-#[derive(Debug, Enum, Serialize, Deserialize, SimpleObject, InputObject)]
+#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
 pub struct ProductOption {
     pub name: String,
     pub control: ProductOptionControl,
