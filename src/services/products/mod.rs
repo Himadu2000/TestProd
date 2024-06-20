@@ -21,13 +21,14 @@ impl ProductsQuery {
         "Server Is Running OK...!"
     }
 
-    async fn numbers(
+    async fn numbers<'ctx>(
         &self,
+        ctx: &Context<'ctx>,
         after: Option<String>,
         before: Option<String>,
         first: Option<i32>,
         last: Option<i32>,
-    ) -> Result<Connection<usize, i32, EmptyFields, EmptyFields>> {
+    ) -> Result<Connection<usize, i32, EmptyFields, EmptyFields>, String> {
         query(
             after,
             before,
