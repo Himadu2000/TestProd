@@ -43,7 +43,7 @@ impl ProductsQuery {
             |after, before, first, last| async move {
                 let db = ctx.data::<Surreal<Db>>().unwrap();
 
-                let product: Vec<ProductRecord> = db.select("product").await.unwrap();
+                let products: Vec<ProductRecord> = db.select("product").await.unwrap();
 
                 let mut start = after.map(|after| after + 1).unwrap_or(0);
                 let mut end = before.unwrap_or(10000);
@@ -75,9 +75,9 @@ impl ProductsMutation {
     ) -> Result<Vec<ProductRecord>, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
-        let product: Vec<ProductRecord> = db.create("product").content(data).await.unwrap();
+        let products: Vec<ProductRecord> = db.create("product").content(data).await.unwrap();
 
-        Ok(product)
+        Ok(products)
     }
 
     async fn update_product<'ctx>(
