@@ -60,7 +60,7 @@ pub struct Variant {
     pub options: Vec<VariantOption>,
 }
 
-#[derive(Debug, Default, Serialize, SimpleObject, InputObject)]
+#[derive(Debug, Default, Serialize, Deserialize, SimpleObject, InputObject)]
 pub struct Product {
     #[graphql(default)]
     pub images: Vec<Image>,
