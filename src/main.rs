@@ -14,12 +14,12 @@ use swd::{
 };
 
 #[launch]
-fn rocket() -> _ {
+async fn rocket() -> _ {
     // Create database connection
-    let db = Surreal::new::<Mem>(()).await?;
+    let db = Surreal::new::<Mem>(()).await.unwrap();
 
     // Select a specific namespace / database
-    db.use_ns("test").use_db("test").await?;
+    db.use_ns("test").use_db("test").await.unwrap();
 
     let schema = Schema::build(Query::default(), Mutation::default(), EmptySubscription)
         .data(db)
