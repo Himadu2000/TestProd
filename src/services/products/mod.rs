@@ -83,6 +83,8 @@ impl ProductsMutation {
     ) -> Result<Product, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
+        let product: Option<Record> = db.update(("product", id)).merge(data).await.unwrap();
+
         Err("Server Is Running OK...!")
     }
 
