@@ -1,9 +1,8 @@
 use serde::{Deserialize, Serialize};
 use surrealdb::sql::{Bytes, Datetime, Thing};
-use swd::async_graphql::{ComplexObject, Enum, InputObject, SimpleObject};
+use swd::async_graphql::{Enum, InputObject, SimpleObject};
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(complex)]
 pub struct Image {
     pub alt: Option<String>,
     pub position: u8,
