@@ -62,15 +62,20 @@ pub struct Variant {
 
 #[derive(Debug, Default, Serialize, SimpleObject, InputObject)]
 pub struct Product {
+    #[graphql(default)]
     pub images: Vec<Image>,
     pub dimensions: Option<Dimensions>,
     pub name: Option<String>,
     pub description: Option<String>,
     pub meta_description: Option<String>,
     pub meta_title: Option<String>,
+    #[graphql(default)]
     pub tags: Vec<String>,
+    #[graphql(default)]
     pub attributes: Vec<Attribute>,
+    #[graphql(default)]
     pub enabled: bool,
+    #[graphql(default)]
     pub discontinued: bool,
     pub slug: Option<String>,
     pub sku: Option<String>,
@@ -78,13 +83,18 @@ pub struct Product {
     pub tax_class: Option<String>,
     #[graphql(skip)]
     pub related_products: Vec<Thing>,
+    #[graphql(default)]
     pub prices: Vec<f32>,
     pub cost_price: Option<f32>,
+    #[graphql(default)]
     pub regular_price: f32,
     pub sale_price: Option<f32>,
+    #[graphql(default)]
     pub quantity_inc: u16,
+    #[graphql(default)]
     pub quantity_min: u16,
     pub weight: Option<f32>,
+    #[graphql(default)]
     pub stock_quantity: u16,
     pub position: u8,
     #[graphql(skip)]
@@ -93,12 +103,17 @@ pub struct Product {
     pub date_sale_from: Datetime,
     #[graphql(skip)]
     pub date_sale_to: Datetime,
+    #[graphql(default)]
     pub stock_tracking: bool,
+    #[graphql(default)]
     pub stock_preorder: bool,
+    #[graphql(default)]
     pub stock_backorder: bool,
     #[graphql(skip)]
     pub category_ids: Vec<Thing>,
+    #[graphql(default)]
     pub options: Vec<ProductOption>,
+    #[graphql(default)]
     pub variants: Vec<Variant>,
 }
 
