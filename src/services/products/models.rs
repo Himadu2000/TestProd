@@ -19,6 +19,7 @@ impl Image {
 }
 
 #[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(input_name = "DimensionsInput")]
 pub struct Dimensions {
     pub length: f32,
     pub width: f32,
