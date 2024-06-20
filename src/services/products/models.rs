@@ -27,9 +27,14 @@ pub struct Value {
 }
 
 #[derive(Debug, Serialize)]
+pub enum ProductOptionControl {
+    SELECT,
+}
+
+#[derive(Debug, Serialize)]
 pub struct ProductOption {
     name: Option<String>,
-    control: Option<String>,
+    control: ProductOptionControl,
     required: bool,
     position: u8,
     values: Vec<Value>,
