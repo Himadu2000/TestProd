@@ -5,9 +5,7 @@ use crate::{
     services::{Mutation, Query},
     util::graphql::graphql,
 };
-use surrealdb::engine::local::Mem;
-use surrealdb::sql::Thing;
-use surrealdb::Surreal;
+use surrealdb::{engine::local::Mem, Surreal};
 use swd::{
     async_graphql::{EmptySubscription, Schema},
     index,
