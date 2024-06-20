@@ -99,7 +99,7 @@ impl ProductsMutation {
     async fn delete_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<bool, &str> {
         let db = ctx.data::<Surreal<Db>>().unwrap();
 
-        let product: Option<ProductRecord> = db.update(("product", id)).merge(data).await.unwrap();
+        let product: Option<ProductRecord> = db.delete(("product", id)).await.unwrap();
 
         Ok(true)
     }
