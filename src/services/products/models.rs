@@ -28,7 +28,11 @@ pub struct Value {
 
 #[derive(Debug, Serialize)]
 pub struct ProductOption {
-    first: String,
+    name: Option<String>,
+    control: Option<String>,
+    required: bool,
+    position: u8,
+    values: Vec<Value>,
 }
 
 #[derive(Debug, Serialize)]
