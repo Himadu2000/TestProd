@@ -1,3 +1,6 @@
+mod products;
+
+use products::{ProductsMutation, ProductsQuery};
 use swd::{async_graphql::MergedObject, Object};
 
 #[derive(Default)]
@@ -11,7 +14,7 @@ impl QueryRoot {
 }
 
 #[derive(MergedObject, Default)]
-pub struct Query(QueryRoot);
+pub struct Query(QueryRoot, ProductsQuery);
 
 #[derive(MergedObject, Default)]
-pub struct Mutation(QueryRoot);
+pub struct Mutation(QueryRoot, ProductsMutation);
