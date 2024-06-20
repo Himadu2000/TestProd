@@ -122,6 +122,7 @@ pub struct Product {
 pub struct ProductRecord {
     #[allow(dead_code)]
     pub id: Thing,
+    #[serde(flatten)]
     #[graphql(flatten)]
     pub product: Product,
 }
