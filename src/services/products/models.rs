@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use surrealdb::sql::{Bytes, Datetime, Thing};
 use swd::async_graphql::{InputObject, SimpleObject};
 
-#[derive(Debug, Serialize, SimpleObject, InputObject)]
+#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
 pub struct Image {
     pub alt: Option<String>,
     pub position: u8,
@@ -10,31 +10,31 @@ pub struct Image {
     pub file: Bytes,
 }
 
-#[derive(Debug, Serialize, SimpleObject, InputObject)]
+#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
 pub struct Dimensions {
     pub length: f32,
     pub width: f32,
     pub height: f32,
 }
 
-#[derive(Debug, Serialize, SimpleObject, InputObject)]
+#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
 pub struct Attribute {
     pub name: String,
     pub value: String,
 }
 
-#[derive(Debug, Serialize, SimpleObject, InputObject)]
+#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
 pub struct Value {
     pub name: String,
 }
 
-#[derive(Debug, Default, Serialize)]
+#[derive(Debug, Default, Serialize, Deserialize)]
 pub enum ProductOptionControl {
     #[default]
     SELECT,
 }
 
-#[derive(Debug, Serialize, SimpleObject, InputObject)]
+#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
 pub struct ProductOption {
     pub name: String,
     #[graphql(skip)]
@@ -44,13 +44,13 @@ pub struct ProductOption {
     pub values: Vec<Value>,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct VariantOption {
     pub option_id: Thing,
     pub value_id: Thing,
 }
 
-#[derive(Debug, Serialize, SimpleObject, InputObject)]
+#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
 pub struct Variant {
     pub sku: Option<String>,
     pub price: f32,
