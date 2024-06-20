@@ -55,10 +55,10 @@ pub struct Variant {
     options: Vec<VariantOption>,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Default, Serialize)]
 pub struct Product {
     images: Vec<Image>,
-    dimensions: Dimensions,
+    dimensions: Option<Dimensions>,
     name: Option<String>,
     description: Option<String>,
     meta_description: Option<String>,
