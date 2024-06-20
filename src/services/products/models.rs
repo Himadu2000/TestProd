@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use surrealdb::sql::{Bytes, Thing};
+use surrealdb::sql::{Bytes, Datetime, Thing};
 
 #[derive(Debug, Serialize)]
 pub struct Image {
