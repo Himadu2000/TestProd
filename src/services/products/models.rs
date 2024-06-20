@@ -17,7 +17,8 @@ pub struct Dimensions {
 
 #[derive(Debug, Serialize)]
 pub struct Attribute {
-    first: String,
+    name: Option<String>,
+    value: Option<String>,
 }
 
 #[derive(Debug, Serialize)]
