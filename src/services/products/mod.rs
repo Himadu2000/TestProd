@@ -1,6 +1,6 @@
 mod models;
 
-use models::{Product, Record};
+use models::{Product, ProductRecord};
 use surrealdb::{engine::local::Db, Surreal};
 use swd::{
     async_graphql::{types::connection::*, Context, Error},
