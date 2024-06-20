@@ -16,12 +16,12 @@ pub struct ProductsMutation;
 
 #[Object]
 impl ProductsQuery {
-    async fn getProduct<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<Product, &str> {
+    async fn get_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<Product, &str> {
         let db = ctx.data::<Surreal<Db>>();
         Err("Server Is Running OK...!")
     }
 
-    async fn getProducts<'ctx>(
+    async fn get_products<'ctx>(
         &self,
         ctx: &Context<'ctx>,
         after: Option<String>,
@@ -58,7 +58,7 @@ impl ProductsQuery {
 
 #[Object]
 impl ProductsMutation {
-    async fn createProduct<'ctx>(
+    async fn create_product<'ctx>(
         &self,
         ctx: &Context<'ctx>,
         data: Product,
@@ -67,7 +67,7 @@ impl ProductsMutation {
         Err("Server Is Running OK...!")
     }
 
-    async fn updateProduct<'ctx>(
+    async fn update_product<'ctx>(
         &self,
         ctx: &Context<'ctx>,
         id: String,
@@ -77,7 +77,7 @@ impl ProductsMutation {
         Err("Server Is Running OK...!")
     }
 
-    async fn deleteProduct<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<bool, &str> {
+    async fn delete_product<'ctx>(&self, ctx: &Context<'ctx>, id: String) -> Result<bool, &str> {
         let db = ctx.data::<Surreal<Db>>();
         Err("Server Is Running OK...!")
     }
