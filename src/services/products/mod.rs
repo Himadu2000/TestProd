@@ -1,6 +1,6 @@
 mod models;
 
-use models::Product;
+use models::{Product, Record};
 use surrealdb::{engine::local::Db, Surreal};
 use swd::{
     async_graphql::{types::connection::*, Context, Error},
@@ -62,7 +62,10 @@ impl ProductsMutation {
         ctx: &Context<'ctx>,
         data: Product,
     ) -> Result<String, &str> {
-        let db = ctx.data::<Surreal<Db>>();
+        let db = ctx.data::<Surreal<Db>>().unwrap();
+
+        let product: Vec<Record> = db.create("product").content(data).await.unwrap();
+
         Err("Server Is Running OK...!")
     }
 
