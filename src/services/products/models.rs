@@ -10,7 +10,9 @@ pub struct Image {
 
 #[derive(Debug, Serialize)]
 pub struct Dimensions {
-    first: String,
+    length: f32,
+    width: f32,
+    height: f32,
 }
 
 #[derive(Debug, Serialize)]
