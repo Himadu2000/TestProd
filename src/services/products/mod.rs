@@ -1,5 +1,6 @@
 mod models;
 
+use crate::util::auth::is_authorized;
 use models::{Filter, Product, ProductRecord};
 use swd::{
     async_graphql::{types::connection::*, Context, Error},
