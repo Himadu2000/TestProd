@@ -30,8 +30,13 @@ async fn rocket() -> _ {
         .attach(AdHoc::on_response(
             "Set Authorization and store_id headers to response!",
             |req, res| {
-                res.set_header(req.headers().get_one("Authorization"));
-                res.set_header(req.headers().get_one("store_id"));
+                let headers = req.headers();
+
+                let Authorization = headers.get_one("Authorization").unwrap_or_default();
+                let Authorization = headers.get_one("store_id").unwrap_or_default();
+
+                res.set_header();
+                res.set_header();
             },
         ))
         .manage(schema)
