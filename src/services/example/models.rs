@@ -1,14 +1,88 @@
-use serde::{Deserialize, Serialize};
-use surrealdb::sql::{Bytes, Thing};
+use swd::{
+    surrealdb::sql::{Datetime},
+    ComplexObject, Deserialize, Enum, InputObject, Serialize, SimpleObject, Thing,
+};
 
-#[derive(Debug, Serialize)]
-pub struct Product<'a> {
-    first: &'a str,
-    last: &'a str,
+#[derive(Clone, Copy, Default, Enum, Eq, PartialEq, Serialize, Deserialize)]
+pub enum ProductOptionControl {
+    #[default]
+    SELECT,
 }
 
-#[derive(Debug, Deserialize)]
-pub struct Record {
+#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(input_name = "ProductOptionInput")]
+pub struct ProductOption {
+    pub name: String,
+    pub control: ProductOptionControl,
+    pub required: bool,
+    pub position: u8,
+    pub values: Vec<Value>,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct VariantOption {
+    pub option_id: Thing,
+    pub value_id: Thing,
+}
+
+#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(complex, input_name = "VariantInput")]
+pub struct Variant {
+    pub sku: Option<String>,
+    pub price: f32,
+    pub stock_quantity: u16,
+    pub weight: Option<f32>,
+    #[graphql(skip)]
+    pub options: Vec<VariantOption>,
+}
+
+#[ComplexObject]
+impl Variant {
+    async fn options(&self) -> String {
+        String::new()
+    }
+}
+
+#[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(complex, input_name = "ProductInput")]
+pub struct Product {
+    pub name: Option<String>,
+    pub description: Option<String>,
+    pub meta_description: Option<String>,
+    pub meta_title: Option<String>,
+    #[graphql(default)]
+    pub tags: Vec<String>,
+}
+
+#[ComplexObject]
+impl Product {
+    async fn date_stock_expected(&self) -> String {
+        String::new()
+    }
+
+    async fn date_sale_from(&self) -> String {
+        String::new()
+    }
+
+    async fn date_sale_to(&self) -> String {
+        String::new()
+    }
+}
+
+#[derive(Deserialize, SimpleObject)]
+#[graphql(complex)]
+pub struct ProductRecord {
     #[allow(dead_code)]
+    #[graphql(skip)]
     pub id: Thing,
+    #[serde(flatten)]
+    #[graphql(flatten)]
+    pub product: Product,
+}
+
+#[ComplexObject]
+impl ProductRecord {
+    async fn id(&self) -> String {
+        format!("{}:{}", &self.id.tb, &self.id.id)
+    }
 }
