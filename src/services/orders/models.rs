@@ -69,34 +69,59 @@ pub struct Order {
     date_paid: Option<Datetime>,
     #[graphql(skip)]
     date_cancelled: Option<Datetime>,
+    #[graphql(default)]
     number: u16,
+    #[graphql(default)]
     shipping_status: String,
+    #[graphql(default)]
     items: Vec<Item>,
+    #[graphql(default)]
     transactions: Vec<String>,
+    #[graphql(default)]
     discounts: Vec<String>,
     billing_address: Address,
     shipping_address: Address,
+    #[graphql(default)]
     tax_rate: f32,
+    #[graphql(default)]
     shipping_tax: f32,
+    #[graphql(default)]
     shipping_discount: f32,
+    #[graphql(default)]
     shipping_price: f32,
+    #[graphql(default)]
     item_tax_included: bool,
+    #[graphql(default)]
     shipping_tax_included: bool,
+    #[graphql(default)]
     closed: bool,
     cancelled: bool,
+    #[graphql(default)]
     delivered: bool,
+    #[graphql(default)]
     paid: bool,
+    #[graphql(default)]
     hold: bool,
+    #[graphql(default = true)]
     draft: bool,
+    #[graphql(default)]
     first_name: String,
+    #[graphql(default)]
     last_name: String,
     password: Option<String>,
+    #[graphql(default)]
     email: String,
+    #[graphql(default)]
     mobile: u16,
+    #[graphql(default)]
     referrer_url: String,
+    #[graphql(default)]
     landing_url: String,
+    #[graphql(default)]
     channel: String,
+    #[graphql(default)]
     note: String,
+    #[graphql(default)]
     comments: String,
     #[graphql(skip)]
     coupon: Option<Thing>,
@@ -109,6 +134,7 @@ pub struct Order {
     payment_method_id: Thing,
     #[graphql(skip)]
     shipping_method_id: Thing,
+    #[graphql(default)]
     tags: Vec<String>,
 }
 
