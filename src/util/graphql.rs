@@ -23,10 +23,10 @@ pub struct Headers {
 }
 
 #[async_trait]
-impl<'r> FromRequest<'r> for Headers {
+impl<'req> FromRequest<'req> for Headers {
     type Error = String;
 
-    async fn from_request(req: &'r Request<'_>) -> Outcome<Self, Self::Error> {
+    async fn from_request(req: &'req Request<'_>) -> Outcome<Self, Self::Error> {
         let headers = req.headers();
 
         let authorization = headers.get_one("Authorization").unwrap_or_default();
