@@ -73,6 +73,8 @@ impl ProductsMutation {
         ctx: &Context<'ctx>,
         data: Product,
     ) -> Result<Vec<ProductRecord>, &str> {
+        is_authorized(ctx.insert_http_header("Authorization", None));
+
         let db = ctx.data::<SurrealDb>().unwrap();
 
         let products: Vec<ProductRecord> = db.create("product").content(data).await.unwrap();
