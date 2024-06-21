@@ -12,45 +12,45 @@ pub enum OrderOptionControl {
 #[graphql(complex, input_name = "VariantInput")]
 pub struct Item {
     #[graphql(skip)]
-    id: Thing,
+    pub id: Thing,
     #[graphql(skip)]
-    product_id: Thing,
+    pub product_id: Thing,
     #[graphql(skip)]
-    variant_id: Thing,
-    quantity: u16,
-    discount_total: f32,
-    name: String,
-    price: f32,
-    price_total: f32,
-    sku: String,
-    tax_class: String,
-    tax_total: f32,
-    variant_name: String,
-    weight: f32,
+    pub variant_id: Thing,
+    pub quantity: u16,
+    pub discount_total: f32,
+    pub name: String,
+    pub price: f32,
+    pub price_total: f32,
+    pub sku: String,
+    pub tax_class: String,
+    pub tax_total: f32,
+    pub variant_name: String,
+    pub weight: f32,
 }
 
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(input_name = "VariantInput")]
 pub struct Coordinates {
-    latitude: f32,
-    longitude: f32,
+    pub latitude: f32,
+    pub longitude: f32,
 }
 
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(input_name = "VariantInput")]
 pub struct Address {
-    full_name: String,
-    address1: String,
-    address2: String,
-    city: String,
-    country: String,
-    postal_code: String,
-    state: String,
-    phone: String,
-    company: String,
-    tax_number: String,
-    coordinates: Coordinates,
-    details: String,
+    pub full_name: String,
+    pub address1: String,
+    pub address2: String,
+    pub city: String,
+    pub country: String,
+    pub postal_code: String,
+    pub state: String,
+    pub phone: String,
+    pub company: String,
+    pub tax_number: String,
+    pub coordinates: Coordinates,
+    pub details: String,
 }
 
 #[ComplexObject]
@@ -64,82 +64,82 @@ impl Variant {
 #[graphql(complex, input_name = "OrderInput")]
 pub struct Order {
     #[graphql(skip)]
-    date_placed: Datetime,
+    pub date_placed: Datetime,
     #[graphql(skip)]
-    date_closed: Option<Datetime>,
+    pub date_closed: Option<Datetime>,
     #[graphql(skip)]
-    date_paid: Option<Datetime>,
+    pub date_paid: Option<Datetime>,
     #[graphql(skip)]
-    date_cancelled: Option<Datetime>,
+    pub date_cancelled: Option<Datetime>,
     #[graphql(default)]
-    number: u16,
+    pub number: u16,
     #[graphql(default)]
-    shipping_status: String,
+    pub shipping_status: String,
     #[graphql(default)]
-    items: Vec<Item>,
+    pub items: Vec<Item>,
     #[graphql(default)]
-    transactions: Vec<String>,
+    pub transactions: Vec<String>,
     #[graphql(default)]
-    discounts: Vec<String>,
-    billing_address: Address,
-    shipping_address: Address,
+    pub discounts: Vec<String>,
+    pub billing_address: Address,
+    pub shipping_address: Address,
     #[graphql(default)]
-    tax_rate: f32,
+    pub tax_rate: f32,
     #[graphql(default)]
-    shipping_tax: f32,
+    pub shipping_tax: f32,
     #[graphql(default)]
-    shipping_discount: f32,
+    pub shipping_discount: f32,
     #[graphql(default)]
-    shipping_price: f32,
+    pub shipping_price: f32,
     #[graphql(default)]
-    item_tax_included: bool,
+    pub item_tax_included: bool,
     #[graphql(default)]
-    shipping_tax_included: bool,
+    pub shipping_tax_included: bool,
     #[graphql(default)]
-    closed: bool,
+    pub closed: bool,
     #[graphql(default)]
-    cancelled: bool,
+    pub cancelled: bool,
     #[graphql(default)]
-    delivered: bool,
+    pub delivered: bool,
     #[graphql(default)]
-    paid: bool,
+    pub paid: bool,
     #[graphql(default)]
-    hold: bool,
+    pub hold: bool,
     #[graphql(default = true)]
-    draft: bool,
+    pub draft: bool,
     #[graphql(default)]
-    first_name: String,
+    pub first_name: String,
     #[graphql(default)]
-    last_name: String,
-    password: Option<String>,
+    pub last_name: String,
+    pub password: Option<String>,
     #[graphql(default)]
-    email: String,
+    pub email: String,
     #[graphql(default)]
-    mobile: u16,
+    pub mobile: u16,
     #[graphql(default)]
-    referrer_url: String,
+    pub referrer_url: String,
     #[graphql(default)]
-    landing_url: String,
+    pub landing_url: String,
     #[graphql(default)]
-    channel: String,
+    pub channel: String,
     #[graphql(default)]
-    note: String,
+    pub note: String,
     #[graphql(default)]
-    comments: String,
+    pub comments: String,
     #[graphql(skip)]
-    coupon: Option<Thing>,
+    pub coupon: Option<Thing>,
     #[graphql(default)]
-    tracking_number: u16,
+    pub tracking_number: u16,
     #[graphql(skip)]
-    customer_id: Option<Thing>,
+    pub customer_id: Option<Thing>,
     #[graphql(skip)]
-    status_id: Thing,
+    pub status_id: Thing,
     #[graphql(skip)]
-    payment_method_id: Thing,
+    pub payment_method_id: Thing,
     #[graphql(skip)]
-    shipping_method_id: Thing,
+    pub shipping_method_id: Thing,
     #[graphql(default)]
-    tags: Vec<String>,
+    pub tags: Vec<String>,
 }
 
 #[ComplexObject]
