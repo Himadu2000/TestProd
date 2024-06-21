@@ -32,8 +32,8 @@ async fn rocket() -> _ {
             |req, res| {
                 let headers = req.headers();
 
-                let Authorization = headers.get_one("Authorization").unwrap_or_default();
-                let Authorization = headers.get_one("store_id").unwrap_or_default();
+                let authorization = headers.get_one("Authorization").unwrap_or_default();
+                let store_id = headers.get_one("store_id").unwrap_or_default();
 
                 res.set_header();
                 res.set_header();
