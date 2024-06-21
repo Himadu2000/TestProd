@@ -35,7 +35,7 @@ pub struct TokenScope {
 pub struct Token {
     name: String,
     email: String,
-    scopes: TokenScope,
+    scopes: Vec<TokenScope>,
     expiration: u16,
 }
 
