@@ -1,10 +1,9 @@
 mod filter;
 mod product;
 
+pub use filter::Filter;
 use product::{Attribute, Dimensions, Image, ProductOption, Variant};
-use swd::{
-    ComplexObject, Datetime, Deserialize, Enum, InputObject, Serialize, SimpleObject, Thing,
-};
+use swd::{ComplexObject, Datetime, Deserialize, InputObject, Serialize, SimpleObject, Thing};
 
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(complex, input_name = "ProductInput")]
@@ -95,45 +94,5 @@ pub struct ProductRecord {
 impl ProductRecord {
     async fn id(&self) -> String {
         format!("{}:{}", &self.id.tb, &self.id.id)
-    }
-}
-
-#[derive(Clone, Copy, Enum, Eq, PartialEq, Serialize, Deserialize)]
-pub enum ProductFilterStockStatus {
-    AVAILABLE,
-}
-
-#[derive(Clone, Copy, Enum, Eq, PartialEq, Serialize, Deserialize)]
-pub enum ProductFilterSort {
-    PriceMinToMax,
-    PriceMaxToMin,
-    StockHighest,
-    StockLowest,
-}
-
-#[derive(InputObject)]
-#[graphql(complex)]
-pub struct Filter {
-    #[allow(dead_code)]
-    #[graphql(skip)]
-    category_id: Option<Thing>,
-    active: Option<bool>,
-    discontinued: Option<bool>,
-    search: Option<String>,
-    on_sale: Option<bool>,
-    stock_status: ProductFilterStockStatus,
-    price_from: Option<f32>,
-    price_to: Option<f32>,
-    sku: Option<String>,
-    #[allow(dead_code)]
-    #[graphql(skip)]
-    ids: Option<Vec<Thing>>,
-    sort: Option<ProductFilterSort>,
-}
-
-#[ComplexObject]
-impl Filter {
-    async fn id(&self) -> String {
-        String::new()
     }
 }
