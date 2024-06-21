@@ -3,9 +3,11 @@ use swd::{async_graphql::Context, Object};
 pub async fn is_authorized<'ctx>(ctx: &Context<'ctx>, _scope: String) -> Result<(), &'static str> {
     let token = ctx
         .insert_http_header("Authorization", "")
-        .ok_or("Not authorized...!")?;
+        .ok_or("Authorization header not set...!")?;
 
-    let token = token.to_str().map_err(|_| "Not authorized...!")?;
+    let token = token
+        .to_str()
+        .map_err(|_| "Incorrect Authorization header...!")?;
 
     if token == "Bearer token03124701209" {
         return Ok(());
