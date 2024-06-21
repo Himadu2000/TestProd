@@ -33,9 +33,12 @@ pub struct TokenScope {
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(input_name = "TokenInput")]
 pub struct Token {
+    #[graphql(default)]
     name: String,
     email: String,
+    #[graphql(default)]
     scopes: Vec<TokenScope>,
+    #[graphql(default = 24)]
     expiration: u16,
 }
 
