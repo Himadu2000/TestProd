@@ -1,4 +1,4 @@
-use product::{Attribute, Dimensions, Image, ProductOption, Variant};
+use super::product::{Attribute, Dimensions, Image, ProductOption, Variant};
 use swd::{
     ComplexObject, Datetime, Deserialize, Enum, InputObject, Serialize, SimpleObject, Thing,
 };
