@@ -3,7 +3,7 @@ mod models;
 use models::{Filter, Product, ProductRecord};
 use swd::{
     async_graphql::{types::connection::*, Context, Error},
-    Db, Object, Surreal,
+    Object, SurrealDb,
 };
 
 #[derive(Default)]
@@ -19,7 +19,7 @@ impl ProductsQuery {
         ctx: &Context<'ctx>,
         id: String,
     ) -> Result<Option<ProductRecord>, &str> {
-        let db = ctx.data::<Surreal<Db>>().unwrap();
+        let db = ctx.data::<SurrealDb>().unwrap();
 
         let product: Option<ProductRecord> = db.select(("product", id)).await.unwrap();
 
@@ -41,7 +41,7 @@ impl ProductsQuery {
             first,
             last,
             |after, before, first, last| async move {
-                let db = ctx.data::<Surreal<Db>>().unwrap();
+                let db = ctx.data::<SurrealDb>().unwrap();
 
                 let products: Vec<ProductRecord> = db.select("product").await.unwrap();
 
@@ -73,7 +73,7 @@ impl ProductsMutation {
         ctx: &Context<'ctx>,
         data: Product,
     ) -> Result<Vec<ProductRecord>, &str> {
-        let db = ctx.data::<Surreal<Db>>().unwrap();
+        let db = ctx.data::<SurrealDb>().unwrap();
 
         let products: Vec<ProductRecord> = db.create("product").content(data).await.unwrap();
 
@@ -86,7 +86,7 @@ impl ProductsMutation {
         id: String,
         data: Product,
     ) -> Result<Option<ProductRecord>, &str> {
-        let db = ctx.data::<Surreal<Db>>().unwrap();
+        let db = ctx.data::<SurrealDb>().unwrap();
 
         let product: Option<ProductRecord> = db.update(("product", id)).merge(data).await.unwrap();
 
@@ -98,7 +98,7 @@ impl ProductsMutation {
         ctx: &Context<'ctx>,
         id: String,
     ) -> Result<Option<ProductRecord>, &str> {
-        let db = ctx.data::<Surreal<Db>>().unwrap();
+        let db = ctx.data::<SurrealDb>().unwrap();
 
         let product: Option<ProductRecord> = db.delete(("product", id)).await.unwrap();
 
