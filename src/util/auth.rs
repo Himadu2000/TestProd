@@ -5,13 +5,13 @@ use surrealdb::{engine::local::Db, Surreal};
 use swd::{async_graphql::Context, Object};
 
 #[derive(Default)]
-pub struct ProductsQuery;
+pub struct AuthQuery;
 
 #[derive(Default)]
-pub struct ProductsMutation;
+pub struct AuthMutation;
 
 #[Object]
-impl ProductsQuery {
+impl AuthQuery {
     async fn status<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
         let db = ctx.data::<Surreal<Db>>();
         "Server Is Running OK...!"
@@ -19,7 +19,7 @@ impl ProductsQuery {
 }
 
 #[Object]
-impl ProductsMutation {
+impl AuthMutation {
     async fn status(&self) -> &str {
         "Server Is Running OK...!"
     }
