@@ -1,7 +1,4 @@
-use super::product::{Attribute, Dimensions, Image, ProductOption, Variant};
-use swd::{
-    ComplexObject, Datetime, Deserialize, Enum, InputObject, Serialize, SimpleObject, Thing,
-};
+use swd::{ComplexObject, Deserialize, Enum, InputObject, Serialize, Thing};
 
 #[derive(Clone, Copy, Enum, Eq, PartialEq, Serialize, Deserialize)]
 pub enum ProductFilterStockStatus {
