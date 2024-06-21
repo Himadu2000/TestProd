@@ -74,7 +74,7 @@ impl ProductsMutation {
         ctx: &Context<'ctx>,
         data: Product,
     ) -> Result<Vec<ProductRecord>, &str> {
-        is_authorized(ctx).await?;
+        is_authorized(ctx, String::new()).await?;
 
         let db = ctx.data::<SurrealDb>().unwrap();
 
@@ -89,7 +89,7 @@ impl ProductsMutation {
         id: String,
         data: Product,
     ) -> Result<Option<ProductRecord>, &str> {
-        is_authorized(ctx).await?;
+        is_authorized(ctx, String::new()).await?;
 
         let db = ctx.data::<SurrealDb>().unwrap();
 
@@ -103,7 +103,7 @@ impl ProductsMutation {
         ctx: &Context<'ctx>,
         id: String,
     ) -> Result<Option<ProductRecord>, &str> {
-        is_authorized(ctx).await?;
+        is_authorized(ctx, String::new()).await?;
 
         let db = ctx.data::<SurrealDb>().unwrap();
 
