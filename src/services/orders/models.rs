@@ -95,6 +95,7 @@ pub struct Order {
     shipping_tax_included: bool,
     #[graphql(default)]
     closed: bool,
+    #[graphql(default)]
     cancelled: bool,
     #[graphql(default)]
     delivered: bool,
@@ -125,6 +126,7 @@ pub struct Order {
     comments: String,
     #[graphql(skip)]
     coupon: Option<Thing>,
+    #[graphql(default)]
     tracking_number: u16,
     #[graphql(skip)]
     customer_id: Thing,
