@@ -34,10 +34,10 @@ pub struct TokenScope {
 #[graphql(input_name = "TokenInput")]
 pub struct Token {
     #[graphql(default)]
-    name: String,
-    email: String,
+    pub name: String,
+    pub email: String,
     #[graphql(default)]
-    scopes: Vec<TokenScope>,
+    pub scopes: Vec<TokenScope>,
 }
 
 #[derive(Deserialize, SimpleObject)]
