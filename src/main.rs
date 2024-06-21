@@ -35,13 +35,15 @@ async fn rocket() -> _ {
         .attach(AdHoc::on_response(
             "Set Authorization and store_id headers to response!",
             |req, res| {
-                let headers = req.headers();
+                Box::pin(async move {
+                    let headers = req.headers();
 
-                let authorization = headers.get_one("Authorization").unwrap_or_default();
-                let store_id = headers.get_one("store_id").unwrap_or_default();
+                    let authorization = headers.get_one("Authorization").unwrap_or_default();
+                    let store_id = headers.get_one("store_id").unwrap_or_default();
 
-                res.adjoin_header(Header::new(AUTHORIZATION.as_str(), authorization));
-                res.adjoin_header(Header::new("store_id", store_id));
+                    res.adjoin_header(Header::new(AUTHORIZATION.as_str(), authorization));
+                    res.adjoin_header(Header::new("store_id", store_id));
+                })
             },
         ))
         .manage(schema)
