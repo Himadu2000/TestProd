@@ -17,6 +17,28 @@ pub struct Variant {
     pub options: Vec<VariantOption>,
 }
 
+#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(complex, input_name = "VariantInput")]
+pub struct Variant {
+    pub sku: Option<String>,
+    pub price: f32,
+    pub stock_quantity: u16,
+    pub weight: Option<f32>,
+    #[graphql(skip)]
+    pub options: Vec<VariantOption>,
+}
+
+#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(complex, input_name = "VariantInput")]
+pub struct Variant {
+    pub sku: Option<String>,
+    pub price: f32,
+    pub stock_quantity: u16,
+    pub weight: Option<f32>,
+    #[graphql(skip)]
+    pub options: Vec<VariantOption>,
+}
+
 #[ComplexObject]
 impl Variant {
     async fn options(&self) -> String {
