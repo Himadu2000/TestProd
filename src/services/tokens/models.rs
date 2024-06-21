@@ -38,8 +38,6 @@ pub struct Token {
     email: String,
     #[graphql(default)]
     scopes: Vec<TokenScope>,
-    #[graphql(default = 24)]
-    expiration: u16,
 }
 
 #[derive(Deserialize, SimpleObject)]
