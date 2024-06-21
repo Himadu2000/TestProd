@@ -9,7 +9,7 @@ use surrealdb::{engine::local::Mem, Surreal};
 use swd::{
     async_graphql::{EmptySubscription, Schema},
     index,
-    rocket::{build, launch, routes},
+    rocket::{build, fairing::AdHoc, launch, routes},
     Cors,
 };
 
@@ -27,6 +27,13 @@ async fn rocket() -> _ {
 
     build()
         .attach(Cors)
+        .attach(AdHoc::on_response(
+            "Set Authorization and store_id header to response!",
+            |req, res| {
+                res.set_header(req.headers().get_one("Authorization"));
+                res.set_header(req.headers().get_one("store_id"));
+            },
+        ))
         .manage(schema)
         .mount("/", routes![index])
         .mount("/graphql", graphql())
