@@ -4084,6 +4084,8 @@ dependencies = [
  "async-graphql-rocket",
  "reqwest 0.12.5",
  "rocket",
+ "serde",
+ "surrealdb",
 ]
 
 [[package]]
