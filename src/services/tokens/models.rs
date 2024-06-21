@@ -1,63 +1,47 @@
-use swd::{
-    surrealdb::sql::Datetime, ComplexObject, Deserialize, Enum, InputObject, Serialize,
-    SimpleObject, Thing,
-};
+use swd::{ComplexObject, Deserialize, Enum, InputObject, Serialize, SimpleObject, Thing};
 
 #[derive(Clone, Copy, Default, Enum, Eq, PartialEq, Serialize, Deserialize)]
-pub enum ProductOptionControl {
+pub enum TokenMethod {
+    #[default]
+    READ,
+    WRITE,
+}
+
+#[derive(Clone, Copy, Default, Enum, Eq, PartialEq, Serialize, Deserialize)]
+pub enum TokenItem {
     #[default]
     SELECT,
 }
 
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(complex, input_name = "VariantInput")]
-pub struct Variant {
-    pub sku: Option<String>,
-    pub price: f32,
-    pub stock_quantity: u16,
-    pub weight: Option<f32>,
-    #[graphql(skip)]
-    pub options: Vec<VariantOption>,
+#[graphql(input_name = "TokenScopeInput")]
+pub struct TokenScope {
+    pub method: TokenMethod,
+    pub item: TokenItem,
 }
 
-#[ComplexObject]
-impl Variant {
-    async fn options(&self) -> String {
-        String::new()
-    }
-}
-
-#[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(complex, input_name = "ProductInput")]
+#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
+#[graphql(input_name = "ProductInput")]
 pub struct Token {
-    pub name: Option<String>,
-    pub description: Option<String>,
-    pub meta_description: Option<String>,
-    pub meta_title: Option<String>,
-    #[graphql(default)]
-    pub tags: Vec<String>,
-}
-
-#[ComplexObject]
-impl Token {
-    async fn date_stock_expected(&self) -> String {
-        String::new()
-    }
+    name: String,
+    email: String,
+    scopes: TokenScope,
+    expiration: u16,
 }
 
 #[derive(Deserialize, SimpleObject)]
 #[graphql(complex)]
-pub struct ProductRecord {
+pub struct TokenRecord {
     #[allow(dead_code)]
     #[graphql(skip)]
     pub id: Thing,
     #[serde(flatten)]
     #[graphql(flatten)]
-    pub product: Token,
+    pub token: Token,
 }
 
 #[ComplexObject]
-impl ProductRecord {
+impl TokenRecord {
     async fn id(&self) -> String {
         format!("{}:{}", &self.id.tb, &self.id.id)
     }
