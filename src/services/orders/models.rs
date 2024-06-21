@@ -36,7 +36,7 @@ pub struct Coordinates {
     longitude: f32,
 }
 
-#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
+#[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(input_name = "VariantInput")]
 pub struct Address {
     full_name: String,
@@ -131,7 +131,7 @@ pub struct Order {
     #[graphql(default)]
     tracking_number: u16,
     #[graphql(skip)]
-    customer_id: Thing,
+    customer_id: Option<Thing>,
     #[graphql(skip)]
     status_id: Thing,
     #[graphql(skip)]
