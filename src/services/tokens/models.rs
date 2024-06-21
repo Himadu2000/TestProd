@@ -43,14 +43,6 @@ impl Product {
     async fn date_stock_expected(&self) -> String {
         String::new()
     }
-
-    async fn date_sale_from(&self) -> String {
-        String::new()
-    }
-
-    async fn date_sale_to(&self) -> String {
-        String::new()
-    }
 }
 
 #[derive(Deserialize, SimpleObject)]
