@@ -1,6 +1,6 @@
 use swd::Object;
 
-pub async fn is_authorized(token: String) -> Result<(), &str> {
+pub async fn is_authorized(token: String) -> Result<(), &'static str> {
     if token == String::from("token03124701209") {
         return Ok(());
     }
