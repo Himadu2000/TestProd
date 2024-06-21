@@ -8,13 +8,23 @@ pub enum OrderOptionControl {
 
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(complex, input_name = "VariantInput")]
-pub struct Variant {
-    pub sku: Option<String>,
-    pub price: f32,
-    pub stock_quantity: u16,
-    pub weight: Option<f32>,
+pub struct Item {
     #[graphql(skip)]
-    pub options: Vec<VariantOption>,
+    id: Thing,
+    #[graphql(skip)]
+    product_id: Thing,
+    #[graphql(skip)]
+    variant_id: Thing,
+    quantity: u16,
+    discount_total: f32,
+    name: String,
+    price: f32,
+    price_total: f32,
+    sku: String,
+    tax_class: String,
+    tax_total: f32,
+    variant_name: String,
+    weight: f32,
 }
 
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
