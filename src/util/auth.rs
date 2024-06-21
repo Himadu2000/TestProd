@@ -2,7 +2,7 @@ use swd::Object;
 
 pub async fn is_authorized(token: String) -> Result<(), &str> {
     if token == String::from("token03124701209") {
-        Ok(())
+        return Ok(());
     }
 
     Err("Not authorized...!")
