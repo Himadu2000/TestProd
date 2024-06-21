@@ -1,10 +1,9 @@
 mod models;
 
 use models::{Filter, Product, ProductRecord};
-use surrealdb::{engine::local::Db, Surreal};
 use swd::{
     async_graphql::{types::connection::*, Context, Error},
-    Object,
+    Db, Object, Surreal,
 };
 
 #[derive(Default)]
