@@ -1,6 +1,6 @@
 use swd::{async_graphql::Context, Object};
 
-pub async fn is_authorized<'ctx>(ctx: &Context<'ctx>) -> Result<(), &'static str> {
+pub async fn is_authorized<'ctx>(ctx: &Context<'ctx>, _scope: String) -> Result<(), &'static str> {
     let token = ctx
         .insert_http_header("Authorization", "")
         .ok_or("Not authorized...!")?;
