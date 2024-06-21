@@ -9,12 +9,7 @@ use surrealdb::{engine::local::Mem, Surreal};
 use swd::{
     async_graphql::{EmptySubscription, Schema},
     index,
-    rocket::{
-        build,
-        fairing::AdHoc,
-        http::{hyper::header::AUTHORIZATION, Header},
-        launch, routes,
-    },
+    rocket::{build, launch, routes},
     Cors,
 };
 
