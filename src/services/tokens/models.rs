@@ -21,7 +21,7 @@ pub struct TokenScope {
 }
 
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(input_name = "ProductInput")]
+#[graphql(input_name = "TokenInput")]
 pub struct Token {
     name: String,
     email: String,
