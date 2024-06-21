@@ -40,8 +40,8 @@ async fn rocket() -> _ {
                 let authorization = headers.get_one("Authorization").unwrap_or_default();
                 let store_id = headers.get_one("store_id").unwrap_or_default();
 
-                res.adjoin_header();
-                res.adjoin_header();
+                res.adjoin_header(Header::new(AUTHORIZATION.as_str(), authorization));
+                res.adjoin_header(Header::new(ACCEPT.as_str(), store_id));
             },
         ))
         .manage(schema)
