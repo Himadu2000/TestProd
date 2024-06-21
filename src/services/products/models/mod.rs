@@ -1,3 +1,4 @@
+mod filter;
 mod product;
 
 use product::{Attribute, Dimensions, Image, ProductOption, Variant};
