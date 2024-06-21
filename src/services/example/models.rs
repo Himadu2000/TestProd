@@ -10,22 +10,6 @@ pub enum ProductOptionControl {
 }
 
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(input_name = "ProductOptionInput")]
-pub struct ProductOption {
-    pub name: String,
-    pub control: ProductOptionControl,
-    pub required: bool,
-    pub position: u8,
-    pub values: Vec<Value>,
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct VariantOption {
-    pub option_id: Thing,
-    pub value_id: Thing,
-}
-
-#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(complex, input_name = "VariantInput")]
 pub struct Variant {
     pub sku: Option<String>,
@@ -57,14 +41,6 @@ pub struct Product {
 #[ComplexObject]
 impl Product {
     async fn date_stock_expected(&self) -> String {
-        String::new()
-    }
-
-    async fn date_sale_from(&self) -> String {
-        String::new()
-    }
-
-    async fn date_sale_to(&self) -> String {
         String::new()
     }
 }
