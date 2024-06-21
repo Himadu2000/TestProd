@@ -1,6 +1,6 @@
 mod models;
 
-use models::{Product, ProductRecord};
+use models::{Filter, Product, ProductRecord};
 use surrealdb::{engine::local::Db, Surreal};
 use swd::{
     async_graphql::{types::connection::*, Context, Error},
@@ -34,6 +34,7 @@ impl ProductsQuery {
         before: Option<String>,
         first: Option<i32>,
         last: Option<i32>,
+        filter: Option<Filter>,
     ) -> Result<Connection<usize, i32, EmptyFields, EmptyFields>, Error> {
         query(
             after,
