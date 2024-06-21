@@ -1,4 +1,6 @@
+mod orders;
 mod products;
+mod tokens;
 
 use products::{ProductsMutation, ProductsQuery};
 use swd::{async_graphql::MergedObject, Object};
