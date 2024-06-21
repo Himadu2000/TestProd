@@ -1,3 +1,5 @@
+mod product;
+
 use swd::{
     surrealdb::sql::Bytes, ComplexObject, Datetime, Deserialize, Enum, InputObject, Serialize,
     SimpleObject, Thing,
