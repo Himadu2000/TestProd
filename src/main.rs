@@ -28,7 +28,7 @@ async fn rocket() -> _ {
     build()
         .attach(Cors)
         .attach(AdHoc::on_response(
-            "Set Authorization and store_id header to response!",
+            "Set Authorization and store_id headers to response!",
             |req, res| {
                 res.set_header(req.headers().get_one("Authorization"));
                 res.set_header(req.headers().get_one("store_id"));
