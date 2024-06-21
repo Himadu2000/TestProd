@@ -1,7 +1,12 @@
-use swd::Object;
+use swd::{async_graphql::Context, Object};
 
-pub async fn is_authorized(token: String) -> Result<(), &'static str> {
-    if token == String::from("token03124701209") {
+pub async fn is_authorized<'ctx>(ctx: &Context<'ctx>) -> Result<(), &'static str> {
+    let token = ctx
+        .insert_http_header("Authorization", None)?
+        .to_str()
+        .ok()?;
+
+    if token == "Bearer token03124701209" {
         return Ok(());
     }
 
