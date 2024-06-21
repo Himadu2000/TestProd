@@ -9,7 +9,7 @@ pub struct AuthMutation;
 
 #[Object]
 impl AuthMutation {
-    async fn status(&self) -> &str {
+    async fn login(&self, #[graphql(validator(email))] email: String) -> Result<String> {
         "Server Is Running OK...!"
     }
 }
