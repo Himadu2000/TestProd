@@ -74,7 +74,7 @@ impl ProductsMutation {
         ctx: &Context<'ctx>,
         data: Product,
     ) -> Result<Vec<ProductRecord>, &str> {
-        is_authorized(ctx.insert_http_header("Authorization", None));
+        is_authorized(ctx).await?;
 
         let db = ctx.data::<SurrealDb>().unwrap();
 
@@ -89,6 +89,8 @@ impl ProductsMutation {
         id: String,
         data: Product,
     ) -> Result<Option<ProductRecord>, &str> {
+        is_authorized(ctx).await?;
+
         let db = ctx.data::<SurrealDb>().unwrap();
 
         let product: Option<ProductRecord> = db.update(("product", id)).merge(data).await.unwrap();
@@ -101,6 +103,8 @@ impl ProductsMutation {
         ctx: &Context<'ctx>,
         id: String,
     ) -> Result<Option<ProductRecord>, &str> {
+        is_authorized(ctx).await?;
+
         let db = ctx.data::<SurrealDb>().unwrap();
 
         let product: Option<ProductRecord> = db.delete(("product", id)).await.unwrap();
