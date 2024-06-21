@@ -29,7 +29,7 @@ impl Variant {
 
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(complex, input_name = "ProductInput")]
-pub struct Product {
+pub struct Token {
     pub name: Option<String>,
     pub description: Option<String>,
     pub meta_description: Option<String>,
@@ -39,7 +39,7 @@ pub struct Product {
 }
 
 #[ComplexObject]
-impl Product {
+impl Token {
     async fn date_stock_expected(&self) -> String {
         String::new()
     }
@@ -53,7 +53,7 @@ pub struct ProductRecord {
     pub id: Thing,
     #[serde(flatten)]
     #[graphql(flatten)]
-    pub product: Product,
+    pub product: Token,
 }
 
 #[ComplexObject]
