@@ -1,6 +1,6 @@
 use swd::{
-    surrealdb::sql::{Bytes, Datetime},
-    ComplexObject, Deserialize, Enum, InputObject, Serialize, SimpleObject, Thing,
+    surrealdb::sql::Bytes, ComplexObject, Datetime, Deserialize, Enum, InputObject, Serialize,
+    SimpleObject, Thing,
 };
 
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
