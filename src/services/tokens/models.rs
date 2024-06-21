@@ -1,15 +1,13 @@
 use swd::{ComplexObject, Deserialize, Enum, InputObject, Serialize, SimpleObject, Thing};
 
-#[derive(Clone, Copy, Default, Enum, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Enum, Eq, PartialEq, Serialize, Deserialize)]
 pub enum TokenMethod {
-    #[default]
     READ,
     WRITE,
 }
 
-#[derive(Clone, Copy, Default, Enum, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Enum, Eq, PartialEq, Serialize, Deserialize)]
 pub enum TokenItem {
-    #[default]
     CustomerGroups,
     Files,
     OrderStatuses,
