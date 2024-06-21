@@ -10,7 +10,18 @@ pub enum TokenMethod {
 #[derive(Clone, Copy, Default, Enum, Eq, PartialEq, Serialize, Deserialize)]
 pub enum TokenItem {
     #[default]
-    SELECT,
+    CustomerGroups,
+    Files,
+    OrderStatuses,
+    Orders,
+    Pages,
+    PaymentMethods,
+    ProductCategories,
+    Products,
+    Settings,
+    ShippingMethods,
+    Sitemap,
+    Theme,
 }
 
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
