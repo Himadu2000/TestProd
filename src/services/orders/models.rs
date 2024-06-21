@@ -29,7 +29,7 @@ pub struct Item {
     weight: f32,
 }
 
-#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
+#[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(input_name = "VariantInput")]
 pub struct Coordinates {
     latitude: f32,
