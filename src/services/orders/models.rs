@@ -35,14 +35,20 @@ pub struct Coordinates {
 }
 
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(complex, input_name = "VariantInput")]
-pub struct Variant {
-    pub sku: Option<String>,
-    pub price: f32,
-    pub stock_quantity: u16,
-    pub weight: Option<f32>,
-    #[graphql(skip)]
-    pub options: Vec<VariantOption>,
+#[graphql(input_name = "VariantInput")]
+pub struct Address {
+    full_name: String,
+    address1: String,
+    address2: String,
+    city: String,
+    country: String,
+    postal_code: String,
+    state: String,
+    phone: String,
+    company: String,
+    tax_number: String,
+    coordinates: Coordinates,
+    details: String,
 }
 
 #[ComplexObject]
