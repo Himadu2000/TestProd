@@ -1,5 +1,13 @@
 use swd::Object;
 
+pub async fn is_authorized(token: String) -> Result<(), &str> {
+    if token == String::from("token03124701209") {
+        Ok(())
+    }
+
+    Err("Not authorized...!")
+}
+
 #[derive(Default)]
 pub struct AuthMutation;
 
