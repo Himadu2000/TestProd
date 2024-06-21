@@ -1,9 +1,8 @@
 mod product;
 
-use product::{Dimensions, Image};
+use product::{Attribute, Dimensions, Image, ProductOption, Variant};
 use swd::{
-    surrealdb::sql::Bytes, ComplexObject, Datetime, Deserialize, Enum, InputObject, Serialize,
-    SimpleObject, Thing,
+    ComplexObject, Datetime, Deserialize, Enum, InputObject, Serialize, SimpleObject, Thing,
 };
 
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
