@@ -3,7 +3,7 @@ use swd::{
     ComplexObject, Deserialize, Enum, InputObject, Serialize, SimpleObject, Thing,
 };
 
-#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(complex, input_name = "ImageInput")]
 pub struct Image {
     pub alt: Option<String>,
@@ -19,7 +19,7 @@ impl Image {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(input_name = "DimensionsInput")]
 pub struct Dimensions {
     pub length: f32,
@@ -27,26 +27,26 @@ pub struct Dimensions {
     pub height: f32,
 }
 
-#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(input_name = "AttributeInput")]
 pub struct Attribute {
     pub name: String,
     pub value: String,
 }
 
-#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(input_name = "ValueInput")]
 pub struct Value {
     pub name: String,
 }
 
-#[derive(Clone, Copy, Debug, Default, Enum, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Default, Enum, Eq, PartialEq, Serialize, Deserialize)]
 pub enum ProductOptionControl {
     #[default]
     SELECT,
 }
 
-#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(input_name = "ProductOptionInput")]
 pub struct ProductOption {
     pub name: String,
@@ -56,13 +56,13 @@ pub struct ProductOption {
     pub values: Vec<Value>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Serialize, Deserialize)]
 pub struct VariantOption {
     pub option_id: Thing,
     pub value_id: Thing,
 }
 
-#[derive(Debug, Serialize, Deserialize, SimpleObject, InputObject)]
+#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(complex, input_name = "VariantInput")]
 pub struct Variant {
     pub sku: Option<String>,
@@ -80,7 +80,7 @@ impl Variant {
     }
 }
 
-#[derive(Debug, Default, Serialize, Deserialize, SimpleObject, InputObject)]
+#[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(complex, input_name = "ProductInput")]
 pub struct Product {
     #[graphql(default)]
@@ -154,7 +154,7 @@ impl Product {
     }
 }
 
-#[derive(Debug, Deserialize, SimpleObject)]
+#[derive(Deserialize, SimpleObject)]
 #[graphql(complex)]
 pub struct ProductRecord {
     #[allow(dead_code)]
