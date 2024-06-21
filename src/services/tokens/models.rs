@@ -9,6 +9,7 @@ pub enum TokenMethod {
 #[derive(Clone, Copy, Enum, Eq, PartialEq, Serialize, Deserialize)]
 pub enum TokenItem {
     CustomerGroups,
+    Customers,
     Files,
     OrderStatuses,
     Orders,
