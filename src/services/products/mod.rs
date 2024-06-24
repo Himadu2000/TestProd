@@ -98,6 +98,21 @@ impl ProductsMutation {
         Ok(product)
     }
 
+    async fn update_product<'ctx>(
+        &self,
+        ctx: &Context<'ctx>,
+        id: String,
+        data: Product,
+    ) -> Result<Option<ProductRecord>, &str> {
+        is_authorized(ctx, String::new()).await?;
+
+        let db = ctx.data::<SurrealDb>().unwrap();
+
+        let product: Option<ProductRecord> = db.update(("product", id)).merge(data).await.unwrap();
+
+        Ok(product)
+    }
+
     async fn delete_product<'ctx>(
         &self,
         ctx: &Context<'ctx>,
