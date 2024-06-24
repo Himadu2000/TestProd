@@ -115,7 +115,7 @@ impl ProductsMutation {
     async fn delete_image<'ctx>(
         &self,
         ctx: &Context<'ctx>,
-        id: String,
+        index: u8,
     ) -> Result<Option<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
