@@ -2,6 +2,7 @@
 mod products;
 mod tokens;
 
+use crate::util::auth::AuthMutation;
 use products::{ProductsMutation, ProductsQuery};
 use swd::{async_graphql::MergedObject, Object};
 
@@ -19,4 +20,4 @@ impl QueryRoot {
 pub struct Query(QueryRoot, ProductsQuery);
 
 #[derive(MergedObject, Default)]
-pub struct Mutation(QueryRoot, ProductsMutation);
+pub struct Mutation(QueryRoot, AuthMutation, ProductsMutation);
