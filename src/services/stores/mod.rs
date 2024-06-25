@@ -36,7 +36,7 @@ impl StoresMutation {
             product: data,
         };
 
-        let products: Vec<ProductRecord> = db.create("product").content(data).await.unwrap();
+        let products: Vec<ProductRecord> = db.create("store").content(data).await.unwrap();
 
         Ok(products)
     }
