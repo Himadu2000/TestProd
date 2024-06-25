@@ -31,11 +31,6 @@ impl StoresMutation {
         let db = ctx.data::<SurrealDb>().map_err(error)?;
         let headers = ctx.data::<Headers>().map_err(error)?;
 
-        let data = ProductDbRecord {
-            store_id,
-            product: data,
-        };
-
         let products: Vec<StoreRecord> = db
             .create("store")
             .content(data)
