@@ -1,6 +1,6 @@
 mod models;
 
-use crate::util::{auth::is_authorized, db_and_headers, error, graphql::Headers};
+use crate::util::{auth::is_authorized, db_and_store_id, error, graphql::Headers};
 use models::{Filter, Product, ProductDbRecord, ProductRecord};
 use swd::{
     async_graphql::{types::connection::*, Context, Error},
@@ -20,7 +20,7 @@ impl ProductsQuery {
         ctx: &Context<'ctx>,
         id: String,
     ) -> Result<ProductRecord, &str> {
-        let (db, headers) = db_and_headers(ctx)?;
+        let (db, headers) = db_and_store_id(ctx)?;
 
         let error = "Product not found...!";
 
