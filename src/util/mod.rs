@@ -3,26 +3,14 @@ pub mod files;
 pub mod graphql;
 pub mod store;
 
-use super::graphql::Headers;
-use swd::async_graphql::Error;
-use swd::{async_graphql::Context, Object};
+use graphql::Headers;
+use swd::{async_graphql::Context, async_graphql::Error, SurrealDb};
 
 pub async fn db_and_headers<'ctx>(ctx: &Context<'ctx>, _scope: String) -> Result<(), &'static str> {
-    let token = ctx
-        .insert_http_header("Authorization", "")
-        .ok_or("Authorization header not set...!")?;
+    let db = ctx.data::<SurrealDb>().map_err(error)?;
+    let headers = ctx.data::<Headers>().map_err(error)?;
 
-    let token = token
-        .to_str()
-        .map_err(|_| "Incorrect Authorization header...!")?;
-
-    let headers = ctx.data::<Headers>().unwrap();
-
-    if headers.authorization == "Bearer token03124701209" {
-        return Ok(());
-    }
-
-    Err("Not authorized...!")
+    (db, headers)
 }
 
 pub fn error(_: Error) -> &'static str {
