@@ -16,6 +16,10 @@ impl QueryRoot {
     async fn status(&self) -> &str {
         "Server Is Running OK...!"
     }
+
+    async fn status(&self) -> &str {
+        "Server Is Running OK...!"
+    }
 }
 
 #[derive(MergedObject, Default)]
