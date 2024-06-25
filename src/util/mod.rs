@@ -11,7 +11,7 @@ use swd::{
 
 pub fn db_and_store_id<'ctx>(
     ctx: &Context<'ctx>,
-) -> Result<(&'ctx SurrealDb, String), &'static str> {
+) -> Result<(&'ctx SurrealDb, Thing), &'static str> {
     let db = ctx.data::<SurrealDb>().map_err(error)?;
     let headers = ctx.data::<Headers>().map_err(error)?;
 
@@ -22,7 +22,7 @@ pub fn db_and_store_id<'ctx>(
         id: id.into(),
     };
 
-    Ok((db, headers.store_id.clone()))
+    Ok((db, store_id))
 }
 
 pub fn error(_: Error) -> &'static str {
