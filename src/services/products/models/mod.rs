@@ -97,8 +97,9 @@ impl ProductRecord {
     }
 }
 
-#[derive(Serialize, SimpleObject)]
+#[derive(Serialize, Deserialize, SimpleObject)]
 pub struct ProductDbRecord {
+    #[graphql(skip)]
     pub store_id: Thing,
     #[serde(flatten)]
     pub product: Product,
