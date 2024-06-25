@@ -9,7 +9,7 @@ use swd::{async_graphql::Context, async_graphql::Error, SurrealDb};
 pub fn db_and_headers<'ctx>(
     ctx: &Context<'ctx>,
     _scope: String,
-) -> Result<(&'ctx SurrealDb, Headers), &'static str> {
+) -> Result<(&'ctx SurrealDb, &'ctx Headers), &'static str> {
     let db = ctx.data::<SurrealDb>().map_err(error)?;
     let headers = ctx.data::<Headers>().map_err(error)?;
 
