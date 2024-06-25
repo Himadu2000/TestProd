@@ -85,6 +85,9 @@ pub struct ProductRecord {
     #[allow(dead_code)]
     #[graphql(skip)]
     pub id: Thing,
+    #[allow(dead_code)]
+    #[graphql(skip)]
+    pub store_id: Thing,
     #[serde(flatten)]
     #[graphql(flatten)]
     pub product: Product,
