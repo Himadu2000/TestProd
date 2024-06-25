@@ -1,4 +1,7 @@
+mod models;
+
 use super::graphql::Headers;
+pub use models;
 use swd::{async_graphql::Context, Object};
 
 pub async fn is_authorized<'ctx>(ctx: &Context<'ctx>, _scope: String) -> Result<(), &'static str> {
