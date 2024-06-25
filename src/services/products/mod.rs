@@ -19,7 +19,7 @@ impl ProductsQuery {
         &self,
         ctx: &Context<'ctx>,
         id: String,
-    ) -> Result<ProductRecord, &str> {
+    ) -> Result<ProductDbRecord, &str> {
         let (db, store_id) = db_and_store_id(ctx)?;
 
         let error = "Product not found...!";
