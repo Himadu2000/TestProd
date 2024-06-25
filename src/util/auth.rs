@@ -5,17 +5,9 @@ pub async fn is_in_the_store<'ctx>(
     ctx: &Context<'ctx>,
     _scope: String,
 ) -> Result<(), &'static str> {
-    let store_id = ctx
-        .insert_http_header("store_id", "")
-        .ok_or("Authorization header not set...!")?;
-
-    let store_id = store_id
-        .to_str()
-        .map_err(|_| "Incorrect Authorization header...!")?;
-
     let headers = ctx.data::<Headers>().unwrap();
 
-    if headers.authorization == "Bearer token03124701209" {
+    if headers.store_id == "Bearer token03124701209" {
         return Ok(());
     }
 
