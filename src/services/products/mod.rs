@@ -22,6 +22,8 @@ impl ProductsQuery {
     ) -> Result<Option<ProductRecord>, &str> {
         let db = ctx.data::<SurrealDb>().unwrap();
 
+        let error = "Product not found...!";
+
         let product: Option<ProductRecord> = db.select(("product", id)).await.unwrap();
 
         Ok(product)
