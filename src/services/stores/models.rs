@@ -14,10 +14,6 @@ impl Store {
     async fn users(&self) -> String {
         String::new()
     }
-
-    async fn products(&self) -> String {
-        String::new()
-    }
 }
 
 #[derive(Deserialize, SimpleObject)]
