@@ -1,7 +1,7 @@
 mod models;
 
 use crate::util::{auth::is_authorized, error, graphql::Headers};
-use models::{Filter, Product, ProductRecord};
+use models::{Filter, Product, ProductDbRecord, ProductRecord};
 use swd::{
     async_graphql::{types::connection::*, Context, Error},
     Object, SurrealDb,
@@ -96,6 +96,11 @@ impl ProductsMutation {
         is_authorized(ctx, String::new()).await?;
 
         let db = ctx.data::<SurrealDb>().map_err(error)?;
+
+        let data = ProductDbRecord {
+            store_id,
+            product: data,
+        };
 
         let products: Vec<ProductRecord> = db.create("product").content(data).await.unwrap();
 
