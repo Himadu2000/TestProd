@@ -1,6 +1,6 @@
 mod models;
 
-use crate::util::{auth::is_authorized, error, graphql::Headers};
+use crate::util::{auth::is_authorized, db_and_headers, error, graphql::Headers};
 use models::{Filter, Product, ProductDbRecord, ProductRecord};
 use swd::{
     async_graphql::{types::connection::*, Context, Error},
@@ -20,8 +20,7 @@ impl ProductsQuery {
         ctx: &Context<'ctx>,
         id: String,
     ) -> Result<ProductRecord, &str> {
-        let db = ctx.data::<SurrealDb>().map_err(error)?;
-        let headers = ctx.data::<Headers>().map_err(error)?;
+        let (db, headers) = db_and_headers(ctx)?;
 
         let error = "Product not found...!";
 
