@@ -102,21 +102,7 @@ impl ProductsMutation {
         &self,
         ctx: &Context<'ctx>,
         id: String,
-    ) -> Result<Option<ProductRecord>, &str> {
-        is_authorized(ctx, String::new()).await?;
-
-        let db = ctx.data::<SurrealDb>().unwrap();
-
-        let product: Option<ProductRecord> = db.delete(("product", id)).await.unwrap();
-
-        Ok(product)
-    }
-
-    async fn delete_image<'ctx>(
-        &self,
-        ctx: &Context<'ctx>,
-        id: String,
-        index: u8,
+        delete_image_index: Option<u8>,
     ) -> Result<Option<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
