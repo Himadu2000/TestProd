@@ -1,7 +1,7 @@
 mod models;
 
 use crate::util::graphql::Headers;
-use models::{Store,StoreRecord};
+use models::{Store, StoreRecord};
 use surrealdb::{engine::local::Db, Surreal};
 use swd::{async_graphql::Context, Object, SurrealDb};
 
@@ -25,7 +25,7 @@ impl StoresMutation {
         &self,
         ctx: &Context<'ctx>,
         data: Store,
-    ) -> Result<StoreRecord>, &str> {
+    ) -> Result<StoreRecord, &str> {
         is_authorized(ctx, String::new()).await?;
 
         let db = ctx.data::<SurrealDb>().map_err(error)?;
