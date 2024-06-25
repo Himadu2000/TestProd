@@ -25,20 +25,14 @@ impl StoresMutation {
         &self,
         ctx: &Context<'ctx>,
         data: Store,
-    ) -> Result<StoreRecord, &str> {
+    ) -> Result<Vec<StoreRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
         let db = ctx.data::<SurrealDb>().map_err(error)?;
         let headers = ctx.data::<Headers>().map_err(error)?;
 
-        let products: StoreRecord = db
-            .create("store")
-            .content(data)
-            .await
-            .unwrap()
-            .first()
-            .unwrap();
+        let stores: Vec<StoreRecord> = db.create("store").content(data).await.unwrap();
 
-        Ok(products)
+        Ok(stores)
     }
 }
