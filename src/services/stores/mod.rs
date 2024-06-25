@@ -1,6 +1,6 @@
 mod models;
 
-use crate::util::{error, graphql::Headers};
+use crate::util::{auth::is_authorized, error, graphql::Headers};
 use models::{Store, StoreRecord};
 use surrealdb::{engine::local::Db, Surreal};
 use swd::{async_graphql::Context, Object, SurrealDb};
