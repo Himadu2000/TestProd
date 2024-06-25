@@ -6,7 +6,7 @@ pub mod store;
 use graphql::Headers;
 use swd::{
     async_graphql::{Context, Error},
-    SurrealDb,
+    SurrealDb, Thing,
 };
 
 pub fn db_and_store_id<'ctx>(
@@ -14,6 +14,12 @@ pub fn db_and_store_id<'ctx>(
 ) -> Result<(&'ctx SurrealDb, String), &'static str> {
     let db = ctx.data::<SurrealDb>().map_err(error)?;
     let headers = ctx.data::<Headers>().map_err(error)?;
+
+    let (tb, id) = headers.store_id.clone().split_once(':').unwrap_or_default();
+    let store_id = Thing {
+        tb: tb.to_owned(),
+        id: id.into(),
+    };
 
     Ok((db, headers.store_id.clone()))
 }
