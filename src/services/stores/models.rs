@@ -1,8 +1,8 @@
 use swd::{ComplexObject, Deserialize, InputObject, Serialize, SimpleObject, Thing};
 
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(complex, input_name = "StoresInput")]
-pub struct Stores {
+#[graphql(complex, input_name = "StoreInput")]
+pub struct Store {
     #[graphql(default = "Untitled")]
     pub name: String,
     #[graphql(skip)]
@@ -12,7 +12,7 @@ pub struct Stores {
 }
 
 #[ComplexObject]
-impl Stores {
+impl Store {
     async fn users(&self) -> String {
         String::new()
     }
@@ -24,17 +24,17 @@ impl Stores {
 
 #[derive(Deserialize, SimpleObject)]
 #[graphql(complex)]
-pub struct StoresRecord {
+pub struct StoreRecord {
     #[allow(dead_code)]
     #[graphql(skip)]
     pub id: Thing,
     #[serde(flatten)]
     #[graphql(flatten)]
-    pub stores: Stores,
+    pub store: Store,
 }
 
 #[ComplexObject]
-impl StoresRecord {
+impl StoreRecord {
     async fn id(&self) -> String {
         format!("{}:{}", &self.id.tb, &self.id.id)
     }
