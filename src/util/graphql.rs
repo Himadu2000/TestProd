@@ -48,12 +48,7 @@ async fn graphql_request(
     request.data(headers).execute(schema.inner()).await
 }
 
-#[post(
-    "/graphql",
-    data = "<request>",
-    format = "multipart/form-data",
-    rank = 2
-)]
+#[post("/", data = "<request>", format = "multipart/form-data", rank = 2)]
 async fn graphql_request_multipart(
     schema: &GraphqlSchema,
     request: GraphQLRequest,
