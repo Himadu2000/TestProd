@@ -31,7 +31,7 @@ impl StoresMutation {
         let db = ctx.data::<SurrealDb>().map_err(error)?;
         let headers = ctx.data::<Headers>().map_err(error)?;
 
-        let products: Vec<StoreRecord> = db
+        let products: StoreRecord = db
             .create("store")
             .content(data)
             .await
