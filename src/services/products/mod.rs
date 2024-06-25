@@ -52,8 +52,7 @@ impl ProductsQuery {
             first,
             last,
             |after, before, first, last| async move {
-                let db = ctx.data::<SurrealDb>().map_err(error)?;
-                let headers = ctx.data::<Headers>().map_err(error)?;
+                let (db, store_id) = db_and_store_id(ctx)?;
 
                 let products: Vec<ProductRecord> = db
                     .query("SELECT * FROM $resource WHERE store_id = $store_id;")
@@ -94,7 +93,7 @@ impl ProductsMutation {
     ) -> Result<Vec<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
-        let db = ctx.data::<SurrealDb>().map_err(error)?;
+        let (db, store_id) = db_and_store_id(ctx)?;
 
         let data = ProductDbRecord {
             store_id,
