@@ -21,7 +21,7 @@ impl StoresQuery {
 
 #[Object]
 impl StoresMutation {
-    async fn create_product<'ctx>(
+    async fn create_store<'ctx>(
         &self,
         ctx: &Context<'ctx>,
         data: Stores,
