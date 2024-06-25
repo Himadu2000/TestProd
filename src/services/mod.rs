@@ -18,7 +18,7 @@ impl QueryRoot {
     }
 
     async fn license(&self) -> &str {
-        "Server Is Running OK...!"
+        "This project is licensed under AGPL-3.0-or-later and the source code is available here https://github.com/Cezerin2/Cezerin2."
     }
 }
 
