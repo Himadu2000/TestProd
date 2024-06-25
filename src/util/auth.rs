@@ -6,7 +6,7 @@ pub async fn is_in_the_store<'ctx>(
     _scope: String,
 ) -> Result<(), &'static str> {
     let token = ctx
-        .insert_http_header("Authorization", "")
+        .insert_http_header("store_id", "")
         .ok_or("Authorization header not set...!")?;
 
     let token = token
