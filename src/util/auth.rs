@@ -5,11 +5,11 @@ pub async fn is_in_the_store<'ctx>(
     ctx: &Context<'ctx>,
     _scope: String,
 ) -> Result<(), &'static str> {
-    let token = ctx
+    let store_id = ctx
         .insert_http_header("store_id", "")
         .ok_or("Authorization header not set...!")?;
 
-    let token = token
+    let store_id = store_id
         .to_str()
         .map_err(|_| "Incorrect Authorization header...!")?;
 
