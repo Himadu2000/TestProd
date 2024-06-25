@@ -1,4 +1,4 @@
-use crate::util::auth::models::Token;
+use crate::util::auth::Token;
 use swd::{ComplexObject, Deserialize, InputObject, Serialize, SimpleObject, Thing};
 
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
