@@ -44,8 +44,8 @@ impl ProductsQuery {
             first,
             last,
             |after, before, first, last| async move {
-                let db = ctx.data::<SurrealDb>().unwrap();
-                let headers = ctx.data::<Headers>().unwrap();
+                let db = ctx.data::<SurrealDb>().map_err(error)?;
+                let headers = ctx.data::<Headers>().map_err(error)?;
 
                 let products: Vec<ProductRecord> = db
                     .query("SELECT * FROM $resource WHERE store_id = $store_id;")
@@ -86,7 +86,7 @@ impl ProductsMutation {
     ) -> Result<Vec<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
-        let db = ctx.data::<SurrealDb>().unwrap();
+        let db = ctx.data::<SurrealDb>().map_err(error)?;
 
         let products: Vec<ProductRecord> = db.create("product").content(data).await.unwrap();
 
@@ -101,7 +101,7 @@ impl ProductsMutation {
     ) -> Result<Option<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
-        let db = ctx.data::<SurrealDb>().unwrap();
+        let db = ctx.data::<SurrealDb>().map_err(error)?;
 
         let product: Option<ProductRecord> = db.update(("product", id)).merge(data).await.unwrap();
 
@@ -116,7 +116,7 @@ impl ProductsMutation {
     ) -> Result<Option<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
-        let db = ctx.data::<SurrealDb>().unwrap();
+        let db = ctx.data::<SurrealDb>().map_err(error)?;
 
         let product: Option<ProductRecord> = db.delete(("product", id)).await.unwrap();
 
