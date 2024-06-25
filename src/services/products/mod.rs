@@ -20,7 +20,7 @@ impl ProductsQuery {
         ctx: &Context<'ctx>,
         id: String,
     ) -> Result<ProductRecord, &str> {
-        let (db, headers) = db_and_store_id(ctx)?;
+        let (db, store_id) = db_and_store_id(ctx)?;
 
         let error = "Product not found...!";
 
@@ -28,7 +28,7 @@ impl ProductsQuery {
 
         match product {
             Some(data) => {
-                if data.store_id.id.to_string() == headers.store_id.clone() {
+                if data.store_id.id.to_string() == store_id {
                     return Ok(data);
                 }
                 Err(error)
