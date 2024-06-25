@@ -1,8 +1,9 @@
 mod models;
 
+use crate::util::graphql::Headers;
 use models::Stores;
 use surrealdb::{engine::local::Db, Surreal};
-use swd::{async_graphql::Context, Object};
+use swd::{async_graphql::Context, Object, SurrealDb};
 
 #[derive(Default)]
 pub struct StoresQuery;
@@ -27,7 +28,8 @@ impl StoresMutation {
     ) -> Result<Vec<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
-        let (db, store_id) = db_and_store_id(ctx)?;
+        let db = ctx.data::<SurrealDb>().map_err(error)?;
+        let headers = ctx.data::<Headers>().map_err(error)?;
 
         let data = ProductDbRecord {
             store_id,
