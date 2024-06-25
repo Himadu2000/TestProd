@@ -55,7 +55,7 @@ async fn graphql_request(
     rank = 2
 )]
 async fn graphql_request_multipart(
-    schema: &State<FilesSchema>,
+    schema: &GraphqlSchema,
     request: GraphQLRequest,
 ) -> GraphQLResponse {
     request.execute(schema.inner()).await
