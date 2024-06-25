@@ -8,8 +8,6 @@ use swd::{ComplexObject, Datetime, Deserialize, InputObject, Serialize, SimpleOb
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(complex, input_name = "ProductInput")]
 pub struct Product {
-    #[graphql(skip)]
-    pub store_id: Thing,
     #[graphql(default)]
     pub images: Vec<Image>,
     pub dimensions: Option<Dimensions>,
@@ -81,7 +79,7 @@ impl Product {
     }
 }
 
-#[derive(Deserialize, SimpleObject)]
+#[derive(Serialize, Deserialize, SimpleObject)]
 #[graphql(complex)]
 pub struct ProductRecord {
     #[allow(dead_code)]
@@ -97,4 +95,12 @@ impl ProductRecord {
     async fn id(&self) -> String {
         format!("{}:{}", &self.id.tb, &self.id.id)
     }
+}
+
+#[derive(Serialize)]
+pub struct ProductDbRecord {
+    #[allow(dead_code)]
+    pub store_id: Thing,
+    #[serde(flatten)]
+    pub product: ProductRecord,
 }
