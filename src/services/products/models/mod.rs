@@ -101,5 +101,5 @@ impl ProductRecord {
 pub struct ProductDbRecord {
     pub store_id: Thing,
     #[serde(flatten)]
-    pub product: ProductRecord,
+    pub product: Product,
 }
