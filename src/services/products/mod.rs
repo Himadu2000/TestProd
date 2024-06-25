@@ -7,6 +7,8 @@ use swd::{
     Object, SurrealDb,
 };
 
+const ERROR: &str = "Product not found...!";
+
 #[derive(Default)]
 pub struct ProductsQuery;
 
@@ -22,8 +24,6 @@ impl ProductsQuery {
     ) -> Result<ProductDbRecord, &str> {
         let (db, store_id) = db_and_store_id(ctx)?;
 
-        let error = "Product not found...!";
-
         let product: Option<ProductDbRecord> = db.select(("product", id)).await.unwrap();
 
         match product {
@@ -31,9 +31,9 @@ impl ProductsQuery {
                 if data.store_id == store_id {
                     return Ok(data);
                 }
-                Err(error)
+                Err(ERROR)
             }
-            None => Err(error),
+            None => Err(ERROR),
         }
     }
 
@@ -113,11 +113,22 @@ impl ProductsMutation {
     ) -> Result<Option<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
-        let db = ctx.data::<SurrealDb>().map_err(error)?;
+        let (db, store_id) = db_and_store_id(ctx)?;
 
-        let product: Option<ProductRecord> = db.update(("product", id)).merge(data).await.unwrap();
+        let product: Option<ProductDbRecord> = db.select(("product", &id)).await.unwrap();
 
-        Ok(product)
+        match product {
+            Some(data) => {
+                if data.store_id == store_id {
+                    let product: Option<ProductRecord> =
+                        db.update(("product", id)).merge(data).await.unwrap();
+
+                    return Ok(product);
+                }
+                Err(ERROR)
+            }
+            None => Err(ERROR),
+        }
     }
 
     async fn delete_product<'ctx>(
