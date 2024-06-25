@@ -48,6 +48,24 @@ async fn graphql_request(
     request.data(headers).execute(schema.inner()).await
 }
 
+#[post(
+    "/graphql",
+    data = "<request>",
+    format = "multipart/form-data",
+    rank = 2
+)]
+async fn graphql_request_multipart(
+    schema: &State<FilesSchema>,
+    request: GraphQLRequest,
+) -> GraphQLResponse {
+    request.execute(schema.inner()).await
+}
+
 pub fn graphql() -> impl Into<Vec<Route>> {
-    routes![graphiql, graphql_query, graphql_request]
+    routes![
+        graphiql,
+        graphql_query,
+        graphql_request,
+        graphql_request_multipart
+    ]
 }
