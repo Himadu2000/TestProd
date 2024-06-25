@@ -17,7 +17,7 @@ impl QueryRoot {
         "Server Is Running OK...!"
     }
 
-    async fn status(&self) -> &str {
+    async fn license(&self) -> &str {
         "Server Is Running OK...!"
     }
 }
