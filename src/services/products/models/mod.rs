@@ -99,7 +99,6 @@ impl ProductRecord {
 
 #[derive(Serialize)]
 pub struct ProductDbRecord {
-    #[allow(dead_code)]
     pub store_id: Thing,
     #[serde(flatten)]
     pub product: ProductRecord,
