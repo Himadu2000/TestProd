@@ -1,7 +1,7 @@
 use swd::{ComplexObject, Deserialize, Enum, InputObject, Serialize, SimpleObject, Thing};
 
 #[derive(Clone, Copy, Default, Enum, Eq, PartialEq, Serialize, Deserialize)]
-pub enum ProductOptionControl {
+pub enum StoresOptionControl {
     #[default]
     SELECT,
 }
@@ -25,8 +25,8 @@ impl Variant {
 }
 
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(complex, input_name = "ProductInput")]
-pub struct Product {
+#[graphql(complex, input_name = "StoresInput")]
+pub struct Stores {
     pub name: Option<String>,
     pub description: Option<String>,
     pub meta_description: Option<String>,
@@ -36,7 +36,7 @@ pub struct Product {
 }
 
 #[ComplexObject]
-impl Product {
+impl Stores {
     async fn date_stock_expected(&self) -> String {
         String::new()
     }
@@ -44,17 +44,17 @@ impl Product {
 
 #[derive(Deserialize, SimpleObject)]
 #[graphql(complex)]
-pub struct ProductRecord {
+pub struct StoresRecord {
     #[allow(dead_code)]
     #[graphql(skip)]
     pub id: Thing,
     #[serde(flatten)]
     #[graphql(flatten)]
-    pub product: Product,
+    pub stores: Stores,
 }
 
 #[ComplexObject]
-impl ProductRecord {
+impl StoresRecord {
     async fn id(&self) -> String {
         format!("{}:{}", &self.id.tb, &self.id.id)
     }
