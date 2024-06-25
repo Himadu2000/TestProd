@@ -4,7 +4,10 @@ pub mod graphql;
 pub mod store;
 
 use graphql::Headers;
-use swd::{async_graphql::Context, async_graphql::Error, SurrealDb};
+use swd::{
+    async_graphql::{Context, Error},
+    SurrealDb,
+};
 
 pub fn db_and_store_id<'ctx>(
     ctx: &Context<'ctx>,
