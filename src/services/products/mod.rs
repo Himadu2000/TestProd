@@ -28,7 +28,7 @@ impl ProductsQuery {
 
         match product {
             Some(data) => {
-                if data.store_id.id.to_string() == store_id {
+                if data.store_id == store_id {
                     return Ok(data);
                 }
                 Err(error)
