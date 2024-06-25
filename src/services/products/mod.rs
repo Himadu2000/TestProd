@@ -24,7 +24,7 @@ impl ProductsQuery {
 
         let error = "Product not found...!";
 
-        let product: Option<ProductRecord> = db.select(("product", id)).await.unwrap();
+        let product: Option<ProductDbRecord> = db.select(("product", id)).await.unwrap();
 
         match product {
             Some(data) => {
