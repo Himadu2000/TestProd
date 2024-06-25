@@ -1,3 +1,4 @@
+use crate::util::auth::models::Token;
 use swd::{ComplexObject, Deserialize, InputObject, Serialize, SimpleObject, Thing};
 
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
@@ -6,7 +7,7 @@ pub struct Store {
     #[graphql(default = "Untitled")]
     pub name: String,
     #[graphql(skip)]
-    pub users: Vec<Thing>,
+    pub users: Vec<Token>,
 }
 
 #[ComplexObject]
