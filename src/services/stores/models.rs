@@ -7,8 +7,6 @@ pub struct Store {
     pub name: String,
     #[graphql(skip)]
     pub users: Vec<Thing>,
-    #[graphql(skip)]
-    pub products: Vec<Thing>,
 }
 
 #[ComplexObject]
