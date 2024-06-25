@@ -1,6 +1,6 @@
 mod models;
 
-use crate::util::auth::is_authorized;
+use crate::util::{auth::is_authorized, graphql::Headers};
 use models::{Filter, Product, ProductRecord};
 use swd::{
     async_graphql::{types::connection::*, Context, Error},
@@ -43,8 +43,16 @@ impl ProductsQuery {
             last,
             |after, before, first, last| async move {
                 let db = ctx.data::<SurrealDb>().unwrap();
+                let headers = ctx.data::<Headers>().unwrap();
 
-                let products: Vec<ProductRecord> = db.select("product").await.unwrap();
+                let products: Vec<ProductRecord> = db
+                    .query("SELECT * FROM $resource WHERE store_id = $store_id;")
+                    .bind(("resource", "product"))
+                    .bind(("store_id", headers.store_id.clone()))
+                    .await
+                    .unwrap()
+                    .take(0)
+                    .unwrap();
 
                 let mut start = after.map(|after| after + 1).unwrap_or(0);
                 let mut end = before.unwrap_or(10000);
