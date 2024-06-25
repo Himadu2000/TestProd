@@ -19,14 +19,23 @@ impl ProductsQuery {
         &self,
         ctx: &Context<'ctx>,
         id: String,
-    ) -> Result<Option<ProductRecord>, &str> {
+    ) -> Result<ProductRecord, &str> {
         let db = ctx.data::<SurrealDb>().map_err(error)?;
+        let headers = ctx.data::<Headers>().map_err(error)?;
 
         let error = "Product not found...!";
 
         let product: Option<ProductRecord> = db.select(("product", id)).await.unwrap();
 
-        Ok(product)
+        match product {
+            Some(data) => {
+                if data.store_id.id.to_string() == headers.store_id.clone() {
+                    return Ok(data);
+                }
+                Err(error)
+            }
+            None => Err(error),
+        }
     }
 
     async fn get_products<'ctx>(
