@@ -1,5 +1,6 @@
 // mod orders;
 mod products;
+mod stores;
 mod tokens;
 
 use crate::util::auth::AuthMutation;
