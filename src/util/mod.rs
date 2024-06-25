@@ -15,7 +15,8 @@ pub fn db_and_store_id<'ctx>(
     let db = ctx.data::<SurrealDb>().map_err(error)?;
     let headers = ctx.data::<Headers>().map_err(error)?;
 
-    let (tb, id) = headers.store_id.clone().split_once(':').unwrap_or_default();
+    let store_id = headers.store_id.clone();
+    let (tb, id) = store_id.split_once(':').unwrap_or_default();
     let store_id = Thing {
         tb: tb.to_owned(),
         id: id.into(),
