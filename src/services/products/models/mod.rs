@@ -97,7 +97,7 @@ impl ProductRecord {
     }
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, SimpleObject)]
 pub struct ProductDbRecord {
     pub store_id: Thing,
     #[serde(flatten)]
