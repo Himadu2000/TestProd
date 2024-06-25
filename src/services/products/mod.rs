@@ -31,9 +31,9 @@ impl ProductsQuery {
                 if data.store_id == store_id {
                     return Ok(data);
                 }
-                Err(error)
+                Err(ERROR)
             }
-            None => Err(error),
+            None => Err(ERROR),
         }
     }
 
@@ -125,9 +125,9 @@ impl ProductsMutation {
 
                     return Ok(product);
                 }
-                Err(error)
+                Err(ERROR)
             }
-            None => Err(error),
+            None => Err(ERROR),
         }
     }
 
