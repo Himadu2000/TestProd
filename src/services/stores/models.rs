@@ -1,43 +1,23 @@
 use swd::{ComplexObject, Deserialize, Enum, InputObject, Serialize, SimpleObject, Thing};
 
-#[derive(Clone, Copy, Default, Enum, Eq, PartialEq, Serialize, Deserialize)]
-pub enum StoresOptionControl {
-    #[default]
-    SELECT,
-}
-
-#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(complex, input_name = "VariantInput")]
-pub struct Variant {
-    pub sku: Option<String>,
-    pub price: f32,
-    pub stock_quantity: u16,
-    pub weight: Option<f32>,
-    #[graphql(skip)]
-    pub options: Vec<VariantOption>,
-}
-
-#[ComplexObject]
-impl Variant {
-    async fn options(&self) -> String {
-        String::new()
-    }
-}
-
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(complex, input_name = "StoresInput")]
 pub struct Stores {
-    pub name: Option<String>,
-    pub description: Option<String>,
-    pub meta_description: Option<String>,
-    pub meta_title: Option<String>,
-    #[graphql(default)]
-    pub tags: Vec<String>,
+    #[graphql(default = "Untitled")]
+    pub name: String,
+    #[graphql(skip)]
+    pub users: Vec<Thing>,
+    #[graphql(skip)]
+    pub products: Vec<Thing>,
 }
 
 #[ComplexObject]
 impl Stores {
-    async fn date_stock_expected(&self) -> String {
+    async fn users(&self) -> String {
+        String::new()
+    }
+
+    async fn products(&self) -> String {
         String::new()
     }
 }
