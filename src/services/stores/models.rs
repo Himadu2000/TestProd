@@ -1,4 +1,4 @@
-use swd::{ComplexObject, Deserialize, Enum, InputObject, Serialize, SimpleObject, Thing};
+use swd::{ComplexObject, Deserialize, InputObject, Serialize, SimpleObject, Thing};
 
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(complex, input_name = "StoresInput")]
