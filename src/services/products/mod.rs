@@ -153,14 +153,14 @@ impl ProductsMutation {
 
         if let Some(images) = images {
             for image in images {
+                let upload = image.value(ctx).unwrap();
+                let file = upload.content.bytes();
+
                 let a = Image {
                     alt: todo!(),
                     position: todo!(),
                     file: todo!(),
                 };
-
-                let upload = image.value(ctx).unwrap();
-                let file = upload.content.bytes();
 
                 data.images = vec![];
             }
