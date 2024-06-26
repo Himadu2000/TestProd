@@ -5,6 +5,7 @@ use crate::{
     services::{Mutation, Query},
     util::graphql::graphql,
 };
+use std::env::set_var;
 use surrealdb::{engine::local::Mem, Surreal};
 use swd::{
     async_graphql::{EmptySubscription, Schema},
@@ -24,6 +25,8 @@ async fn rocket() -> _ {
     let schema = Schema::build(Query::default(), Mutation::default(), EmptySubscription)
         .data(db)
         .finish();
+
+    set_var("ROCKET_LIMITS", "{data-form=\"10MiB\"}");
 
     build()
         .attach(Cors)
