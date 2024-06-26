@@ -57,9 +57,9 @@ impl ProductsQuery {
                 let (db, store_id) = db_and_store_id(ctx)?;
 
                 let products: Vec<ProductRecord> = db
-                    .query("SELECT * FROM $resource WHERE store_id = $store_id;")
-                    .bind(("resource", "product"))
-                    .bind(("store_id", store_id))
+                    .query(format!(
+                        "SELECT * FROM product WHERE store_id = store:{store_id};"
+                    ))
                     .await
                     .unwrap()
                     .take(0)
