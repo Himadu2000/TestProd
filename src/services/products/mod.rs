@@ -117,6 +117,12 @@ impl ProductsMutation {
 
         let product: Option<ProductDbRecord> = db.select(("product", &id)).await.unwrap();
 
+        let mut data = data;
+
+        if delete_image_index.is_some() {
+            data.images = vec![];
+        }
+
         match product {
             Some(value) => {
                 if value.store_id == store_id {
