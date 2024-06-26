@@ -44,7 +44,7 @@ impl ProductsQuery {
         first: Option<i32>,
         last: Option<i32>,
         filter: Option<Filter>,
-    ) -> Result<Connection<usize, ProductRecord, EmptyFields, EmptyFields>, Error> {
+    ) -> Result<Connection<usize, ProductRecord>, Error> {
         query(
             after,
             before,
