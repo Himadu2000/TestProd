@@ -150,14 +150,18 @@ impl ProductsMutation {
 
         let mut data = data;
 
-        while let Some(image) = images {
-            let a = Image {
-                alt: todo!(),
-                position: todo!(),
-                file: todo!(),
-            };
+        if let Some(images) = images {
+            for image in images {
+                let a = Image {
+                    alt: todo!(),
+                    position: todo!(),
+                    file: todo!(),
+                };
 
-            data.images = vec![];
+                let upload = image.value(ctx).unwrap();
+
+                data.images = vec![];
+            }
         }
 
         if delete_image_index.is_some() {
