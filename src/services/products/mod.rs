@@ -75,7 +75,7 @@ impl ProductsQuery {
                     // (start..end)
                     (products)
                         .into_iter()
-                        .map(|n| Edge::with_additional_fields(n, n as i32, EmptyFields)),
+                        .map(|n| Edge::with_additional_fields(12, n, EmptyFields)),
                 );
                 Ok::<_, async_graphql::Error>(connection)
             },
