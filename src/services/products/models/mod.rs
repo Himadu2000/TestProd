@@ -2,7 +2,8 @@ mod filter;
 mod product;
 
 pub use filter::Filter;
-use product::{Attribute, Dimensions, Image, ProductOption, Variant};
+pub use product::Image;
+use product::{Attribute, Dimensions, ProductOption, Variant};
 use swd::{ComplexObject, Datetime, Deserialize, InputObject, Serialize, SimpleObject, Thing};
 
 #[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
