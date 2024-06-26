@@ -1,7 +1,7 @@
 mod models;
 
 use crate::util::{auth::is_authorized, db_and_store_id, error};
-use models::{Filter, Product, ProductDbRecord, ProductRecord};
+use models::{Filter, Image, Product, ProductDbRecord, ProductRecord};
 use swd::{
     async_graphql::{
         types::{connection::*, ID},
@@ -151,6 +151,7 @@ impl ProductsMutation {
         let mut data = data;
 
         while let Some(image) = images {
+            let a = Image {};
             data.images = vec![];
         }
 
