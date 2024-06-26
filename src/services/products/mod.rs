@@ -26,7 +26,7 @@ impl ProductsQuery {
 
         let product: Option<ProductRecord> = db
             .query("SELECT * FROM $resource WHERE store_id = $store_id;")
-            .bind(("resource", "product"))
+            .bind(("resource", format!("product:{}", id)))
             .bind(("store_id", store_id))
             .await
             .unwrap()
