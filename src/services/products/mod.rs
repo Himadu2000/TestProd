@@ -4,7 +4,7 @@ use crate::util::{auth::is_authorized, db_and_store_id, error};
 use models::{Filter, Product, ProductDbRecord, ProductRecord};
 use swd::{
     async_graphql::{types::connection::*, Context, Error},
-    Object, SurrealDb,
+    Object, SurrealDb, Thing,
 };
 
 const ERROR: &str = "Product not found...!";
@@ -93,6 +93,11 @@ impl ProductsMutation {
         is_authorized(ctx, String::new()).await?;
 
         let (db, store_id) = db_and_store_id(ctx)?;
+
+        let store_id = Thing {
+            tb: "store",
+            id: store_id.into(),
+        };
 
         let data = ProductDbRecord {
             store_id,
