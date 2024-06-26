@@ -151,7 +151,12 @@ impl ProductsMutation {
         let mut data = data;
 
         while let Some(image) = images {
-            let a = Image {};
+            let a = Image {
+                alt: todo!(),
+                position: todo!(),
+                file: todo!(),
+            };
+
             data.images = vec![];
         }
 
