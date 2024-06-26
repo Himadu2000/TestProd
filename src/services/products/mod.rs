@@ -8,6 +8,7 @@ use swd::{
         types::{connection::*, ID},
         Context, Error, Upload,
     },
+    surrealdb::sql::Bytes,
     Object, SurrealDb, Thing,
 };
 
@@ -153,16 +154,19 @@ impl ProductsMutation {
 
         if let Some(images) = images {
             for image in images {
-                let upload = image.value(ctx).unwrap();
-                let file = upload.content.bytes();
+                let mut upload = image.value(ctx).unwrap();
 
-                let a = Image {
-                    alt: todo!(),
-                    position: todo!(),
-                    file: todo!(),
+                let mut file = Vec::new();
+
+                upload.content.read_to_end(&mut file).unwrap();
+
+                let file = Image {
+                    alt: Some(String::new()),
+                    position: 0,
+                    file: Bytes::from(file),
                 };
 
-                data.images = vec![];
+                data.images = vec![file];
             }
         }
 
