@@ -97,6 +97,7 @@ impl ProductRecord {
     }
 }
 
+//? To include store_id when creating a product.
 #[derive(Serialize, Deserialize, SimpleObject)]
 pub struct ProductDbRecord {
     #[graphql(skip)]
