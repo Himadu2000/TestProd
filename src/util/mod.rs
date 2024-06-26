@@ -1,7 +1,6 @@
 pub mod auth;
 pub mod files;
 pub mod graphql;
-pub mod store;
 
 use graphql::Headers;
 use swd::{
