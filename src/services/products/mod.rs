@@ -74,7 +74,10 @@ impl ProductsQuery {
                 //     start = if last > end - start { end } else { end - last };
                 // }
 
-                let mut connection = Connection::new(start > 0, end < 10000);
+                let has_previous_page = false;
+                let has_next_page = false;
+
+                let mut connection = Connection::new(has_previous_page, has_next_page);
                 connection.edges.extend(
                     // (start..end)
                     (products)
