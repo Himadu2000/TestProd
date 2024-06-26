@@ -13,7 +13,7 @@ pub struct StoresMutation;
 #[Object]
 impl StoresQuery {
     async fn stores<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
-        let _db = ctx.data::<Surreal<Db>>();
+        let _db = ctx.data::<SurrealDb>();
         "Server Is Running OK...!"
     }
 }
