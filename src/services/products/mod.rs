@@ -42,8 +42,8 @@ impl ProductsQuery {
     async fn get_products<'ctx>(
         &self,
         ctx: &Context<'ctx>,
-        after: Option<ID>,
-        before: Option<ID>,
+        after: Option<String>,
+        before: Option<String>,
         first: Option<i32>,
         last: Option<i32>,
         filter: Option<Filter>,
