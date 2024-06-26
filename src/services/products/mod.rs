@@ -118,8 +118,8 @@ impl ProductsMutation {
         let product: Option<ProductDbRecord> = db.select(("product", &id)).await.unwrap();
 
         match product {
-            Some(data) => {
-                if data.store_id == store_id {
+            Some(value) => {
+                if value.store_id == store_id {
                     let product: Option<ProductRecord> =
                         db.update(("product", id)).merge(data).await.unwrap();
 
