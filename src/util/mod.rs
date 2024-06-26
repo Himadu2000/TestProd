@@ -6,7 +6,7 @@ pub mod store;
 use graphql::Headers;
 use swd::{
     async_graphql::{Context, Error},
-    SurrealDb, Thing,
+    SurrealDb,
 };
 
 pub fn db_and_store_id<'ctx>(
