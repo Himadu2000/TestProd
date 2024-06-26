@@ -79,7 +79,6 @@ impl ProductsQuery {
 
                 let mut connection = Connection::new(has_previous_page, has_next_page);
                 connection.edges.extend(
-                    // (start..end)
                     (products)
                         .into_iter()
                         .map(|n| Edge::with_additional_fields(ID::from(&n.id.id), n, EmptyFields)),
