@@ -150,7 +150,7 @@ impl ProductsMutation {
 
         let mut data = data;
 
-        for file in files {}
+        for image in images {}
 
         if delete_image_index.is_some() {
             data.images = vec![];
