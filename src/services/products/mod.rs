@@ -30,9 +30,9 @@ impl ProductsQuery {
         let (db, store_id) = db_and_store_id(ctx)?;
 
         let product: Option<ProductRecord> = db
-            .query("SELECT * FROM $resource WHERE store_id = $store_id;")
-            .bind(("resource", format!("product:{}", id)))
-            .bind(("store_id", store_id))
+            .query(format!(
+                "SELECT * FROM product:{id} WHERE store_id = store:{store_id};"
+            ))
             .await
             .unwrap()
             .take(0)
