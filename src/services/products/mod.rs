@@ -79,7 +79,7 @@ impl ProductsQuery {
                     // (start..end)
                     (products)
                         .into_iter()
-                        .map(|n| Edge::with_additional_fields(ID::from(n.id.id), n, EmptyFields)),
+                        .map(|n| Edge::with_additional_fields(ID::from(&n.id.id), n, EmptyFields)),
                 );
                 Ok::<_, async_graphql::Error>(connection)
             },
