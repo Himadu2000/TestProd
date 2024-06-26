@@ -74,8 +74,16 @@ impl ProductsQuery {
                 //     start = if last > end - start { end } else { end - last };
                 // }
 
-                let has_previous_page = false;
-                let has_next_page = false;
+                let has_previous_page = after.map_or(false, |value| {
+                    products
+                        .first()
+                        .map_or(false, |product| ID::from(product.id.clone()) == value)
+                });
+                let has_next_page = before.map_or(false, |value| {
+                    products
+                        .last()
+                        .map_or(false, |product| ID::from(product.id.clone()) == value)
+                });
 
                 let mut connection = Connection::new(has_previous_page, has_next_page);
                 connection.edges.extend(
