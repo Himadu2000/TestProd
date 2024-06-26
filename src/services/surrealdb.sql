@@ -4,3 +4,5 @@ DEFINE NAMESPACE CHost;
 USE NS abcum;
 -- Define database
 DEFINE DATABASE Cezerin;
+-- Create a schemafull store table.
+DEFINE TABLE store SCHEMAFULL;
