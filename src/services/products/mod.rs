@@ -95,7 +95,7 @@ impl ProductsMutation {
         let (db, store_id) = db_and_store_id(ctx)?;
 
         let store_id = Thing {
-            tb: "store",
+            tb: "store".to_owned(),
             id: store_id.into(),
         };
 
@@ -130,7 +130,7 @@ impl ProductsMutation {
 
         match product {
             Some(value) => {
-                if value.store_id == store_id {
+                if value.store_id.id.to_string() == store_id {
                     let product: Option<ProductRecord> =
                         db.update(("product", id)).merge(data).await.unwrap();
 
