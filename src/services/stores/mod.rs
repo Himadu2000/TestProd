@@ -14,7 +14,7 @@ pub struct StoresMutation;
 #[Object]
 impl StoresQuery {
     async fn stores<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
-        let db = ctx.data::<Surreal<Db>>();
+        // let db = ctx.data::<Surreal<Db>>();
         "Server Is Running OK...!"
     }
 }
@@ -29,7 +29,6 @@ impl StoresMutation {
         is_authorized(ctx, String::new()).await?;
 
         let db = ctx.data::<SurrealDb>().map_err(error)?;
-        let headers = ctx.data::<Headers>().map_err(error)?;
 
         let stores: Vec<StoreRecord> = db.create("store").content(data).await.unwrap();
 
