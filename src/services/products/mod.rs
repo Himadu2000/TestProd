@@ -115,7 +115,7 @@ impl ProductsMutation {
 
         let (db, store_id) = db_and_store_id(ctx)?;
 
-        let product: Option<ProductRecord> = db.select(("product", &id)).await.unwrap();
+        let product: Option<ProductDbRecord> = db.select(("product", &id)).await.unwrap();
 
         match product {
             Some(value) => {
