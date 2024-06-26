@@ -5,7 +5,7 @@ use models::{Filter, Product, ProductDbRecord, ProductRecord};
 use swd::{
     async_graphql::{
         types::{connection::*, ID},
-        Context, Error,
+        Context, Error, Upload,
     },
     Object, SurrealDb, Thing,
 };
@@ -139,6 +139,7 @@ impl ProductsMutation {
         ctx: &Context<'ctx>,
         id: String,
         data: Product,
+        images: Option<Vec<Upload>>,
         delete_image_index: Option<u8>,
     ) -> Result<Option<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
@@ -148,6 +149,8 @@ impl ProductsMutation {
         let product: Option<ProductDbRecord> = db.select(("product", &id)).await.unwrap();
 
         let mut data = data;
+
+        for file in files {}
 
         if delete_image_index.is_some() {
             data.images = vec![];
