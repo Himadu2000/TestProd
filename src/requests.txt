@@ -1,0 +1,41 @@
+{
+  "Authorization": "Bearer token03124701209",
+  "store_id": "6nan3pel3fxcmbiika3m"
+}
+
+
+# mutation {
+#   createStore(data:{name:"CAt"}){
+#     name,id
+#   }
+#
+#   createProduct(data:{name:"AAA"}){
+#     name
+#     id
+#     description
+#   }
+# }
+
+# {
+#   getProduct(id:"jduohkgejwv7xfdpyh7e"){
+#     product {
+#       name
+#       regularPrice
+#       description
+#     }
+#   }
+# }
+
+{
+  getProducts{
+    nodes{name}
+    edges{node{name}}
+  }
+}
+
+# mutation {
+#   updateProduct(id:"jduohkgejwv7xfdpyh7e", data:{name:"CA"}){
+#     name
+#     description
+#   }
+# }
