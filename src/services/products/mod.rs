@@ -21,10 +21,10 @@ impl ProductsQuery {
         &self,
         ctx: &Context<'ctx>,
         id: String,
-    ) -> Result<ProductDbRecord, &str> {
+    ) -> Result<ProductRecord, &str> {
         let (db, store_id) = db_and_store_id(ctx)?;
 
-        let product: Option<ProductDbRecord> = db.select(("product", id)).await.unwrap();
+        let product: Option<ProductRecord> = db.select(("product", id)).await.unwrap();
 
         match product {
             Some(data) => {
@@ -115,7 +115,7 @@ impl ProductsMutation {
 
         let (db, store_id) = db_and_store_id(ctx)?;
 
-        let product: Option<ProductDbRecord> = db.select(("product", &id)).await.unwrap();
+        let product: Option<ProductRecord> = db.select(("product", &id)).await.unwrap();
 
         match product {
             Some(value) => {
