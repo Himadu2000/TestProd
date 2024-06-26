@@ -109,6 +109,7 @@ impl ProductsMutation {
         ctx: &Context<'ctx>,
         id: String,
         data: Product,
+        delete_image_index: Option<u8>,
     ) -> Result<Option<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
@@ -134,7 +135,6 @@ impl ProductsMutation {
         &self,
         ctx: &Context<'ctx>,
         id: String,
-        delete_image_index: Option<u8>,
     ) -> Result<Option<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
