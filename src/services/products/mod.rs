@@ -2,6 +2,7 @@ mod models;
 
 use crate::util::{auth::is_authorized, db_and_store_id, error};
 use models::{Filter, Image, Product, ProductDbRecord, ProductRecord};
+use std::io::Read;
 use swd::{
     async_graphql::{
         types::{connection::*, ID},
@@ -159,6 +160,7 @@ impl ProductsMutation {
                 };
 
                 let upload = image.value(ctx).unwrap();
+                let file = upload.content.bytes();
 
                 data.images = vec![];
             }
