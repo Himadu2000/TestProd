@@ -65,20 +65,21 @@ impl ProductsQuery {
                     .take(0)
                     .unwrap();
 
-                let mut start = after.map(|after| after + 1).unwrap_or(0);
-                let mut end = before.unwrap_or(10000);
-                if let Some(first) = first {
-                    end = (start + first).min(end);
-                }
-                if let Some(last) = last {
-                    start = if last > end - start { end } else { end - last };
-                }
+                // let mut start = after.map(|after| after + 1).unwrap_or(0);
+                // let mut end = before.unwrap_or(10000);
+                // if let Some(first) = first {
+                //     end = (start + first).min(end);
+                // }
+                // if let Some(last) = last {
+                //     start = if last > end - start { end } else { end - last };
+                // }
+
                 let mut connection = Connection::new(start > 0, end < 10000);
                 connection.edges.extend(
                     // (start..end)
                     (products)
                         .into_iter()
-                        .map(|n| Edge::with_additional_fields(12, n, EmptyFields)),
+                        .map(|n| Edge::with_additional_fields(ID::from(n.id.id), n, EmptyFields)),
                 );
                 Ok::<_, async_graphql::Error>(connection)
             },
