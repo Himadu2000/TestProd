@@ -24,17 +24,16 @@ impl ProductsQuery {
     ) -> Result<ProductRecord, &str> {
         let (db, store_id) = db_and_store_id(ctx)?;
 
-        let product: Option<ProductRecord> = db.select(("product", id)).await.unwrap();
+        let product: Option<ProductRecord> = db
+            .query("SELECT * FROM $resource WHERE store_id = $store_id;")
+            .bind(("resource", "product"))
+            .bind(("store_id", store_id))
+            .await
+            .unwrap()
+            .take(0)
+            .unwrap();
 
-        match product {
-            Some(data) => {
-                if data.store_id == store_id {
-                    return Ok(data);
-                }
-                Err(ERROR)
-            }
-            None => Err(ERROR),
-        }
+        product.ok_or(ERROR)
     }
 
     async fn get_products<'ctx>(
