@@ -44,7 +44,7 @@ impl ProductsQuery {
         first: Option<i32>,
         last: Option<i32>,
         filter: Option<Filter>,
-    ) -> Result<Connection<usize, i32, EmptyFields, EmptyFields>, Error> {
+    ) -> Result<Connection<usize, ProductRecord, EmptyFields, EmptyFields>, Error> {
         query(
             after,
             before,
@@ -72,7 +72,8 @@ impl ProductsQuery {
                 }
                 let mut connection = Connection::new(start > 0, end < 10000);
                 connection.edges.extend(
-                    (start..end)
+                    // (start..end)
+                    (products)
                         .into_iter()
                         .map(|n| Edge::with_additional_fields(n, n as i32, EmptyFields)),
                 );
