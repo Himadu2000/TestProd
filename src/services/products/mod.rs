@@ -3,7 +3,10 @@ mod models;
 use crate::util::{auth::is_authorized, db_and_store_id, error};
 use models::{Filter, Product, ProductDbRecord, ProductRecord};
 use swd::{
-    async_graphql::{types::connection::*, Context, Error},
+    async_graphql::{
+        types::{connection::*, ID},
+        Context, Error,
+    },
     Object, SurrealDb, Thing,
 };
 
@@ -39,12 +42,12 @@ impl ProductsQuery {
     async fn get_products<'ctx>(
         &self,
         ctx: &Context<'ctx>,
-        after: Option<String>,
-        before: Option<String>,
+        after: Option<ID>,
+        before: Option<ID>,
         first: Option<i32>,
         last: Option<i32>,
         filter: Option<Filter>,
-    ) -> Result<Connection<usize, ProductRecord>, Error> {
+    ) -> Result<Connection<ID, ProductRecord>, Error> {
         query(
             after,
             before,
