@@ -74,6 +74,15 @@ impl ProductsQuery {
                 //     start = if last > end - start { end } else { end - last };
                 // }
 
+                // let mut start = after.map(|after| after + 1).unwrap_or(0);
+                // let mut end = before.unwrap_or(10000);
+                // if let Some(first) = first {
+                //     end = (start + first).min(end);
+                // }
+                // if let Some(last) = last {
+                //     start = if last > end - start { end } else { end - last };
+                // }
+
                 let has_previous_page = after.map_or(false, |value| {
                     products
                         .first()
