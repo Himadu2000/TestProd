@@ -19,10 +19,10 @@ async fn rocket() -> _ {
     let db_url = get_db();
 
     // Create database connection
-    let db = Surreal::new::<Http>(()).await.unwrap();
+    let db = Surreal::new::<Http>(db_url.url).await.unwrap();
 
     // Select a specific namespace / database
-    db.use_ns("test").use_db("test").await.unwrap();
+    db.use_ns(db_url.ns).use_db(db_url.db).await.unwrap();
 
     let schema = Schema::build(Query::default(), Mutation::default(), EmptySubscription)
         .data(db)
