@@ -3,7 +3,7 @@
   "store_id": "6nan3pel3fxcmbiika3m"
 }
 
-surrealdb://root:@localhost/TestAAA/TestBBB
+surreal://root:@localhost/TestAAA/TestBBB
 
 # mutation {
 #   createStore(data:{name:"CAt"}){
