@@ -22,11 +22,7 @@ pub struct ProductsMutation;
 
 #[Object]
 impl ProductsQuery {
-    async fn get_product<'ctx>(
-        &self,
-        ctx: &Context<'ctx>,
-        id: String,
-    ) -> Result<ProductRecord, &str> {
+    async fn get_product<'ctx>(&self, ctx: &Context<'ctx>, id: ID) -> Result<ProductRecord, &str> {
         let (db, store_id) = db_and_store_id(ctx)?;
 
         let product: Option<ProductRecord> = db
@@ -139,7 +135,7 @@ impl ProductsMutation {
     async fn update_product<'ctx>(
         &self,
         ctx: &Context<'ctx>,
-        id: String,
+        id: ID,
         data: Product,
         images: Option<Vec<Upload>>,
         delete_image_index: Option<u8>,
@@ -191,7 +187,7 @@ impl ProductsMutation {
     async fn delete_product<'ctx>(
         &self,
         ctx: &Context<'ctx>,
-        id: String,
+        id: ID,
     ) -> Result<Option<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
