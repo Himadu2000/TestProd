@@ -23,8 +23,8 @@ async fn rocket() -> _ {
 
     // Sign in as root
     db.signin(Root {
-        username: "root",
-        password: "root",
+        username: &db_url.user,
+        password: &db_url.pass,
     })
     .await
     .unwrap();
