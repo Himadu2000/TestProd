@@ -65,10 +65,10 @@ pub fn get_db() -> DbInfo {
     let db = var("").unwrap_or("default");
 
     DbInfo {
-        url: db.split_once("://").unwrap_or(("", "")),
-        user: db.split_once("://").unwrap_or(("", "")),
-        pass: db.split_once("://").unwrap_or(("", "")),
-        ns: db.split_once("://").unwrap_or(("", "")),
-        db: db.split_once("://").unwrap_or(("", "")),
+        url: db.split_once("://").unwrap_or(("", "")).0,
+        user: db.split_once("://").unwrap_or(("", "")).0,
+        pass: db.split_once("://").unwrap_or(("", "")).0,
+        ns: db.split_once("://").unwrap_or(("", "")).0,
+        db: db.split_once("://").unwrap_or(("", "")).0,
     }
 }
