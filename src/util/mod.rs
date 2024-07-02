@@ -53,12 +53,12 @@ pub fn error(_: Error) -> &'static str {
     "Connection error...!"
 }
 
-pub struct DbInfo<'a> {
-    url: &'a str,
-    user: &'a str,
-    pass: &'a str,
-    ns: &'a str,
-    db: &'a str,
+pub struct DbInfo {
+    url: &'static str,
+    user: &'static str,
+    pass: &'static str,
+    ns: &'static str,
+    db: &'static str,
 }
 
 pub fn get_db() -> DbInfo {
