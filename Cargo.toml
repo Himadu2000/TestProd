@@ -9,4 +9,4 @@ async-graphql = "7.0.6"
 rocket = "0.5.1"
 surrealdb = { version = "1.5.3", features = ["kv-mem", "protocol-http"] }
 serde = "1.0.203"
-swd = { git = "https://github.com/Himadu2000/teststand", rev = "f668d8c", version = "0.0.0" }
+swd = { git = "https://github.com/Himadu2000/teststand", rev = "f668d8c" }
