@@ -62,7 +62,7 @@ pub struct DbInfo {
 }
 
 pub fn get_db() -> DbInfo {
-    let db = var("").unwrap_or("default");
+    let db = var("DATABASE_URL").unwrap_or("default");
 
     let error = "Invalid connection string...!";
 
