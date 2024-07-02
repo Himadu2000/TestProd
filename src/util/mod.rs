@@ -69,8 +69,8 @@ pub fn get_db() -> DbInfo {
     let (_, db) = db.split_once("://").expect(error);
     let (user, db) = db.split_once(':').expect(error);
     let (pass, db) = db.split_once('@').expect(error);
+    let (url, db) = db.split_once('/').expect(error);
     let (ns, db) = db.split_once('/').expect(error);
-    let (db, _) = db.split_once('/').expect(error);
 
     DbInfo {
         url,
