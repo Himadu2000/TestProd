@@ -34,10 +34,6 @@ impl<'req> FromRequest<'req> for Headers {
         let authorization = headers.get_one("Authorization").unwrap_or_default();
         let store_id = headers.get_one("store_id").unwrap_or_default();
 
-        if let Err(_) = regex(&String::from(store_id), "[a-z0-9]{20}") {
-            return Outcome::Error((Status::BadRequest, String::from("Invalid store_id...!")));
-        }
-
         Outcome::Success(Headers {
             authorization: authorization.to_owned(),
             store_id: store_id.to_owned(),
