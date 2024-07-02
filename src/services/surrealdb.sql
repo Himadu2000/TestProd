@@ -15,7 +15,8 @@ DEFINE FIELD users.scopes ON TABLE store TYPE array;
 -- Create a schemafull product table.
 DEFINE TABLE product SCHEMAFULL;
 -- Define some fields.
-DEFINE FIELD firstName ON TABLE product TYPE string;
-DEFINE FIELD lastName ON TABLE product TYPE string;
-DEFINE FIELD email ON TABLE product TYPE string;
-ASSERT string::is::email($value);
+DEFINE FIELD name ON TABLE product TYPE string;
+DEFINE FIELD description ON TABLE product TYPE string;
+DEFINE FIELD slug ON TABLE product TYPE string ASSERT string::is::email($value);
+DEFINE FIELD meta_title ON TABLE product TYPE string;
+DEFINE FIELD meta_description ON TABLE product TYPE string;
