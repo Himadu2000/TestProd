@@ -11,3 +11,5 @@ DEFINE FIELD firstName ON TABLE store TYPE string;
 DEFINE FIELD lastName ON TABLE store TYPE string;
 DEFINE FIELD email ON TABLE store TYPE string;
 ASSERT string::is::email($value);
+-- Create a schemafull product table.
+DEFINE TABLE product SCHEMAFULL;
