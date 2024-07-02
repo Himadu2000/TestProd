@@ -27,7 +27,8 @@ impl ProductsQuery {
 
         let product: Option<ProductRecord> = db
             .query(format!(
-                "SELECT * FROM product:{id} WHERE store_id = store:{store_id};"
+                "SELECT * FROM product:{} WHERE store_id = store:{store_id};",
+                id.0
             ))
             .await
             .unwrap()
@@ -143,6 +144,7 @@ impl ProductsMutation {
         is_authorized(ctx, String::new()).await?;
 
         let (db, store_id) = db_and_store_id(ctx)?;
+        let id = id.0;
 
         let product: Option<ProductDbRecord> = db.select(("product", &id)).await.unwrap();
 
@@ -193,7 +195,7 @@ impl ProductsMutation {
 
         let db = ctx.data::<SurrealDb>().map_err(error)?;
 
-        let product: Option<ProductRecord> = db.delete(("product", id)).await.unwrap();
+        let product: Option<ProductRecord> = db.delete(("product", id.0)).await.unwrap();
 
         Ok(product)
     }
