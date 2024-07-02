@@ -26,7 +26,8 @@ async fn rocket() -> _ {
         username: "root",
         password: "root",
     })
-    .await?;
+    .await
+    .unwrap();
 
     // Select a specific namespace / database
     db.use_ns(db_url.ns).use_db(db_url.db).await.unwrap();
