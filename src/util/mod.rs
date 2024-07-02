@@ -67,10 +67,10 @@ pub fn get_db() -> DbInfo {
     let (url, db) = db.split_once("://").unwrap_or(("", ""));
 
     DbInfo {
-        url: db.split_once("://").unwrap_or(("", "")).0,
-        user: db.split_once("://").unwrap_or(("", "")).0,
-        pass: db.split_once("://").unwrap_or(("", "")).0,
-        ns: db.split_once("://").unwrap_or(("", "")).0,
-        db: db.split_once("://").unwrap_or(("", "")).0,
+        url,
+        user,
+        pass,
+        ns,
+        db,
     }
 }
