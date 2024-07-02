@@ -2,18 +2,33 @@ pub mod auth;
 pub mod files;
 pub mod graphql;
 
+use async_graphql::{CustomValidator, ID};
 use graphql::Headers;
 use swd::{
-    async_graphql::{validators::regex, Context, Error},
+    async_graphql::{validators::regex, Context, Error, InputType, InputValueError},
     SurrealDb,
 };
+
+pub struct IdValidator;
+
+impl IdValidator {
+    pub fn new() -> Self {
+        Self
+    }
+}
+
+impl CustomValidator<ID> for IdValidator {
+    fn check(&self, value: &ID) -> Result<(), InputValueError<ID>> {
+        regex(&value.0, "^[a-z0-9]{20}$").map_err(|_| "Invalid store_id...!".into())
+    }
+}
 
 fn is_store_id_valid(store_id: &String) -> Result<(), &'static str> {
     if store_id.len() == 0 {
         return Ok(());
     }
 
-    if regex(store_id, "^[a-z0-9]{20}$").is_ok() {
+    if IdValidator::new().check(&ID::from(store_id)).is_ok() {
         return Ok(());
     }
 
