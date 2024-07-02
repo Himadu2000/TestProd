@@ -64,6 +64,8 @@ pub struct DbInfo {
 pub fn get_db() -> DbInfo {
     let db = var("").unwrap_or("default");
 
+    let (url, db) = db.split_once("://").unwrap_or(("", ""));
+
     DbInfo {
         url: db.split_once("://").unwrap_or(("", "")).0,
         user: db.split_once("://").unwrap_or(("", "")).0,
