@@ -6,7 +6,7 @@ use async_graphql::{CustomValidator, ID};
 use graphql::Headers;
 use swd::{
     async_graphql::{validators::regex, Context, Error, InputValueError},
-    SurrealDb,
+    surrealdb::{engine::remote::http::Client, Surreal},
 };
 
 pub struct IdValidator;
