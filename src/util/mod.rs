@@ -64,6 +64,8 @@ pub struct DbInfo {
 pub fn get_db() -> DbInfo {
     let db = var("").unwrap_or("default");
 
+    let error = "Invalid connection string...!";
+
     let (_, db) = db.split_once("://").unwrap_or(("", ""));
     let (user, db) = db.split_once(':').unwrap_or(("", ""));
     let (pass, db) = db.split_once('@').unwrap_or(("", ""));
