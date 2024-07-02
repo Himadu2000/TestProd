@@ -5,7 +5,7 @@ pub mod graphql;
 use async_graphql::{CustomValidator, ID};
 use graphql::Headers;
 use swd::{
-    async_graphql::{validators::regex, Context, Error, InputType, InputValueError},
+    async_graphql::{validators::regex, Context, Error, InputValueError},
     SurrealDb,
 };
 
