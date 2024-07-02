@@ -5,6 +5,8 @@
 
 surreal://root:password@37.27.86.30:8000/TestAAA/TestBBB
 
+surreal sql -e http://37.27.86.30:8000 -u root -p  --ns TestAAA --db TestBBB --pretty
+
 # mutation {
 #   createStore(data:{name:"CAt"}){
 #     name,id
