@@ -8,9 +8,10 @@ DEFINE DATABASE Cezerin;
 DEFINE TABLE store SCHEMAFULL;
 -- Define some fields.
 DEFINE FIELD name ON TABLE store TYPE string;
-DEFINE FIELD lastName ON TABLE store TYPE string;
-DEFINE FIELD email ON TABLE store TYPE string;
-ASSERT string::is::email($value);
+DEFINE FIELD users ON TABLE store TYPE array < object >;
+DEFINE FIELD users.name ON TABLE store TYPE string;
+DEFINE FIELD users.email ON TABLE store TYPE string ASSERT string::is::email($value);
+DEFINE FIELD users.scopes ON TABLE store TYPE array;
 -- Create a schemafull product table.
 DEFINE TABLE product SCHEMAFULL;
 -- Define some fields.
