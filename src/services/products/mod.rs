@@ -1,6 +1,6 @@
 mod models;
 
-use crate::util::{auth::is_authorized, db_and_store_id, error};
+use crate::util::{auth::is_authorized, db_and_store_id, error, IdValidator};
 use models::{Filter, Image, Product, ProductDbRecord, ProductRecord};
 use std::io::Read;
 use swd::{
@@ -22,7 +22,11 @@ pub struct ProductsMutation;
 
 #[Object]
 impl ProductsQuery {
-    async fn get_product<'ctx>(&self, ctx: &Context<'ctx>, id: ID) -> Result<ProductRecord, &str> {
+    async fn get_product<'ctx>(
+        &self,
+        ctx: &Context<'ctx>,
+        #[graphql(validator(custom = "IdValidator::new()"))] id: ID,
+    ) -> Result<ProductRecord, &str> {
         let (db, store_id) = db_and_store_id(ctx)?;
 
         let product: Option<ProductRecord> = db
@@ -136,7 +140,7 @@ impl ProductsMutation {
     async fn update_product<'ctx>(
         &self,
         ctx: &Context<'ctx>,
-        id: ID,
+        #[graphql(validator(custom = "IdValidator::new()"))] id: ID,
         data: Product,
         images: Option<Vec<Upload>>,
         delete_image_index: Option<u8>,
@@ -189,7 +193,7 @@ impl ProductsMutation {
     async fn delete_product<'ctx>(
         &self,
         ctx: &Context<'ctx>,
-        id: ID,
+        #[graphql(validator(custom = "IdValidator::new()"))] id: ID,
     ) -> Result<Option<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
