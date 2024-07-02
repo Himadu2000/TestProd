@@ -54,11 +54,11 @@ pub fn error(_: Error) -> &'static str {
 }
 
 pub struct DbInfo {
-    url: String,
-    user: String,
-    pass: String,
-    ns: String,
-    db: String,
+    pub url: String,
+    pub user: String,
+    pub pass: String,
+    pub ns: String,
+    pub db: String,
 }
 
 pub fn get_db() -> DbInfo {
