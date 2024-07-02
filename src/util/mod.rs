@@ -74,9 +74,9 @@ pub fn get_db(db: String) -> DbInfo {
 
     DbInfo {
         url: url.to_owned(),
-        user: url.to_owned(),
-        pass: url.to_owned(),
-        ns: url.to_owned(),
-        db: url.to_owned(),
+        user: user.to_owned(),
+        pass: pass.to_owned(),
+        ns: ns.to_owned(),
+        db: db.to_owned(),
     }
 }
