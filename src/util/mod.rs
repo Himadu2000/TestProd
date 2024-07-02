@@ -53,15 +53,15 @@ pub fn error(_: Error) -> &'static str {
     "Connection error...!"
 }
 
-pub struct DbInfo<'a> {
-    url: &'a str,
-    user: &'a str,
-    pass: &'a str,
-    ns: &'a str,
-    db: &'a str,
+pub struct DbInfo {
+    url: String,
+    user: String,
+    pass: String,
+    ns: String,
+    db: String,
 }
 
-pub fn get_db<'a>() -> DbInfo<'a> {
+pub fn get_db(db: String) -> DbInfo {
     let db = var("DATABASE_URL").expect("DATABASE_URL not found...!");
 
     let error = "Invalid connection string...!";
@@ -73,10 +73,10 @@ pub fn get_db<'a>() -> DbInfo<'a> {
     let (ns, db) = db.split_once('/').expect(error);
 
     DbInfo {
-        url,
-        user,
-        pass,
-        ns,
-        db,
+        url: url.to_owned(),
+        user: url.to_owned(),
+        pass: url.to_owned(),
+        ns: url.to_owned(),
+        db: url.to_owned(),
     }
 }
