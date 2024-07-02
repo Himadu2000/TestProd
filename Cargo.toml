@@ -4,9 +4,6 @@ authors = ["Himadu2000 <49078336+Himadu2000@users.noreply.github.com>"]
 edition = "2021"
 license = "AGPL-3.0-or-later"
 
-[build]
-target = ["arm-unknown-linux-gnu"]
-
 [dependencies]
 async-graphql = "7.0.6"
 swd = { path = "../../Rust/standard/src/swd" }
