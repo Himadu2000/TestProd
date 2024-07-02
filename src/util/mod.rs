@@ -53,16 +53,16 @@ pub fn error(_: Error) -> &'static str {
     "Connection error...!"
 }
 
-pub struct DbInfo {
-    url: &'static str,
-    user: &'static str,
-    pass: &'static str,
-    ns: &'static str,
-    db: &'static str,
+pub struct DbInfo<'a> {
+    url: &'a str,
+    user: &'a str,
+    pass: &'a str,
+    ns: &'a str,
+    db: &'a str,
 }
 
 pub fn get_db() -> DbInfo {
-    let db = var("DATABASE_URL").unwrap_or("default");
+    let db = var("DATABASE_URL").expect("msg");
 
     let error = "Invalid connection string...!";
 
