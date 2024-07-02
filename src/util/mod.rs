@@ -4,6 +4,7 @@ pub mod graphql;
 
 use async_graphql::{CustomValidator, ID};
 use graphql::Headers;
+use std::env::var;
 use swd::{
     async_graphql::{validators::regex, Context, Error, InputValueError},
     surrealdb::{engine::remote::http::Client, Surreal},
@@ -50,4 +51,24 @@ pub fn db_and_store_id<'ctx>(
 
 pub fn error(_: Error) -> &'static str {
     "Connection error...!"
+}
+
+pub struct DbInfo {
+    url: String,
+    user: String,
+    pass: String,
+    ns: String,
+    db: String,
+}
+
+pub fn get_db() -> DbInfo {
+    let db = var("").unwrap_or("default");
+
+    DbInfo {
+        url: db.split_once("://").unwrap_or(("", "")),
+        user: db.split_once("://").unwrap_or(("", "")),
+        pass: db.split_once("://").unwrap_or(("", "")),
+        ns: db.split_once("://").unwrap_or(("", "")),
+        db: db.split_once("://").unwrap_or(("", "")),
+    }
 }
