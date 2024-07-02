@@ -21,6 +21,13 @@ async fn rocket() -> _ {
     // Create database connection
     let db = Surreal::new::<Http>(db_url.url).await.unwrap();
 
+    // Sign in as root
+    db.signin(Root {
+        username: "root",
+        password: "root",
+    })
+    .await?;
+
     // Select a specific namespace / database
     db.use_ns(db_url.ns).use_db(db_url.db).await.unwrap();
 
