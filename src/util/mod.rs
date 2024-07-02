@@ -13,7 +13,7 @@ fn is_store_id_valid(store_id: &String) -> Result<(), &'static str> {
         return Ok(());
     }
 
-    if regex(&String::from(store_id), "^[a-z0-9]{20}$").is_ok() {
+    if regex(store_id, "^[a-z0-9]{20}$").is_ok() {
         return Ok(());
     }
 
