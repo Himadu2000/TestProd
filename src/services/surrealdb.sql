@@ -17,6 +17,6 @@ DEFINE TABLE product SCHEMAFULL;
 -- Define some fields.
 DEFINE FIELD name ON TABLE product TYPE string;
 DEFINE FIELD description ON TABLE product TYPE string;
-DEFINE FIELD slug ON TABLE product TYPE string ASSERT string::is::email($value);
+DEFINE FIELD slug ON TABLE product TYPE string ASSERT string::is::url($value);
 DEFINE FIELD meta_title ON TABLE product TYPE string;
 DEFINE FIELD meta_description ON TABLE product TYPE string;
