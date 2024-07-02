@@ -37,8 +37,8 @@ fn is_store_id_valid(store_id: &String) -> Result<(), &'static str> {
 
 pub fn db_and_store_id<'ctx>(
     ctx: &Context<'ctx>,
-) -> Result<(&'ctx SurrealDb, String), &'static str> {
-    let db = ctx.data::<SurrealDb>().map_err(error)?;
+) -> Result<(&'ctx Surreal<Client>, String), &'static str> {
+    let db = ctx.data::<Surreal<Client>>().map_err(error)?;
     let headers = ctx.data::<Headers>().map_err(error)?;
 
     let store_id = headers.store_id.clone();
