@@ -6,11 +6,11 @@ use crate::{
     util::graphql::graphql,
 };
 use std::env::set_var;
-use surrealdb::{engine::local::Mem, Surreal};
 use swd::{
     async_graphql::{EmptySubscription, Schema},
     index,
     rocket::{build, launch, routes},
+    surrealdb::{engine::remote::http::Http, opt::auth::Root, Surreal},
     Cors,
 };
 
