@@ -62,7 +62,7 @@ pub struct DbInfo<'a> {
 }
 
 pub fn get_db<'a>() -> DbInfo<'a> {
-    let db = var("DATABASE_URL").expect("msg");
+    let db = var("DATABASE_URL").expect("DATABASE_URL not found...!");
 
     let error = "Invalid connection string...!";
 
