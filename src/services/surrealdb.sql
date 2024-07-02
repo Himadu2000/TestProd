@@ -20,3 +20,7 @@ DEFINE FIELD description ON TABLE product TYPE string;
 DEFINE FIELD slug ON TABLE product TYPE string VALUE string::slug($value);
 DEFINE FIELD meta_title ON TABLE product TYPE string;
 DEFINE FIELD meta_description ON TABLE product TYPE string;
+DEFINE FIELD regular_price ON TABLE product TYPE float;
+DEFINE FIELD sale_price ON TABLE product TYPE float;
+DEFINE FIELD date_sale_from ON TABLE product TYPE datetime;
+DEFINE FIELD date_sale_to ON TABLE product TYPE datetime;
