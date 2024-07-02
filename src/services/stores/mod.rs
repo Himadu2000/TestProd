@@ -1,8 +1,8 @@
 mod models;
 
-use crate::util::{auth::is_authorized, error};
+use crate::util::{auth::is_authorized, db_and_store_id};
 use models::{Store, StoreRecord};
-use swd::{async_graphql::Context, Object, SurrealDb};
+use swd::{async_graphql::Context, Object};
 
 #[derive(Default)]
 pub struct StoresQuery;
@@ -12,9 +12,9 @@ pub struct StoresMutation;
 
 #[Object]
 impl StoresQuery {
-    async fn stores<'ctx>(&self, ctx: &Context<'ctx>) -> &str {
-        let _db = ctx.data::<SurrealDb>();
-        "Server Is Running OK...!"
+    async fn stores<'ctx>(&self, ctx: &Context<'ctx>) -> Result<&str, &str> {
+        let (db, _) = db_and_store_id(ctx)?;
+        Ok("Server Is Running OK...!")
     }
 }
 
@@ -27,7 +27,7 @@ impl StoresMutation {
     ) -> Result<Vec<StoreRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
-        let db = ctx.data::<SurrealDb>().map_err(error)?;
+        let (db, _) = db_and_store_id(ctx)?;
 
         let stores: Vec<StoreRecord> = db.create("store").content(data).await.unwrap();
 
