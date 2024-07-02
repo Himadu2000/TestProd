@@ -7,7 +7,7 @@ WORKDIR /build
 
 COPY . .
 
-RUN apt install libssl-dev \
+RUN apt install openssl libssl-dev \
     --mount=type=cache,target=/build/target \
     --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/usr/local/cargo/git \
