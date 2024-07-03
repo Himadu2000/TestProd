@@ -9,5 +9,7 @@ COPY . .
 
 RUN apt update && apt install openssl libssl-dev -y
 
+RUN cargo build --release
+
 ################################################################################
 
