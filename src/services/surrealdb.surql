@@ -45,3 +45,4 @@ DEFINE FIELD category_ids ON TABLE product TYPE set<record<string>>;
 DEFINE FIELD tags ON TABLE product TYPE set<string>;
 DEFINE FIELD position ON TABLE product TYPE int;
 DEFINE FIELD related_products ON TABLE product TYPE set<record<string>>;
+DEFINE FIELD images ON TABLE product TYPE set<object>;
