@@ -33,7 +33,7 @@ async fn rocket() -> _ {
     db.use_ns(db_url.ns).use_db(db_url.db).await.unwrap();
 
     let schema = Schema::build(Query::default(), Mutation::default(), EmptySubscription)
-        .data(db)
+        .data(db.clone())
         .finish();
 
     set_var("ROCKET_LIMITS", "{data-form=\"10MiB\"}");
@@ -41,6 +41,7 @@ async fn rocket() -> _ {
     build()
         .attach(Cors)
         .manage(schema)
+        .manage(db)
         .mount("/", routes![index, files])
         .mount("/graphql", graphql())
 }
