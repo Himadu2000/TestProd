@@ -29,6 +29,6 @@ COPY --from=build /build/template[s] ./templates
 ENV ROCKET_ADDRESS=0.0.0.0
 ENV ROCKET_PORT=8080
 
-HEALTHCHECK --interval=10s --start-period=20s CMD [ "curl" ,"-f" ,"http://localhost/" ,"||" ,"exit" ,"1" ]
+HEALTHCHECK --interval=10s --start-period=20s CMD [ "curl", "-f", "http://localhost:8080/graphql", "||", "exit", "1" ]
 
 CMD ./main
