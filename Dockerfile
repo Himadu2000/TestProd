@@ -7,12 +7,11 @@ WORKDIR /build
 
 COPY . .
 
-RUN apt update && apt install openssl libssl-dev \
+RUN apt update && apt install openssl libssl-dev -y \
     --mount=type=cache,target=/build/target \
     --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/usr/local/cargo/git \
     set -eux; \
-    cargo build --release; \
     objcopy --compress-debug-sections target/release/$pkg ./main
 
 ################################################################################
