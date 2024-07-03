@@ -163,7 +163,7 @@ impl ProductsMutation {
                 upload.content.read_to_end(&mut file).unwrap();
 
                 let file = Image {
-                    alt: Some(String::new()),
+                    alt: String::new(),
                     file: Bytes::from(file),
                 };
 
