@@ -15,6 +15,7 @@ DEFINE FIELD users.scopes ON TABLE store TYPE set<string>;
 -- Create a schemafull product table.
 DEFINE TABLE product SCHEMAFULL;
 -- Define some fields.
+DEFINE FIELD store_id ON TABLE product TYPE record<string>;
 DEFINE FIELD name ON TABLE product TYPE string;
 DEFINE FIELD description ON TABLE product TYPE string;
 DEFINE FIELD slug ON TABLE product TYPE string VALUE string::slug($value);
