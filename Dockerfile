@@ -1,4 +1,4 @@
-FROM docker.io/rust:1-slim-bookworm AS build
+FROM rust AS build
 
 ## cargo package name: customize here or provide via --build-arg
 ARG pkg=rocket-app
@@ -7,8 +7,7 @@ WORKDIR /build
 
 COPY . .
 
-RUN apt update && apt install openssl libssl-dev \
-    --mount=type=cache,target=/build/target \
+RUN --mount=type=cache,target=/build/target \
     --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/usr/local/cargo/git \
     set -eux; \
