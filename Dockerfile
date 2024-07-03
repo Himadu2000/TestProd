@@ -12,7 +12,7 @@ RUN apt update && apt install openssl libssl-dev -y \
     --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/usr/local/cargo/git \
     set -eux; \
-    objcopy --compress-debug-sections target/release/$pkg ./main
+    
 
 ################################################################################
 
@@ -32,4 +32,4 @@ COPY --from=build /build/template[s] ./templates
 ENV ROCKET_ADDRESS=0.0.0.0
 ENV ROCKET_PORT=8080
 
-CMD ./main
+CMD echo "Hello"
