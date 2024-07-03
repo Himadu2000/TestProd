@@ -26,7 +26,7 @@ impl CustomValidator<ID> for IdValidator {
 
 fn is_store_id_valid(store_id: &String) -> Result<(), &'static str> {
     if store_id.len() == 0 {
-        return Ok(());
+        return Err("store_id header not set...!");
     }
 
     if IdValidator::new().check(&ID::from(store_id)).is_ok() {
