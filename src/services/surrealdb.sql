@@ -34,6 +34,8 @@ DEFINE FIELD stock_backorder ON TABLE product TYPE bool;
 DEFINE FIELD discontinued ON TABLE product TYPE bool;
 DEFINE FIELD enabled ON TABLE product TYPE bool;
 DEFINE FIELD attributes ON TABLE product TYPE array < object >;
+DEFINE FIELD attributes.name ON TABLE product TYPE string;
+DEFINE FIELD attributes.value ON TABLE product TYPE string;
 DEFINE FIELD variants ON TABLE product TYPE array < object >;
 DEFINE FIELD category_ids ON TABLE product TYPE array < record < string > >;
 DEFINE FIELD tags ON TABLE product TYPE array < string >;
