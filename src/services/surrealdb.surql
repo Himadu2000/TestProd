@@ -10,7 +10,7 @@ DEFINE TABLE store SCHEMAFULL;
 DEFINE FIELD name ON TABLE store TYPE string;
 DEFINE FIELD users ON TABLE store TYPE set<object>;
 DEFINE FIELD users.name ON TABLE store TYPE string;
-DEFINE FIELD users.email ON TABLE store TYPE string ASSERT string::is::email($value);
+DEFINE FIELD users.email ON TABLE store TYPE string VALUE string::lowercase($value) ASSERT string::is::email($value);
 DEFINE FIELD users.scopes ON TABLE store TYPE set<string>;
 -- Create a schemafull product table.
 DEFINE TABLE product SCHEMAFULL;
