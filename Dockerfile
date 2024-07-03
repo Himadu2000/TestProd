@@ -1,8 +1,5 @@
 FROM rust AS build
 
-## cargo package name: customize here or provide via --build-arg
-ARG pkg=rocket-app
-
 WORKDIR /build
 
 COPY . .
