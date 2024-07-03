@@ -1,7 +1,5 @@
 use crate::services::{Mutation, Query};
-use rocket::http::Status;
 use swd::{
-    async_graphql::validators::regex,
     async_graphql_rocket::{GraphQLQuery, GraphQLRequest, GraphQLResponse},
     graphiql,
     rocket::{
