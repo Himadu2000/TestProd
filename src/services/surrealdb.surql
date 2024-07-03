@@ -38,7 +38,12 @@ DEFINE FIELD attributes.name ON TABLE product TYPE string;
 DEFINE FIELD attributes.value ON TABLE product TYPE string;
 DEFINE FIELD variants ON TABLE product TYPE set<object>;
 DEFINE FIELD variants.name ON TABLE product TYPE string;
-DEFINE FIELD variants.control ON TABLE product TYPE set<string>;
+DEFINE FIELD variants.control ON TABLE product TYPE string
+  -- The array must not be empty because at least one permission is required.
+  -- The items in the array must also be restricted to specific permissions.
+  ASSERT 
+      array::len($value) > 0 
+      AND $value ALLINSIDE ["select"];
 DEFINE FIELD variants.required ON TABLE product TYPE bool;
 DEFINE FIELD variants.values ON TABLE product TYPE set<string>;
 DEFINE FIELD category_ids ON TABLE product TYPE set<record<string>>;
