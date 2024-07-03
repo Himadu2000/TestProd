@@ -51,5 +51,5 @@ DEFINE FIELD tags ON TABLE product TYPE set<string>;
 DEFINE FIELD position ON TABLE product TYPE int;
 DEFINE FIELD related_products ON TABLE product TYPE set<record<string>>;
 DEFINE FIELD images ON TABLE product TYPE set<object>;
-DEFINE FIELD images.name ON TABLE product TYPE string;
+DEFINE FIELD images.alt ON TABLE product TYPE string;
 DEFINE FIELD images.file ON TABLE product TYPE bytes;
