@@ -164,7 +164,6 @@ impl ProductsMutation {
 
                 let file = Image {
                     alt: Some(String::new()),
-                    position: 0,
                     file: Bytes::from(file),
                 };
 
