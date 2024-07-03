@@ -13,7 +13,7 @@ pub struct StoresMutation;
 #[Object]
 impl StoresQuery {
     async fn stores<'ctx>(&self, ctx: &Context<'ctx>) -> Result<&str, &str> {
-        let (db, _) = db_and_store_id(ctx)?;
+        let (_db, _) = db_and_store_id(ctx)?;
 
         Ok("Server Is Running OK...!")
     }
