@@ -3,7 +3,7 @@ mod util;
 
 use crate::{
     services::{Mutation, Query},
-    util::{get_db, graphql::graphql},
+    util::{files::files, get_db, graphql::graphql},
 };
 use std::env::set_var;
 use swd::{
@@ -41,6 +41,6 @@ async fn rocket() -> _ {
     build()
         .attach(Cors)
         .manage(schema)
-        .mount("/", routes![index])
+        .mount("/", routes![index, files])
         .mount("/graphql", graphql())
 }
