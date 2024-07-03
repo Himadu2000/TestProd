@@ -41,6 +41,6 @@ DEFINE FIELD variants.name ON TABLE product TYPE string;
 DEFINE FIELD variants.control ON TABLE product TYPE set<string>;
 DEFINE FIELD variants.required ON TABLE product TYPE bool;
 DEFINE FIELD variants.values ON TABLE product TYPE set<string>;
-DEFINE FIELD category_ids ON TABLE product TYPE set<record<string> >;
-DEFINE FIELD tags ON TABLE product TYPE set <string>;
+DEFINE FIELD category_ids ON TABLE product TYPE set<record<string>>;
+DEFINE FIELD tags ON TABLE product TYPE set<string>;
 DEFINE FIELD position ON TABLE product TYPE int;
