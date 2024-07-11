@@ -27,7 +27,7 @@ impl ProductsQuery {
         ctx: &Context<'ctx>,
         #[graphql(validator(custom = "IdValidator::new()"))] id: ID,
     ) -> Result<ProductRecord, &str> {
-        let (db, store_id) = db_and_store_id(ctx)?;
+        let (db, store_id) = db_and_store_id(ctx).await?;
 
         let product: Option<ProductRecord> = db
             .query(format!(
@@ -49,15 +49,15 @@ impl ProductsQuery {
         before: Option<String>,
         first: Option<i32>,
         last: Option<i32>,
-        filter: Option<Filter>,
+        _filter: Option<Filter>,
     ) -> Result<Connection<ID, ProductRecord>, Error> {
         query(
             after,
             before,
             first,
             last,
-            |after, before, first, last| async move {
-                let (db, store_id) = db_and_store_id(ctx)?;
+            |after, before, _first, _last| async move {
+                let (db, store_id) = db_and_store_id(ctx).await?;
 
                 let products: Vec<ProductRecord> = db
                     .query(format!(
@@ -77,8 +77,8 @@ impl ProductsQuery {
                 //     start = if last > end - start { end } else { end - last };
                 // }
 
-                let mut start = after;
-                let mut end = before;
+                let start = after;
+                let end = before;
 
                 // if let Some(first) = first {
                 //     end = (start + first).min(end);
@@ -120,7 +120,7 @@ impl ProductsMutation {
     ) -> Result<Vec<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
-        let (db, store_id) = db_and_store_id(ctx)?;
+        let (db, store_id) = db_and_store_id(ctx).await?;
 
         let store_id = Thing {
             tb: "store".to_owned(),
@@ -147,7 +147,7 @@ impl ProductsMutation {
     ) -> Result<Option<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
-        let (db, store_id) = db_and_store_id(ctx)?;
+        let (db, store_id) = db_and_store_id(ctx).await?;
         let id = id.0;
 
         let product: Option<ProductDbRecord> = db.select(("product", &id)).await.unwrap();
@@ -162,17 +162,43 @@ impl ProductsMutation {
 
                 upload.content.read_to_end(&mut file).unwrap();
 
+                let ext = upload.filename.split('.').last().unwrap_or("png");
+
                 let file = Image {
-                    alt: String::new(),
                     file: Bytes::from(file),
+                    file_as_vec: vec![],
+                    mime: upload.content_type.unwrap_or(format!("image/{ext}")),
+                    alt: String::new(),
                 };
 
-                data.images = vec![file];
+                if let Some(value) = &product {
+                    data.images = value
+                        .product
+                        .images
+                        .iter()
+                        .map(|value| Image {
+                            file: Bytes::from(value.file_as_vec.clone()),
+                            ..value.clone()
+                        })
+                        .collect();
+                }
+
+                data.images.push(file);
             }
         }
 
-        if delete_image_index.is_some() {
-            data.images = vec![];
+        if let Some(index) = delete_image_index {
+            let file: Option<ProductRecord> = db
+            .query(format!(
+                "UPDATE product:{id} SET images = array::remove(images, $index) WHERE store_id = store:{store_id};"
+            ))
+            .bind(("index", index))
+            .await
+            .unwrap()
+            .take(0)
+            .unwrap();
+
+            file.ok_or(ERROR)?;
         }
 
         match product {
