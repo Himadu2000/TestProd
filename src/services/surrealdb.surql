@@ -53,6 +53,7 @@ DEFINE FIELD position ON TABLE product TYPE int;
 DEFINE FIELD related_products ON TABLE product TYPE set<record<string>>;
 DEFINE FIELD images ON TABLE product TYPE array<object>;
 DEFINE FIELD images[*].file ON TABLE product TYPE bytes;
-DEFINE FIELD images[*].mime ON TABLE product TYPE string VALUE string::lowercase($value);
+DEFINE FIELD images[*].mime ON TABLE product TYPE string VALUE string::lowercase($value)
+  ASSERT string::contains($value, '/') ASSERT string::is::alpha($value);
 -- DEFINE FIELD images[*].hash ON TABLE product TYPE string VALUE time::now() READONLY;
 DEFINE FIELD images[*].alt ON TABLE product TYPE string;
