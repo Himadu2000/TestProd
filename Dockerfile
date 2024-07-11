@@ -30,6 +30,9 @@ COPY --from=build /build/template[s] ./templates
 ENV ROCKET_ADDRESS=0.0.0.0
 ENV ROCKET_PORT=8080
 
+RUN apt update
+RUN apt install curl -y
+
 HEALTHCHECK --interval=10s --start-period=20s CMD [ "curl", "-f", "http://localhost:8080/graphql", "||", "exit", "1" ]
 
 CMD ./main
