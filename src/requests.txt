@@ -1,6 +1,6 @@
 {
   "Authorization": "Bearer token03124701209",
-  "store_id": "6nan3pel3fxcmbiika3m"
+  "store_id": "bwg3p7nmdux1e44l6pub"
 }
 
 surreal://root:password@testdb.chost.ansiglobal.com/TestAAA/TestBBB
