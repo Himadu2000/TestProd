@@ -18,19 +18,17 @@ pub async fn files(
     index: u8,
 ) -> (Status, (ContentType, Vec<u8>)) {
     is_store_id_valid(&store_id.to_owned())
-        .map_err(|error| NotFound(error.to_owned()))
+        .map_err(|error| NotFound(error))
         .unwrap();
 
     is_store_id_valid(&product_id.to_owned())
-        .map_err(|error| NotFound(error.to_owned()))
+        .map_err(|error| NotFound(error))
         .unwrap();
 
     #[derive(Deserialize)]
     pub struct Image {
         pub file: Vec<u8>,
         pub mime: String,
-        #[allow(dead_code)]
-        pub alt: String,
     }
 
     #[derive(Deserialize)]
@@ -52,9 +50,9 @@ pub async fn files(
         None => return (Status::NotFound, (ContentType::Bytes, vec![])),
     };
 
-    let images = image.unwrap().images;
+    let image = image.unwrap().images;
 
-    let mime = ContentType::parse_flexible(&images.mime).unwrap_or(ContentType::PNG);
+    let mime = ContentType::parse_flexible(&image.mime).unwrap_or(ContentType::PNG);
 
-    (Status::Ok, (mime, images.file.to_vec()))
+    (Status::Ok, (mime, image.file))
 }
