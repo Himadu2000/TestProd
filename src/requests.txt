@@ -7,6 +7,8 @@ surreal://root:password@testdb.chost.ansiglobal.com/TestAAA/TestBBB
 
 surreal sql -e http://testdb.chost.ansiglobal.com -u root -p  --ns TestAAA --db TestBBB --pretty
 
+# Test
+
 # mutation {
 #   createStore(data:{name:"CAt"}){
 #     name,id
