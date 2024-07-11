@@ -18,7 +18,6 @@ pub struct ImageOutput {
     pub file: String,
     pub mime: String,
     // #[graphql(skip)]
-    // #[allow(dead_code)]
     // #[serde(skip_serializing)]
     // pub hash: String,
     pub alt: String,
