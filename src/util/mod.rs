@@ -8,6 +8,7 @@ use std::env::var;
 use swd::{
     async_graphql::{validators::regex, Context, Error, InputValueError},
     surrealdb::{engine::remote::http::Client, Surreal},
+    Deserialize,
 };
 
 pub struct IdValidator;
@@ -36,7 +37,7 @@ pub fn is_store_id_valid(store_id: &String) -> Result<(), &'static str> {
     Err("Invalid store_id...!")
 }
 
-pub fn db_and_store_id<'ctx>(
+pub async fn db_and_store_id<'ctx>(
     ctx: &Context<'ctx>,
 ) -> Result<(&'ctx Surreal<Client>, String), &'static str> {
     let db = ctx.data::<Surreal<Client>>().map_err(error)?;
@@ -45,6 +46,23 @@ pub fn db_and_store_id<'ctx>(
     let store_id = headers.store_id.clone();
 
     is_store_id_valid(&store_id)?;
+
+    #[derive(Deserialize)]
+    struct Name {
+        #[allow(dead_code)]
+        name: String,
+    }
+
+    let id: Option<Name> = db
+        .query(format!("SELECT name FROM store:{store_id};",))
+        .await
+        .unwrap()
+        .take(0)
+        .unwrap();
+
+    if let None = id {
+        return Err("Invalid store_id...!");
+    }
 
     Ok((db, store_id))
 }
