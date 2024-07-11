@@ -8,7 +8,6 @@ pub struct Image {
     #[serde(skip_serializing)]
     pub file_as_vec: Vec<u8>,
     pub mime: String,
-    // #[allow(dead_code)]
     // #[serde(skip_serializing)]
     // pub hash: String,
     pub alt: String,
