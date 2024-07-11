@@ -54,6 +54,5 @@ DEFINE FIELD related_products ON TABLE product TYPE set<record<string>>;
 DEFINE FIELD images ON TABLE product TYPE array<object>;
 DEFINE FIELD images[*].file ON TABLE product TYPE bytes;
 DEFINE FIELD images[*].mime ON TABLE product TYPE string VALUE string::lowercase($value);
--- DEFINE FIELD images[*].hash ON product VALUE time::now() READONLY;
+-- DEFINE FIELD images[*].hash ON TABLE product TYPE string VALUE time::now() READONLY;
 DEFINE FIELD images[*].alt ON TABLE product TYPE string;
--- Move file up and alt down in everyplace
