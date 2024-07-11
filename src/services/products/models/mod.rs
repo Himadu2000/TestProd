@@ -61,7 +61,6 @@ pub struct Product {
     #[graphql(skip)]
     pub related_products: Vec<Thing>,
     #[graphql(skip)]
-    #[serde(default)]
     pub images: Vec<Image>,
 }
 
