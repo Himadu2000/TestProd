@@ -191,13 +191,14 @@ impl ProductsMutation {
             let file: Option<ProductRecord> = db
                 .query(format!(
                     "UPDATE product:{id} SET images = array::remove(images, $index) WHERE store_id = store:{store_id};"
-                )).bind(("index",index))
+                ))
+                .bind(("index", index))
                 .await
                 .unwrap()
                 .take(0)
                 .unwrap();
 
-            product.ok_or(ERROR)
+            file.ok_or(ERROR)?;
         }
 
         match product {
