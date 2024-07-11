@@ -52,8 +52,9 @@ async fn graphql_request(
 async fn graphql_request_multipart(
     schema: &GraphqlSchema,
     request: GraphQLRequest,
+    headers: Headers,
 ) -> GraphQLResponse {
-    request.execute(schema.inner()).await
+    request.data(headers).execute(schema.inner()).await
 }
 
 pub fn graphql() -> impl Into<Vec<Route>> {
