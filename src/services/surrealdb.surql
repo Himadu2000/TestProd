@@ -9,9 +9,9 @@ DEFINE TABLE store SCHEMAFULL;
 -- Define some fields.
 DEFINE FIELD name ON TABLE store TYPE string;
 DEFINE FIELD users ON TABLE store TYPE set<object>;
-DEFINE FIELD users.name ON TABLE store TYPE string;
-DEFINE FIELD users.email ON TABLE store TYPE string VALUE string::lowercase($value) ASSERT string::is::email($value);
-DEFINE FIELD users.scopes ON TABLE store TYPE set<string>;
+DEFINE FIELD users[*].name ON TABLE store TYPE string;
+DEFINE FIELD users[*].email ON TABLE store TYPE string VALUE string::lowercase($value) ASSERT string::is::email($value);
+DEFINE FIELD users[*].scopes ON TABLE store TYPE set<string>;
 -- Create a schemafull product table.
 DEFINE TABLE product SCHEMAFULL;
 -- Define some fields.
@@ -35,22 +35,25 @@ DEFINE FIELD stock_backorder ON TABLE product TYPE bool;
 DEFINE FIELD discontinued ON TABLE product TYPE bool;
 DEFINE FIELD enabled ON TABLE product TYPE bool;
 DEFINE FIELD attributes ON TABLE product TYPE set<object>;
-DEFINE FIELD attributes.name ON TABLE product TYPE string;
-DEFINE FIELD attributes.value ON TABLE product TYPE string;
+DEFINE FIELD attributes[*].name ON TABLE product TYPE string;
+DEFINE FIELD attributes[*].value ON TABLE product TYPE string;
 DEFINE FIELD variants ON TABLE product TYPE set<object>;
-DEFINE FIELD variants.name ON TABLE product TYPE string;
-DEFINE FIELD variants.control ON TABLE product TYPE string
+DEFINE FIELD variants[*].name ON TABLE product TYPE string;
+DEFINE FIELD variants[*].control ON TABLE product TYPE string
   -- The array must not be empty because at least one permission is required.
   -- The items in the array must also be restricted to specific permissions.
   ASSERT 
       array::len($value) > 0 
       AND $value ALLINSIDE ["select"];
-DEFINE FIELD variants.required ON TABLE product TYPE bool;
-DEFINE FIELD variants.values ON TABLE product TYPE set<string>;
+DEFINE FIELD variants[*].required ON TABLE product TYPE bool;
+DEFINE FIELD variants[*].values ON TABLE product TYPE set<string>;
 DEFINE FIELD category_ids ON TABLE product TYPE set<record<string>>;
 DEFINE FIELD tags ON TABLE product TYPE set<string>;
 DEFINE FIELD position ON TABLE product TYPE int;
 DEFINE FIELD related_products ON TABLE product TYPE set<record<string>>;
-DEFINE FIELD images ON TABLE product TYPE set<object>;
-DEFINE FIELD images.alt ON TABLE product TYPE string;
-DEFINE FIELD images.file ON TABLE product TYPE bytes;
+DEFINE FIELD images ON TABLE product TYPE array<object>;
+DEFINE FIELD images[*].file ON TABLE product TYPE bytes;
+DEFINE FIELD images[*].mime ON TABLE product TYPE string VALUE string::lowercase($value);
+-- DEFINE FIELD images[*].hash ON product VALUE time::now() READONLY;
+DEFINE FIELD images[*].alt ON TABLE product TYPE string;
+-- Move file up and alt down in everyplace
