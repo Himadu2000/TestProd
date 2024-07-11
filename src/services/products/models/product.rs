@@ -1,30 +1,29 @@
-use swd::{
-    surrealdb::sql::Bytes, ComplexObject, Deserialize, Enum, InputObject, Serialize, SimpleObject,
-    Thing,
-};
+use swd::{surrealdb::sql::Bytes, Deserialize, Enum, InputObject, Serialize, SimpleObject};
 
-#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(complex, input_name = "ImageInput")]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Image {
-    pub alt: Option<String>,
-    pub position: u8,
-    #[graphql(skip)]
+    #[serde(skip_deserializing)]
     pub file: Bytes,
+    #[allow(dead_code)]
+    #[serde(alias = "file")]
+    #[serde(skip_serializing)]
+    pub file_as_vec: Vec<u8>,
+    pub mime: String,
+    // #[allow(dead_code)]
+    // #[serde(skip_serializing)]
+    // pub hash: String,
+    pub alt: String,
 }
 
-#[ComplexObject]
-impl Image {
-    async fn file(&self) -> String {
-        String::new()
-    }
-}
-
-#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(input_name = "DimensionsInput")]
-pub struct Dimensions {
-    pub length: f32,
-    pub width: f32,
-    pub height: f32,
+#[derive(Serialize, Deserialize, SimpleObject)]
+pub struct ImageOutput {
+    pub file: String,
+    pub mime: String,
+    // #[graphql(skip)]
+    // #[allow(dead_code)]
+    // #[serde(skip_serializing)]
+    // pub hash: String,
+    pub alt: String,
 }
 
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
@@ -32,12 +31,6 @@ pub struct Dimensions {
 pub struct Attribute {
     pub name: String,
     pub value: String,
-}
-
-#[derive(Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(input_name = "ValueInput")]
-pub struct Value {
-    pub name: String,
 }
 
 #[derive(Clone, Copy, Default, Enum, Eq, PartialEq, Serialize, Deserialize)]
@@ -48,34 +41,19 @@ pub enum ProductOptionControl {
 
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
 #[graphql(input_name = "ProductOptionInput")]
-pub struct ProductOption {
+pub struct VariantOption {
     pub name: String,
     pub control: ProductOptionControl,
     pub required: bool,
-    pub position: u8,
-    pub values: Vec<Value>,
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct VariantOption {
-    pub option_id: Thing,
-    pub value_id: Thing,
+    pub values: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(complex, input_name = "VariantInput")]
+#[graphql(input_name = "VariantInput")]
 pub struct Variant {
-    pub sku: Option<String>,
+    pub sku: String,
     pub price: f32,
     pub stock_quantity: u16,
-    pub weight: Option<f32>,
-    #[graphql(skip)]
+    pub weight: f32,
     pub options: Vec<VariantOption>,
-}
-
-#[ComplexObject]
-impl Variant {
-    async fn options(&self) -> String {
-        String::new()
-    }
 }
