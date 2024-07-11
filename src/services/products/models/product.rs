@@ -1,10 +1,9 @@
 use swd::{surrealdb::sql::Bytes, Deserialize, Enum, InputObject, Serialize, SimpleObject};
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Image {
     #[serde(skip_deserializing)]
     pub file: Bytes,
-    #[allow(dead_code)]
     #[serde(alias = "file")]
     #[serde(skip_serializing)]
     pub file_as_vec: Vec<u8>,
