@@ -189,16 +189,15 @@ impl ProductsMutation {
 
         if let Some(index) = delete_image_index {
             let file: Option<ProductRecord> = db
-            .query(format!(
-                "UPDATE product:{id} SET images = array::remove(images, $index) WHERE store_id = store:{store_id};"
-            ))
-            .bind(("index", index))
-            .await
-            .unwrap()
-            .take(0)
-            .unwrap();
+                .query(format!(
+                    "UPDATE product:{id} SET images = array::remove(images, $index) WHERE store_id = store:{store_id};"
+                )).bind(("index",index))
+                .await
+                .unwrap()
+                .take(0)
+                .unwrap();
 
-            file.ok_or(ERROR)?;
+            product.ok_or(ERROR)
         }
 
         match product {
