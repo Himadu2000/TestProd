@@ -5,11 +5,14 @@ use crate::{
     services::{Mutation, Query},
     util::{files::files, get_db, graphql::graphql},
 };
-use std::env::set_var;
 use swd::{
     async_graphql::{EmptySubscription, Schema},
     index,
-    rocket::{build, launch, routes},
+    rocket::{
+        build,
+        data::{Limits, ToByteUnit},
+        launch, routes, Config,
+    },
     surrealdb::{engine::remote::http::Http, opt::auth::Root, Surreal},
     Cors,
 };
@@ -36,9 +39,11 @@ async fn rocket() -> _ {
         .data(db.clone())
         .finish();
 
-    set_var("ROCKET_LIMITS", "{data-form=\"10MiB\"}");
-
     build()
+        .configure(Config {
+            limits: Limits::default().limit("data-form", 10.megabytes()),
+            ..Default::default()
+        })
         .attach(Cors)
         .manage(schema)
         .manage(db)
