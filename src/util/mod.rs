@@ -54,7 +54,7 @@ pub async fn db_and_store_id<'ctx>(
     }
 
     let id: Option<Name> = db
-        .query(format!("SELECT name FROM store:{store_id};",))
+        .query(format!("SELECT name FROM store:{store_id};"))
         .await
         .unwrap()
         .take(0)
