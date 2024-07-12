@@ -49,7 +49,7 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Build
-        run: cargo build -r --verbose
+        run: cargo build --target aarch64_be-unknown-linux-gnu -r --verbose
 
       - name: Move
         run: objcopy --compress-debug-sections target/release/server ./main
