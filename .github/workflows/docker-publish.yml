@@ -48,11 +48,10 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: Comp
-        run: apt install gcc-aarch64-linux-gnu
-
-      - name: Install
-        run: rustup target add aarch64-unknown-linux-gnu
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+          target: aarch64-unknown-linux-gnu
 
       - name: Build
         run: cargo build --target aarch64-unknown-linux-gnu -r --verbose
