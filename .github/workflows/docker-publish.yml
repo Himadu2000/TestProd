@@ -48,14 +48,16 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: Install latest nightly
-        uses: actions-rs/toolchain@v1
+      - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           target: aarch64-unknown-linux-gnu
-
-      - name: Build
-        run: cargo build --target aarch64-unknown-linux-gnu -r --verbose
+          override: true
+      - uses: actions-rs/cargo@v1
+        with:
+          use-cross: true
+          command: build
+          args: --target aarch64-unknown-linux-gnu -r --verbose
 
       - name: Move
         run: objcopy --compress-debug-sections target/release/server ./main
