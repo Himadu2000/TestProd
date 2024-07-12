@@ -55,7 +55,7 @@ jobs:
           strip: true
 
       - name: Move
-        run: objcopy --compress-debug-sections target/release/server ./main
+        run: objcopy --compress-debug-sections target/aarch64-unknown-linux-gnu/release/server ./main
 
       - name: Run tests
         run: cargo test --verbose
