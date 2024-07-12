@@ -1,38 +1,14 @@
-FROM rust AS build
-
-## cargo package name: customize here or provide via --build-arg
-ARG pkg=server
-
-WORKDIR /build
-
-COPY . .
-
-RUN --mount=type=cache,target=/usr/local/cargo/git \
-    set -eux; \
-    cargo build --release; \
-    objcopy --compress-debug-sections target/release/$pkg ./main
-
-################################################################################
-
-FROM docker.io/debian:bookworm-slim
+FROM alpine
 
 WORKDIR /app
 
 ## copy the main binary
-COPY --from=build /build/main ./
+COPY ./main ./main
 
-## copy runtime assets which may or may not exist
-COPY --from=build /build/Rocket.tom[l] ./static
-COPY --from=build /build/stati[c] ./static
-COPY --from=build /build/template[s] ./templates
+RUN apk update && apk add curl
 
-## ensure the container listens globally on port 8080
-ENV ROCKET_ADDRESS=0.0.0.0
-ENV ROCKET_PORT=8080
+EXPOSE 8000
 
-RUN apt update
-RUN apt install curl -y
-
-# HEALTHCHECK --interval=10s --start-period=20s CMD [ "curl", "-f", "http://localhost:8080/graphql", "||", "exit", "1" ]
+HEALTHCHECK --interval=10s --start-period=20s CMD curl -f http://localhost:8080/graphql || exit 1
 
 CMD ./main
