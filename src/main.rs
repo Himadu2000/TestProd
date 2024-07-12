@@ -5,6 +5,7 @@ use crate::{
     services::{Mutation, Query},
     util::{files::files, get_db, graphql::graphql},
 };
+use std::net::{IpAddr, Ipv4Addr};
 use swd::{
     async_graphql::{EmptySubscription, Schema},
     index,
@@ -41,6 +42,7 @@ async fn rocket() -> _ {
 
     build()
         .configure(Config {
+            address: IpAddr::V4(Ipv4Addr::UNSPECIFIED),
             limits: Limits::default().limit("data-form", 10.megabytes()),
             ..Default::default()
         })
