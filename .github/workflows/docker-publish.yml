@@ -16,10 +16,12 @@ on:
     branches: ["main"]
 
 env:
+  CARGO_TERM_COLOR: always
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+  # DOCKER_DEFAULT_PLATFORM: linux/amd64
   DOCKER_DEFAULT_PLATFORM: linux/arm64
 
 jobs:
@@ -34,7 +36,26 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build
+        run: cargo build -r --verbose
+
+      - name: Move
+        run: objcopy --compress-debug-sections target/release/tra ./main
+
+      - name: Run tests
+        run: cargo test --verbose
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
