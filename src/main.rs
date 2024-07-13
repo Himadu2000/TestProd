@@ -20,6 +20,8 @@ use swd::{
 
 #[launch]
 async fn rocket() -> _ {
+    println!("Server starting!");
+
     let db_url = get_db();
 
     // Create database connection
