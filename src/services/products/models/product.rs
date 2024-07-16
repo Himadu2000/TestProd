@@ -37,7 +37,7 @@ pub enum ProductOptionControl {
 }
 
 #[derive(Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(input_name = "ProductOptionInput")]
+#[graphql(input_name = "VariantOptionInput")]
 pub struct VariantOption {
     pub name: String,
     pub control: ProductOptionControl,
