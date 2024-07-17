@@ -17,7 +17,7 @@ DEFINE FIELD users[*].scopes ON TABLE store TYPE set<string>;
 -- Create a schemafull product table.
 DEFINE TABLE product SCHEMAFULL;
 -- Define some fields.
-DEFINE FIELD store_id ON TABLE product TYPE record<string>;
+DEFINE FIELD store_id ON TABLE product TYPE record;
 DEFINE FIELD name ON TABLE product TYPE string;
 DEFINE FIELD description ON TABLE product TYPE string;
 DEFINE FIELD slug ON TABLE product TYPE string VALUE string::slug($value);
@@ -49,10 +49,10 @@ DEFINE FIELD variants[*].control ON TABLE product TYPE string
       AND $value ALLINSIDE ["select"];
 DEFINE FIELD variants[*].required ON TABLE product TYPE bool;
 DEFINE FIELD variants[*].values ON TABLE product TYPE set<string>;
-DEFINE FIELD category_ids ON TABLE product TYPE set<record<string>>;
+DEFINE FIELD category_ids ON TABLE product TYPE set<record>;
 DEFINE FIELD tags ON TABLE product TYPE set<string>;
 DEFINE FIELD position ON TABLE product TYPE int;
-DEFINE FIELD related_products ON TABLE product TYPE set<record<string>>;
+DEFINE FIELD related_products ON TABLE product TYPE set<record>;
 DEFINE FIELD images ON TABLE product TYPE array<object>;
 DEFINE FIELD images[*].file ON TABLE product TYPE bytes;
 DEFINE FIELD images[*].mime ON TABLE product TYPE string VALUE string::lowercase($value)
