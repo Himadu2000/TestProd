@@ -5,7 +5,7 @@
 
 surreal://root:password@testdb.chost.ansiglobal.com/TestAAA/TestBBB
 
-surreal sql -e http://testdb.chost.ansiglobal.com -u root -p  --ns TestAAA --db TestBBB --pretty
+surreal sql -e http://testdb.chost.ansiglobal.com -u root -p  --ns CHost --db Cezerin --pretty
 
 mx8v8wibis5wewl4eq62
 mmzp08vulm6ijkqusk45
