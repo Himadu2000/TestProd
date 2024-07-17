@@ -4,6 +4,8 @@ DEFINE NAMESPACE CHost;
 USE NS CHost;
 -- Define database
 DEFINE DATABASE Cezerin;
+-- Specify the database
+USE DATABASE Cezerin;
 -- Create a schemafull store table.
 DEFINE TABLE store SCHEMAFULL;
 -- Define some fields.
