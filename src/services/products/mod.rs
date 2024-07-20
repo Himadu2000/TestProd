@@ -199,6 +199,7 @@ impl ProductsMutation {
 
             file.ok_or(ERROR)?;
         }
+
         // TODO: Check if is in correct store
         let product: Option<ProductRecord> = db.update(("product", id)).merge(data).await.unwrap();
 
