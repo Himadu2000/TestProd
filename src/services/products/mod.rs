@@ -116,7 +116,7 @@ impl ProductsMutation {
     async fn create_product<'ctx>(
         &self,
         ctx: &Context<'ctx>,
-        data: Product,
+        data: ProductInput,
     ) -> Result<Vec<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
@@ -141,7 +141,7 @@ impl ProductsMutation {
         &self,
         ctx: &Context<'ctx>,
         #[graphql(validator(custom = "IdValidator::new()"))] id: ID,
-        data: Product,
+        data: ProductInput,
         images: Option<Vec<Upload>>,
         delete_image_index: Option<u8>,
     ) -> Result<Option<ProductRecord>, &str> {
