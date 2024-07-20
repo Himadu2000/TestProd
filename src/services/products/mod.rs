@@ -1,7 +1,7 @@
 mod models;
 
 use crate::util::{auth::is_authorized, db_and_store_id, error, IdValidator};
-use models::{Filter, Image, Product, ProductDbRecord, ProductRecord};
+use models::{Filter, Image, Product, ProductDbRecord, ProductInput, ProductRecord};
 use std::io::Read;
 use swd::{
     async_graphql::{
@@ -150,7 +150,8 @@ impl ProductsMutation {
         let (db, store_id) = db_and_store_id(ctx).await?;
         let id = id.0;
 
-        let product: Option<ProductDbRecord> = db.select(("product", &id)).await.unwrap();
+        let product: Option<Product> = db.select(("product", &id)).await.unwrap();
+        let product = product.unwrap_or_default();
 
         let mut data = data;
 
@@ -171,19 +172,17 @@ impl ProductsMutation {
                     alt: String::new(),
                 };
 
-                if let Some(value) = &product {
-                    data.images = value
-                        .product
-                        .images
-                        .iter()
-                        .map(|value| Image {
-                            file: Bytes::from(value.file_as_vec.clone()),
-                            ..value.clone()
-                        })
-                        .collect();
-                }
+                let mut prev: Vec<Image> = product
+                    .images
+                    .iter()
+                    .map(|value| Image {
+                        file: Bytes::from(value.file_as_vec.clone()),
+                        ..value.clone()
+                    })
+                    .collect();
 
-                data.images.push(file);
+                prev.push(file);
+                data.images = prev;
             }
         }
 
@@ -200,19 +199,10 @@ impl ProductsMutation {
 
             file.ok_or(ERROR)?;
         }
+        // TODO: Check if is in correct store
+        let product: Option<ProductRecord> = db.update(("product", id)).merge(data).await.unwrap();
 
-        match product {
-            Some(value) => {
-                if value.store_id.id.to_string() == store_id {
-                    let product: Option<ProductRecord> =
-                        db.update(("product", id)).merge(data).await.unwrap();
-
-                    return Ok(product);
-                }
-                Err(ERROR)
-            }
-            None => Err(ERROR),
-        }
+        Ok(product)
     }
 
     async fn delete_product<'ctx>(
@@ -222,7 +212,7 @@ impl ProductsMutation {
     ) -> Result<Option<ProductRecord>, &str> {
         is_authorized(ctx, String::new()).await?;
 
-        let db = ctx.data::<SurrealDb>().map_err(error)?;
+        let (db, store_id) = db_and_store_id(ctx).await?;
 
         let product: Option<ProductRecord> = db.delete(("product", id.0)).await.unwrap();
 
