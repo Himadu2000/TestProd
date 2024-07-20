@@ -9,8 +9,70 @@ use swd::{
     Thing,
 };
 
-#[derive(Default, Serialize, Deserialize, SimpleObject, InputObject)]
-#[graphql(complex, input_name = "ProductInput")]
+// GQL Input
+#[derive(Default, Serialize, Deserialize, InputObject)]
+pub struct ProductInput {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub slug: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub meta_title: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub meta_description: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub regular_price: Option<f32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub sale_price: Option<f32>,
+    #[graphql(skip)]
+    #[graphql(default)]
+    pub date_sale_from: Datetime,
+    #[graphql(skip)]
+    #[graphql(default)]
+    pub date_sale_to: Datetime,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub sku: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stock_quantity: Option<u8>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub weight: Option<f32>,
+    #[graphql(skip)]
+    #[graphql(default)]
+    pub date_stock_expected: Datetime,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stock_tracking: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stock_preorder: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stock_backorder: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub discontinued: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub enabled: Option<bool>,
+    #[graphql(default)]
+    pub attributes: Vec<Attribute>,
+    #[graphql(default)]
+    pub variants: Vec<Variant>,
+    #[graphql(skip)]
+    #[graphql(default)]
+    pub category_ids: Vec<Thing>,
+    #[graphql(default)]
+    pub tags: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub position: Option<u8>,
+    #[graphql(skip)]
+    #[graphql(default)]
+    pub related_products: Vec<Thing>,
+    #[graphql(skip)]
+    #[graphql(default)]
+    pub images: Vec<Image>,
+}
+
+// DB Input/Output GQL Output
+#[derive(Default, Serialize, Deserialize, SimpleObject)]
+#[graphql(complex)]
 pub struct Product {
     #[graphql(default)]
     pub name: String,
@@ -116,10 +178,9 @@ impl ProductRecord {
 }
 
 //? To include store_id when creating a product.
-#[derive(Serialize, Deserialize, SimpleObject)]
+#[derive(Serialize, Deserialize)]
 pub struct ProductDbRecord {
-    #[graphql(skip)]
     pub store_id: Thing,
     #[serde(flatten)]
-    pub product: Product,
+    pub product: ProductInput,
 }
